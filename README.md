@@ -1,2 +1,3 @@
 # todo-list
-A simple todo web app
+
+A simple todo web app.
