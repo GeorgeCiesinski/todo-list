@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     main: "./src/index.js",
-    test: "./src/multiple.js",
+    baseLayout: "./src/baseLayout.js",
+    modifyDom: "./src/modifyDom.js"
+
   },
   plugins: [
     new HtmlWebpackPlugin({
