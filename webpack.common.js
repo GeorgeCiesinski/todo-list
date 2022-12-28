@@ -4,7 +4,8 @@ module.exports = {
   entry: {
     main: "./src/index.js",
     baseLayout: "./src/baseLayout.js",
-    modifyDom: "./src/modifyDom.js"
+    modifyDom: "./src/modifyDom.js",
+    copyright: "./src/copyright.js"
 
   },
   plugins: [

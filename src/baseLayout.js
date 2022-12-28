@@ -1,4 +1,5 @@
 import modifyDom from "./modifyDom";
+import copyright from "./copyright";
 
 /*
 Builds the base layout including: 
@@ -12,57 +13,31 @@ const baseLayout = function createBaseLayoutElements() {
     const dom = modifyDom();
 
     const createHeader = function createHeaderElement() {
-        // Element Data
-        const data = {
-            "parent": document.body,
-            "tag": "header",
-            "id": "site-header"
-        }
-        const element = dom.createWithId(data.parent, data.tag, data.id);
-        element.innerText = data.id;  // Temp
+        const header = dom.createWithId(document.body, "header", "site-header");
+        header.innerText = "header";  // Temp
     }
     
     const createSidebar = function createSidebarElement(parent) {
-        const data = {
-            "parent": parent,
-            "tag": "div",
-            "id": "sidebar"
-        }
-        const element = dom.createWithId(data.parent, data.tag, data.id);
-        element.innerText = data.id;
+        const sidebar = dom.createWithId(parent, "div", "sidebar");
+        sidebar.innerText = "sidebar";
     }
 
     const createContent = function createContentElement(parent) {
-        const data = {
-            "parent": parent,
-            "tag": "div",
-            "id": "content"
-        }
-        const element = dom.createWithId(data.parent, data.tag, data.id);
-        element.innerText = data.id;
+        const content = dom.createWithId(parent, "div", "content");
+        content.innerText = "content";
     }
 
     // Create App Body and append sidebar and content
     const createAppBody = function createAppBodyElement() {
-        const data = {
-            "parent": document.body,
-            "tag": "div",
-            "id": "app-body"
-        }
-        const element = dom.createWithId(data.parent, data.tag, data.id);
-        element.innerText = data.id;
-        createSidebar(element);
-        createContent(element);
+        const appBody = dom.createWithId(document.body, "div", "app-body");
+        createSidebar(appBody);
+        createContent(appBody);
     }
 
     const createFooter = function createFooterElement() {
-        const data = {
-            "parent": document.body,
-            "tag": "footer",
-            "id": "site-footer"
-        }
-        const element = dom.createWithId(data.parent, data.tag, data.id);
-        element.innerText = data.id;
+        const footer = dom.createWithId(document.body, "footer", "site-footer"); 
+        const h3 = dom.createWithId(footer, "h3", "copyright");
+        h3.innerHTML = copyright();
     }
     
     // Creates all of the needed base elements
