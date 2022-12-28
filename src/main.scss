@@ -51,6 +51,10 @@ table {
     Meyer's Reset End
 */
 
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
 	padding: 0;
@@ -66,6 +70,15 @@ body {
     background-color: lightgrey;
 }
 
+#site-header {
+    padding: 20px;
+}
+
+#site-footer {
+    padding: 20px;
+    text-align: center;
+}
+
 #app-body {
     flex: 1;
     display: flex;
@@ -76,5 +89,6 @@ body {
 }
 
 #content {
+    flex: 1;
     background-color: orange;
 }

@@ -14,7 +14,8 @@ const baseLayout = function createBaseLayoutElements() {
 
     const createHeader = function createHeaderElement() {
         const header = dom.createWithId(document.body, "header", "site-header");
-        header.innerText = "header";  // Temp
+        const logoText = dom.createWithId(header, "h1", "logo-text");
+        logoText.innerText = "What TODO";
     }
     
     const createSidebar = function createSidebarElement(parent) {
