@@ -13,32 +13,32 @@ const baseLayout = function createBaseLayoutElements() {
     const dom = modifyDom();
 
     const createHeader = function createHeaderElement() {
-        const header = dom.createWithId(document.body, "header", "site-header");
-        const logoText = dom.createWithId(header, "h1", "logo-text");
-        logoText.innerText = "What TODO";
+        const logoText = "What TODO";
+        const header = dom.createWithId({parent: document.body, tag: "header", idName: "site-header"});
+        dom.createWithId({parent: header, tag: "h1", idName: "logo-text", innerHTML: logoText});
     }
     
     const createSidebar = function createSidebarElement(parent) {
-        const sidebar = dom.createWithId(parent, "div", "sidebar");
-        sidebar.innerText = "sidebar";
+        const sidebar = dom.createWithId({parent, tag: "div", idName: "sidebar"});
+        // Add Nav
     }
 
     const createContent = function createContentElement(parent) {
-        const content = dom.createWithId(parent, "div", "content");
-        content.innerText = "content";
+        const tempContent = "content";
+        dom.createWithId({parent, tag: "div", idName: "content", innerHTML: tempContent});
     }
 
     // Create App Body and append sidebar and content
     const createAppBody = function createAppBodyElement() {
-        const appBody = dom.createWithId(document.body, "div", "app-body");
+        const appBody = dom.createWithId({parent: document.body, tag: "div", idName: "app-body"});
         createSidebar(appBody);
         createContent(appBody);
     }
 
     const createFooter = function createFooterElement() {
-        const footer = dom.createWithId(document.body, "footer", "site-footer"); 
-        const h3 = dom.createWithId(footer, "h3", "copyright");
-        h3.innerHTML = copyright();
+        const copyrightHTML = copyright();
+        const footer = dom.createWithId({parent: document.body, tag: "footer", idName: "site-footer"}); 
+        dom.createWithId({parent: footer, tag: "h3", idName: "copyright", innerHTML: copyrightHTML});
     }
     
     // Creates all of the needed base elements
