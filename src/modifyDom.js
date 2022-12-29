@@ -1,5 +1,6 @@
 /*
  * Contains all functions that modify DOM
+
  * - Params -
  * parent: Parent element. Appends new element to parent if provided.
  * tag(required): The new element is created using the provided tag.
@@ -7,6 +8,12 @@
  * className: Adds class if provided.
  * innerHTML: Adds innerHTML if provided.
  * href: Adds href if the tag is an anchor. If no href provided, 'href="#"` will be added instead.
+ * 
+ * - Returns -
+ * {
+ *      success: true/false,
+ *      element: (element) if success === true
+ * }
  */
 const modifyDom = function modifyDomElements() {
 
