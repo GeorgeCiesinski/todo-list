@@ -3,11 +3,11 @@ import navLinks from "./navLinks";
 import copyright from "./copyright";
 
 /*
-Builds the base layout including: 
-- Header
-- App Body
-- Footer
-*/
+ *Builds the base layout including: 
+ * - Header
+ * - App Body
+ * - Footer
+ */
 
 const baseLayout = function createBaseLayoutElements() {
 
@@ -15,17 +15,17 @@ const baseLayout = function createBaseLayoutElements() {
     const nav = navLinks();
 
     const createHeader = function createHeaderElement() {
-        const logoText = "What TODO";
+        const logoText = 'What TODO';
         const header = dom.createElement({
             parent: document.body, 
-            tag: "header", 
-            idName: "site-header"
+            tag: 'header', 
+            idName: 'site-header'
         });
         if (header.success) {
             dom.createElement({
                 parent: header.element, 
-                tag: "h1", 
-                idName: "logo-text", 
+                tag: 'h1', 
+                idName: 'logo-text', 
                 innerHTML: logoText
             });
         }
@@ -35,8 +35,8 @@ const baseLayout = function createBaseLayoutElements() {
     const createSidebar = function createSidebarElement(parent) {
         const sidebar = dom.createElement({
             parent, 
-            tag: "div", 
-            idName: "sidebar"
+            tag: 'div', 
+            idName: 'sidebar'
         });
         // Add Nav if sidebar was successfully created
         if (sidebar.success) {
@@ -46,12 +46,10 @@ const baseLayout = function createBaseLayoutElements() {
     }
 
     const createContent = function createContentElement(parent) {
-        const tempContent = "content";
         dom.createElement({
             parent, 
-            tag: "div", 
-            idName: "content", 
-            innerHTML: tempContent
+            tag: 'div', 
+            idName: 'content'
         });
     }
 
@@ -59,8 +57,8 @@ const baseLayout = function createBaseLayoutElements() {
     const createAppBody = function createAppBodyElement() {
         const appBody = dom.createElement({
             parent: document.body, 
-            tag: "div", 
-            idName: "app-body"
+            tag: 'div', 
+            idName: 'app-body'
         });
         if (appBody.success) {
             createSidebar(appBody.element);
@@ -72,14 +70,14 @@ const baseLayout = function createBaseLayoutElements() {
         const copyrightHTML = copyright();
         const footer = dom.createElement({
             parent: document.body, 
-            tag: "footer", 
-            idName: "site-footer"
+            tag: 'footer', 
+            idName: 'site-footer'
         }); 
         if (footer.success) {
             dom.createElement({
                 parent: footer.element, 
-                tag: "h3", 
-                idName: "copyright", 
+                tag: 'h3', 
+                idName: 'copyright', 
                 innerHTML: copyrightHTML
             });
         }

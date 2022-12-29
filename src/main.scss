@@ -51,6 +51,7 @@ table {
     Meyer's Reset End
 */
 
+// Universal Styling
 * {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -66,6 +67,7 @@ body {
     height: 100vh;
 }
 
+// Header & Footer
 #site-header, #site-footer {
     background-color: lightgrey;
 }
@@ -79,19 +81,37 @@ body {
     text-align: center;
 }
 
+// App Body - Contains sidebar and main content
 #app-body {
     flex: 1;
     display: flex;
 }
 
+// Sidebar
 #sidebar {
     background-color: red;
+}
+
+// Nav
+#nav-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .nav-item {
     margin: 20px;
 }
 
+.nav-link {
+    
+}
+
+#lists {
+    flex: 1;
+}
+
+// Content
 #content {
     flex: 1;
     background-color: orange;

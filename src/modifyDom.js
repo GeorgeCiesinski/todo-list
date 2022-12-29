@@ -1,3 +1,13 @@
+/*
+ * Contains all functions that modify DOM
+ * - Params -
+ * parent: Parent element. Appends new element to parent if provided.
+ * tag(required): The new element is created using the provided tag.
+ * idName: Adds id if provided.
+ * className: Adds class if provided.
+ * innerHTML: Adds innerHTML if provided.
+ * href: Adds href if the tag is an anchor. If no href provided, 'href="#"` will be added instead.
+ */
 const modifyDom = function modifyDomElements() {
 
     const createElement = function createNewDomElement({
@@ -6,15 +16,18 @@ const modifyDom = function modifyDomElements() {
         idName, 
         className,
         innerHTML,
-        href = "#"
+        href
     }={}) {
 
         const result = {};
 
         // If parent and tag are provided, create element
-        if (parent && tag) {
+        if (tag) {
             const element = document.createElement(tag);
-            parent.appendChild(element);
+            // Append to parent if provided
+            if (parent) {
+                parent.appendChild(element);
+            }
             // Add optional values
             if (idName) {
                 element.id = idName;
@@ -25,14 +38,14 @@ const modifyDom = function modifyDomElements() {
             if (innerHTML) {
                 element.innerHTML = innerHTML;
             }
-            if (tag === "a") {
+            if (href) {
                 element.href = href;
             }
             // Update result object
             result.success = true;
             result.element = element;
         } else {
-            console.log("Failed to create a new element because either parent or tag were not provided.");
+            console.log('Unable to create element without a tag.');
             result.success = false;
         }
 
