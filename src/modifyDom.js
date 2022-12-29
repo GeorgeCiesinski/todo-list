@@ -1,46 +1,47 @@
 const modifyDom = function modifyDomElements() {
-    
-    // Create a dom element and give it an ID
-    const createWithId = function createDomElementAddID({
-        parent, 
-        tag, 
-        idName,
-        innerHTML = null
-    }={}) {
-        if (parent && tag && idName) {
-            const element = document.createElement(tag);
-            element.id = idName;
-            if (innerHTML !== undefined && innerHTML !== null) {
-                element.innerHTML = innerHTML;
-            }
-            parent.appendChild(element);
-            return element;
-        }
-        return null;
-    }
 
-    // Create a dom element and give it a class
-    const createWithClass = function createDomElementAddClass({
+    const createElement = function createNewDomElement({
         parent, 
-        tag, 
+        tag,
+        idName, 
         className,
-        innerHTML = null
+        innerHTML,
+        href = "#"
     }={}) {
-        if (parent && tag && className) {
+
+        const result = {};
+
+        // If parent and tag are provided, create element
+        if (parent && tag) {
             const element = document.createElement(tag);
-            element.classList.add(className);
-            if (innerHTML !== undefined && innerHTML !== null) {
+            parent.appendChild(element);
+            // Add optional values
+            if (idName) {
+                element.id = idName;
+            }
+            if (className) {
+                element.classList.add(className);
+            }
+            if (innerHTML) {
                 element.innerHTML = innerHTML;
             }
-            parent.appendChild(element);
-            return element;
+            if (tag === "a") {
+                element.href = href;
+            }
+            // Update result object
+            result.success = true;
+            result.element = element;
+        } else {
+            console.log("Failed to create a new element because either parent or tag were not provided.");
+            result.success = false;
         }
-        return null;
+
+        return result;
+
     }
 
     return {
-        createWithId,
-        createWithClass
+        createElement
     }
 };
 
