@@ -6,7 +6,8 @@ module.exports = {
     baseLayout: "./src/baseLayout.js",
     modifyDom: "./src/modifyDom.js",
     nav: "./src/navLinks.js",
-    copyright: "./src/copyright.js"
+    copyright: "./src/copyright.js",
+    settings: "./src/settingsUtils.js"
 
   },
   plugins: [

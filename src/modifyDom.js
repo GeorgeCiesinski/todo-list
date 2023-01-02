@@ -17,14 +17,28 @@
  */
 const modifyDom = function modifyDomElements() {
 
+    // Set attribute for element
+    const addAttributes = function addAttributesToElement(element, attribute) {
+        const {name, value} = attribute;
+        try {
+            element.setAttribute(name, value);
+        }
+        catch(err) {
+            console.error("Failed to add attribute to element.", err);
+        }
+    }
+
     const createElement = function createNewDomElement({
         parent, 
         tag,
         idName, 
         className,
         innerHTML,
-        href
-    }={}) {
+        href,
+        attributes
+    }={
+        attributes: {} 
+    }) {
 
         const result = {};
 
@@ -48,11 +62,14 @@ const modifyDom = function modifyDomElements() {
             if (href) {
                 element.href = href;
             }
-            // Update result object
+            if (attributes) {
+                attributes.forEach(attribute => addAttributes(element, attribute));
+            }
+            // Result
             result.success = true;
             result.element = element;
         } else {
-            console.log('Unable to create element without a tag.');
+            console.error('Unable to create element without a tag.');
             result.success = false;
         }
 
@@ -60,8 +77,15 @@ const modifyDom = function modifyDomElements() {
 
     }
 
+    const updateContent = function updateContentWithNewElement(element) {
+        const content = document.querySelector('#content');  // Temp
+        console.log(content);
+        content.appendChild(element);
+    }
+
     return {
-        createElement
+        createElement,
+        updateContent
     }
 };
 

@@ -1,14 +1,14 @@
+import settingsUtils from "./settingsUtils"
+
 /*
  *Builds the nav elements in the sidebar
  */
 const navLinks = function createNavElements() {
 
-    const test = function testEventListener() {
-        console.log("Link is working");
-    }
+    const settings = settingsUtils();
 
     // Create lists link
-    const lists = function createListsNav(dom, sidebar) {
+    const listsItem = function createListsNav(dom, sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -27,7 +27,7 @@ const navLinks = function createNavElements() {
     }
 
     // Create settings link
-    const settings = function createSettingsNav(dom, sidebar) {
+    const settingsItem = function createSettingsNav(dom, sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -42,12 +42,12 @@ const navLinks = function createNavElements() {
                 className: "nav-link",
                 innerHTML: "Settings"
             });
-            settingsLink.element.addEventListener("click", test);
+            settingsLink.element.addEventListener("click", settings.build);
         }
     }
 
     // Create about link
-    const about = function createAboutNav(dom, sidebar) {
+    const aboutItem = function createAboutNav(dom, sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -68,9 +68,9 @@ const navLinks = function createNavElements() {
     const build = function buildSidebarNavLinks(dom, sidebar) {
         const navList = dom.createElement({parent: sidebar, tag: "ul", idName: "nav-list"});
         if (navList.success) {
-            lists(dom, navList.element);
-            settings(dom, navList.element);
-            about(dom, navList.element);
+            listsItem(dom, navList.element);
+            settingsItem(dom, navList.element);
+            aboutItem(dom, navList.element);
         }
     }
 
