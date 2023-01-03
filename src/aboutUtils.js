@@ -1,4 +1,4 @@
-import credits from "./assets/data/credits.json"
+import about from "./assets/data/about.json"
 
 /*
  * Builds about page
@@ -21,19 +21,32 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
         });
     }
 
+    // App Info
+    const createInfo = function createInfoDiv() {
+        const infoDiv = dom.createElement({
+            parent: aboutPage.element,
+            tag: 'div',
+        });
+        dom.createElement({
+            parent: infoDiv.element,
+            tag: 'p',
+            innerHTML: about.info
+        });
+    }
+
    /* Credits
     * Creates a credits section by looping through credits.json
     * and adding a list item for each entry. 
     */
     const createCredits = function createCreditSection() {
+        dom.createElement({
+            parent: aboutPage.element,
+            tag: 'h3',
+            innerHTML: "Credits"
+        });
         const creditsDiv = dom.createElement({
             parent: aboutPage.element,
             tag: 'div',
-        });
-        dom.createElement({
-            parent: creditsDiv.element,
-            tag: 'h3',
-            innerHTML: "Credits"
         });
         // Unordered List
         const list = dom.createElement({
@@ -41,7 +54,7 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
             tag: 'ul'
         });
         // Loop through credits.json and add contents as list items
-        credits.credits.forEach(credit => {
+        about.credits.forEach(credit => {
             dom.createElement({
                 parent: list.element,
                 tag: "li",
@@ -53,6 +66,7 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
     // Builds page page
     const build = function buildAboutPage() {
         createTitle();
+        createInfo();
         createCredits();
     }
 
