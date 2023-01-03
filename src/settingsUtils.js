@@ -1,46 +1,57 @@
-import modifyDom from "./modifyDom";
-
 /*
  * Builds settings page and includes various functions
  * - Color Palette Picker
  * - Dark Mode Toggle
  */
-const settingsUtils = function settingsUtilityFunctions() {
-
-    const dom = modifyDom();
+const settingsUtils = function settingsUtilityFunctions(dom) {
     
+    // Empty Settings Page
     const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element
 
-    const createHeader = function createHeader(parent) {
+    /*
+     * Headers
+     */
+
+    // Page Title
+    const createTitle = function createHeader() {
         dom.createElement({
-            parent,
-            tag: 'h3',
+            parent: settingsPage.element,
+            tag: 'h2',
             innerHTML: "Settings"
         });
     }
 
-    const createColors = function createColorPalette(parent) {
-        // Create Div
+    // Data
+    const createDataHeader = function createHeader() {
+        dom.createElement({
+            parent: settingsPage.element,
+            tag: 'h3',
+            innerHTML: "Data"
+        });
+    }
+
+    // Creates color div
+    const createColors = function createColorPalette() {
         const colorDiv = dom.createElement({
-            parent, 
+            parent: settingsPage.element, 
             tag: 'div', 
             idName: 'color-div', 
             className: 'settings-divs'
         });
-        // Create label
+        // Label
         dom.createElement({
             parent: colorDiv.element,
             tag: 'label',
             className: 'labels',
-            innerHTML: 'Primary Color',
+            innerHTML: 'Primary Color: ',
             attributes: [
                 {
                     name: 'for',
-                    value: 'color'
+                    value: 'color-input'
                 }
             ],
         });
-        // Create input
+        // Input
         dom.createElement({
             parent: colorDiv.element,
             tag: 'input',
@@ -63,27 +74,88 @@ const settingsUtils = function settingsUtilityFunctions() {
         });
     }
 
-    const build = function buildSettingsPage() {
-        // Create Header
-        createHeader(settingsPage.element);
-        // Create Form
-        const settingsForm = dom.createElement({
-            parent: settingsPage.element, 
-            tag: 'form',
-            idName: 'settings-form',
-            className: 'forms'
+    // Creates dark mode div
+    const createDarkMode = function createDarkMode() {
+        const darkModeDiv = dom.createElement({
+            parent: settingsPage.element,
+            tag: "div",
+            idName: 'dark-mode-div', 
+            className: 'settings-divs'
         });
-        // Add Color Palette
-        createColors(settingsForm.element);
-        // createColors(settingsForm.element);
-        // Dark Mode
-        // Delete Data (local)
-        // Append to Content
-        dom.updateContent(settingsPage.element);  // Temp
+        // Label
+        dom.createElement({
+            parent: darkModeDiv.element,
+            tag: 'label',
+            className: 'labels',
+            innerHTML: 'Dark Mode: ',
+            attributes: [
+                {
+                    name: 'for',
+                    value: 'dark-mode-input'
+                }
+            ],
+        });
+        // Input
+        dom.createElement({
+            parent: darkModeDiv.element,
+            tag: 'input',
+            className: 'inputs',
+            idName: 'dark-mode-input',
+            attributes: [
+                {
+                    name: 'type',
+                    value: 'checkbox'
+                },
+                {
+                    name: 'name',
+                    value: 'dark-mode-input',
+                },
+                {
+                    name: 'value',
+                    value: '#1D4ED8'
+                }
+            ],
+        });
     }
 
+    // Create Delete Data Div
+    const createDeleteData = function createDeleteData() {
+        const deleteDataDiv = dom.createElement({
+            parent: settingsPage.element,
+            tag: "div",
+            idName: 'delete-data-div', 
+            className: 'settings-divs'
+        });
+        // Button
+        dom.createElement({
+            parent: deleteDataDiv.element,
+            tag: 'button',
+            className: 'buttons',
+            innerHTML: 'Delete Local Data',
+        });
+    }
+
+    // Build page
+    const build = function buildSettingsPage() {
+        // Page Header
+        createTitle();
+        // Color Theme and Dark Mode
+        createColors();
+        createDarkMode();
+        // Data
+        createDataHeader();
+        createDeleteData();
+    }
+
+    // Shows built page
+    const showPage = function switchPage() {
+        dom.switchContent(settingsPage.element);
+    }
+
+    build();  // Builds page
+
     return {
-        build
+        showPage
     }
 }
 

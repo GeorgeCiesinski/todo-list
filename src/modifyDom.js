@@ -1,23 +1,21 @@
 /*
  * Contains all functions that modify DOM
-
- * - Params -
- * parent: Parent element. Appends new element to parent if provided.
- * tag(required): The new element is created using the provided tag.
- * idName: Adds id if provided.
- * className: Adds class if provided.
- * innerHTML: Adds innerHTML if provided.
- * href: Adds href if the tag is an anchor. If no href provided, 'href="#"` will be added instead.
- * 
- * - Returns -
- * {
- *      success: true/false,
- *      element: (element) if success === true
- * }
  */
 const modifyDom = function modifyDomElements() {
 
-    // Set attribute for element
+    // Content element
+    let content = null;
+
+    /* Set attribute for a given element
+     * 
+     * - Params - 
+     * element: A DOM element
+     * attribute: An array containing objects with attribute name and value
+     *      {
+     *          name: The name of the attribute to add
+     *          value: The value of the attribute
+     *      }
+     */
     const addAttributes = function addAttributesToElement(element, attribute) {
         const {name, value} = attribute;
         try {
@@ -28,6 +26,23 @@ const modifyDom = function modifyDomElements() {
         }
     }
 
+    /*
+    * Creates a new element, adds attributes, and appends to parent if provided. 
+    *
+    * - Params -
+    * parent: Parent element. Appends new element to parent if provided.
+    * tag(required): The new element is created using the provided tag.
+    * idName: Adds id if provided.
+    * className: Adds class if provided.
+    * innerHTML: Adds innerHTML if provided.
+    * href: Adds href if the tag is an anchor. If no href provided, 'href="#"` will be added instead.
+    * 
+    * - Returns -
+    * {
+    *      success: true/false,
+    *      element: (element) if success === true
+    * } 
+    */
     const createElement = function createNewDomElement({
         parent, 
         tag,
@@ -77,15 +92,27 @@ const modifyDom = function modifyDomElements() {
 
     }
 
-    const updateContent = function updateContentWithNewElement(element) {
-        const content = document.querySelector('#content');  // Temp
-        console.log(content);
+    const setContent = function setContentDomNode(element) {
+        content = element;
+    }
+
+    const clearContent = function clearElementsFromContent() {
+        while (content.firstChild) {
+            content.removeChild(content.lastChild);
+        }
+    }
+
+    const switchContent = function switchContentWithNewElement(element) {
+        clearContent();  // Remove previous page
         content.appendChild(element);
     }
 
+
+
     return {
         createElement,
-        updateContent
+        setContent,
+        switchContent
     }
 };
 

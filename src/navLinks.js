@@ -3,12 +3,12 @@ import settingsUtils from "./settingsUtils"
 /*
  *Builds the nav elements in the sidebar
  */
-const navLinks = function createNavElements() {
+const navLinks = function createNavElements(dom) {
 
-    const settings = settingsUtils();
+    const settings = settingsUtils(dom);
 
     // Create lists link
-    const listsItem = function createListsNav(dom, sidebar) {
+    const listsItem = function createListsNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -27,7 +27,7 @@ const navLinks = function createNavElements() {
     }
 
     // Create settings link
-    const settingsItem = function createSettingsNav(dom, sidebar) {
+    const settingsItem = function createSettingsNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -42,12 +42,12 @@ const navLinks = function createNavElements() {
                 className: "nav-link",
                 innerHTML: "Settings"
             });
-            settingsLink.element.addEventListener("click", settings.build);
+            settingsLink.element.addEventListener("click", settings.showPage);
         }
     }
 
     // Create about link
-    const aboutItem = function createAboutNav(dom, sidebar) {
+    const aboutItem = function createAboutNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
@@ -65,12 +65,13 @@ const navLinks = function createNavElements() {
         }
     }
 
-    const build = function buildSidebarNavLinks(dom, sidebar) {
+    // Build page
+    const build = function buildSidebarNavLinks(sidebar) {
         const navList = dom.createElement({parent: sidebar, tag: "ul", idName: "nav-list"});
         if (navList.success) {
-            listsItem(dom, navList.element);
-            settingsItem(dom, navList.element);
-            aboutItem(dom, navList.element);
+            listsItem(navList.element);
+            settingsItem(navList.element);
+            aboutItem(navList.element);
         }
     }
 

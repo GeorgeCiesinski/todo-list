@@ -1,4 +1,3 @@
-import modifyDom from "./modifyDom";
 import navLinks from "./navLinks";
 import copyright from "./copyright";
 
@@ -9,10 +8,9 @@ import copyright from "./copyright";
  * - Footer
  */
 
-const baseLayout = function createBaseLayoutElements() {
+const baseLayout = function createBaseLayoutElements(dom) {
 
-    const dom = modifyDom();
-    const nav = navLinks();
+    const nav = navLinks(dom);  // Navbar
 
     const createHeader = function createHeaderElement() {
         const logoText = 'What TODO';
@@ -29,7 +27,6 @@ const baseLayout = function createBaseLayoutElements() {
                 innerHTML: logoText
             });
         }
-        
     }
     
     const createSidebar = function createSidebarElement(parent) {
@@ -40,17 +37,19 @@ const baseLayout = function createBaseLayoutElements() {
         });
         // Add Nav if sidebar was successfully created
         if (sidebar.success) {
-            nav.build(dom, sidebar.element);
+            nav.build(sidebar.element);
         }
         
     }
 
+    // Empty content div
     const createContent = function createContentElement(parent) {
-        dom.createElement({
+        const content = dom.createElement({
             parent, 
             tag: 'div', 
             idName: 'content'
         });
+        dom.setContent(content.element);
     }
 
     // Create App Body and append sidebar and content
@@ -83,17 +82,15 @@ const baseLayout = function createBaseLayoutElements() {
         }
     }
     
-    // Creates all of the needed base elements
+    // Build Page
     const build = function buildBaseLayout() {
         createHeader();
         createAppBody();
         createFooter();
     }
 
-    // Returns
-    return {
-        build
-    }
+    // Build on load
+    build();
 };
 
 export default baseLayout;

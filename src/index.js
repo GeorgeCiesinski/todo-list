@@ -1,5 +1,6 @@
 import './main.scss'
 import baseLayout from './baseLayout';
+import modifyDom from "./modifyDom";
 
-const layout = baseLayout();
-layout.build();
+const dom = modifyDom();  // Document Object Model Module
+baseLayout(dom);
