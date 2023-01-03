@@ -13,7 +13,7 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
      */
 
     // Page Title
-    const createTitle = function createHeader() {
+    const createTitle = function createTitleHeader() {
         dom.createElement({
             parent: settingsPage.element,
             tag: 'h2',
@@ -135,7 +135,7 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
         });
     }
 
-    // Build page
+    // Builds page page
     const build = function buildSettingsPage() {
         // Page Header
         createTitle();

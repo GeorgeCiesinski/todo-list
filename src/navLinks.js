@@ -1,4 +1,5 @@
 import settingsUtils from "./settingsUtils"
+import aboutUtils from "./aboutUtils"
 
 /*
  *Builds the nav elements in the sidebar
@@ -6,6 +7,7 @@ import settingsUtils from "./settingsUtils"
 const navLinks = function createNavElements(dom) {
 
     const settings = settingsUtils(dom);
+    const about = aboutUtils(dom);
 
     // Create lists link
     const listsItem = function createListsNav(sidebar) {
@@ -55,13 +57,14 @@ const navLinks = function createNavElements(dom) {
             className: "nav-item"
         });
         if (listItem.success) {
-            dom.createElement({
+            const aboutLink = dom.createElement({
                 parent: listItem.element,
                 tag: "a",
                 idName: "about-link",
                 className: "nav-link",
                 innerHTML: "About"
             });
+            aboutLink.element.addEventListener("click", about.showPage);
         }
     }
 

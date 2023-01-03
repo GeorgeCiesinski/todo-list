@@ -116,3 +116,17 @@ body {
     flex: 1;
     background-color: orange;
 }
+
+#content>div {
+    margin: 20px;
+}
+
+#content>div>div {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#content>div>h2, #content>div>h3 {
+    margin: 15px 0px;
+}

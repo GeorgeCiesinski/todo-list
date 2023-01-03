@@ -5,6 +5,7 @@ import copyright from "./copyright";
  *Builds the base layout including: 
  * - Header
  * - App Body
+ * - Sidebar and Nav
  * - Footer
  */
 

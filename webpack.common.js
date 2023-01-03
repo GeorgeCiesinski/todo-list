@@ -7,8 +7,8 @@ module.exports = {
     modifyDom: "./src/modifyDom.js",
     nav: "./src/navLinks.js",
     copyright: "./src/copyright.js",
-    settings: "./src/settingsUtils.js"
-
+    settings: "./src/settingsUtils.js",
+    about: "./src/aboutUtils.js"
   },
   plugins: [
     new HtmlWebpackPlugin({

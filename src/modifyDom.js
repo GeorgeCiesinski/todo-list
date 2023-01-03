@@ -41,7 +41,7 @@ const modifyDom = function modifyDomElements() {
     * {
     *      success: true/false,
     *      element: (element) if success === true
-    * } 
+    * }
     */
     const createElement = function createNewDomElement({
         parent, 
@@ -92,22 +92,23 @@ const modifyDom = function modifyDomElements() {
 
     }
 
+    // Sets content div once it is first created
     const setContent = function setContentDomNode(element) {
         content = element;
     }
 
+    // Remove elements from content div
     const clearContent = function clearElementsFromContent() {
         while (content.firstChild) {
             content.removeChild(content.lastChild);
         }
     }
 
+    // Appends element to content div
     const switchContent = function switchContentWithNewElement(element) {
-        clearContent();  // Remove previous page
+        clearContent();  
         content.appendChild(element);
     }
-
-
 
     return {
         createElement,
