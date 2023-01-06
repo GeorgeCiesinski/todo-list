@@ -5,42 +5,26 @@ import { createPaletteFromColor } from "palettey";
  */
 const settingsUtilities = function settingsUtilitiesFunctions() {
 
+    // Returns a new colorSettings object
+    const createColorSettings = function createNewColorSettingsObject(colorHex) {
+        return {
+            'primaryColor': colorHex,
+            'palette': createPaletteFromColor(colorHex)
+        }
+    }
+
     const defaultColor = '#1D4ED8';
+    let colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || createColorSettings(defaultColor);
 
-    const colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || {};
+    console.log(colorSettings);
 
-    // Sets primary color in colorSettings Object
-    const setPrimary = function setPrimaryColor(colorHex) {
-        colorSettings.primaryColor = colorHex;
-    }
-
-    // Sets palette in colorSettings Object
-    const setPalette = function setPaletteColors(colorHex) {
-        const palette = createPaletteFromColor(
-            "primary", 
-            colorHex, 
-            {
-                useLightness: false,
-            }
-        )
-        colorSettings.palette = palette.primary;
-    }
-
-    // Updates the colorSettings object with primary color and palette
-    const setColorScheme = function setColorSchemeSetting(colorHex) {
-        setPrimary(colorHex);
-        setPalette(colorHex);
-    }
-
-    if (!localStorage.getItem("colorSettings")) {
-        console.log("Settings Exist");
-    } else {
-        console.log("Settings Don't Exist");
+    const getPrimaryColor = function getPrimaryColor() {
+        return colorSettings.primaryColor;
     }
 
     // Update theme colors in colorSettings
-    const updateColor = function updateColorValues(event) {
-        setColorScheme(event.target.value);  
+    const updateColorScheme = function updateColorValues(event) {
+        colorSettings = createColorSettings(event.target.value);
     }
 
     // Update dark mode in local storage
@@ -64,9 +48,12 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
         localStorage.clear();
     }
 
+    console.log(localStorage.getItem('colorSettings'));
+
+
     return {
-        defaultColor,
-        updateColor,
+        getPrimaryColor,
+        updateColorScheme,
         updateDarkMode,
         saveSettings,
         deleteData
@@ -132,11 +119,11 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
                 },
                 {
                     name: 'value',
-                    value: util.defaultColor
+                    value: util.getPrimaryColor()
                 }
             ],
         });
-        colorInput.element.addEventListener('input', util.updateColor);
+        colorInput.element.addEventListener('input', util.updateColorScheme);
     }
 
     // Creates dark mode div

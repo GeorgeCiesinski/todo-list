@@ -2,13 +2,13 @@ import navLinks from "./navLinks";
 import copyright from "./copyright";
 
 /*
- *Builds the base layout including: 
+ *Builds the base layout: 
  * - Header
  * - App Body
- * - Sidebar and Nav
+ * - Sidebar
+ * - Nav
  * - Footer
  */
-
 const baseLayout = function createBaseLayoutElements(dom) {
 
     const nav = navLinks(dom);  // Navbar
