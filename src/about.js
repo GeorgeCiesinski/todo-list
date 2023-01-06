@@ -1,9 +1,9 @@
-import about from "./assets/data/about.json"
+import aboutData from "./assets/data/about.json"
 
 /*
  * Builds about page
  */
-const aboutUtils = function aboutUtilityFunctions(dom) {
+const aboutBuilder = function aboutUtilityFunctions(dom) {
     
     const aboutPage = dom.createElement({tag: 'div'});  // Base about dom element
 
@@ -29,7 +29,7 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
         dom.createElement({
             parent: infoDiv.element,
             tag: 'p',
-            innerHTML: about.info
+            innerHTML: aboutData.info
         });
     }
 
@@ -53,7 +53,7 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
             tag: 'ul'
         });
         // Loop through credits.json and add contents as list items
-        about.credits.forEach(credit => {
+        aboutData.credits.forEach(credit => {
             dom.createElement({
                 parent: list.element,
                 tag: "li",
@@ -81,4 +81,4 @@ const aboutUtils = function aboutUtilityFunctions(dom) {
     }
 }
 
-export default aboutUtils;
+export default aboutBuilder;

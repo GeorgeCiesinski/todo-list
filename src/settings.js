@@ -1,22 +1,12 @@
 import { createPaletteFromColor } from "palettey";
 
 /*
- * Builds settings page and includes various functions
- * - Color Palette Picker
- * - Dark Mode Toggle
+ * Utility functions for Settings Page
  */
-const settingsUtils = function settingsUtilityFunctions(dom) {
-    
-    const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element
-
-    /*
-     * Utilities
-     * 
-     * Change settings functions
-     */
+const settingsUtilities = function settingsUtilitiesFunctions() {
 
     const defaultColor = '#1D4ED8';
- 
+
     const colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || {};
 
     // Sets primary color in colorSettings Object
@@ -42,9 +32,11 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
         setPalette(colorHex);
     }
 
-    // if (!localStorage.getItem("colorSettings")) {
-    //     setColorScheme(defaultColor);
-    // }
+    if (!localStorage.getItem("colorSettings")) {
+        console.log("Settings Exist");
+    } else {
+        console.log("Settings Don't Exist");
+    }
 
     // Update theme colors in colorSettings
     const updateColor = function updateColorValues(event) {
@@ -71,6 +63,23 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
      const deleteData = function deleteLocalStorage() {
         localStorage.clear();
     }
+
+    return {
+        defaultColor,
+        updateColor,
+        updateDarkMode,
+        saveSettings,
+        deleteData
+    }
+}
+
+/*
+ * Builds settings page
+ */
+const settingsBuilder = function settingsBuilderFunctions(dom) {
+    
+    const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element  
+    const util = settingsUtilities();
 
     /*
      * Page Construction
@@ -123,11 +132,11 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
                 },
                 {
                     name: 'value',
-                    value: defaultColor
+                    value: util.defaultColor
                 }
             ],
         });
-        colorInput.element.addEventListener('input', updateColor);
+        colorInput.element.addEventListener('input', util.updateColor);
     }
 
     // Creates dark mode div
@@ -172,7 +181,7 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
                 }
             ],
         });
-        darkModeInput.element.addEventListener('input', updateDarkMode);
+        darkModeInput.element.addEventListener('input', util.updateDarkMode);
     }
 
     const createSaveButton = function createSaveButton() {
@@ -189,7 +198,7 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
             className: 'buttons',
             innerHTML: 'Save',
         });
-        saveButton.element.addEventListener('click', saveSettings);
+        saveButton.element.addEventListener('click', util.saveSettings);
     }
 
     // Data
@@ -216,7 +225,7 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
             className: 'buttons',
             innerHTML: 'Delete Local Data',
         });
-        deleteDataButton.element.addEventListener('click', deleteData);
+        deleteDataButton.element.addEventListener('click', util.deleteData);
     }
 
     // Builds page page
@@ -244,4 +253,4 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
     }
 }
 
-export default settingsUtils;
+export default settingsBuilder;

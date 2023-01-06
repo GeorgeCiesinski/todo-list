@@ -1,13 +1,13 @@
-import settingsUtils from "./settingsUtils"
-import aboutUtils from "./aboutUtils"
+import settings from "./settings"
+import about from "./about"
 
 /*
  *Builds the nav elements in the sidebar
  */
 const navLinks = function createNavElements(dom) {
 
-    const settings = settingsUtils(dom);
-    const about = aboutUtils(dom);
+    const settingsBuilder = settings(dom);
+    const aboutBuilder = about(dom);
 
     // Create lists link
     const listsItem = function createListsNav(sidebar) {
@@ -44,7 +44,7 @@ const navLinks = function createNavElements(dom) {
                 className: "nav-link",
                 innerHTML: "Settings"
             });
-            settingsLink.element.addEventListener("click", settings.showPage);
+            settingsLink.element.addEventListener("click", settingsBuilder.showPage);
         }
     }
 
@@ -64,7 +64,7 @@ const navLinks = function createNavElements(dom) {
                 className: "nav-link",
                 innerHTML: "About"
             });
-            aboutLink.element.addEventListener("click", about.showPage);
+            aboutLink.element.addEventListener("click", aboutBuilder.showPage);
         }
     }
 
