@@ -1,3 +1,5 @@
+import { createPaletteFromColor } from "palettey";
+
 /*
  * Builds settings page and includes various functions
  * - Color Palette Picker
@@ -7,24 +9,46 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
     
     const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element
 
-    const defaultColor = '#1D4ED8';
-    const colorSettings = {};  // Color settings object
-    
-
     /*
      * Utilities
      * 
-     * Carry out settings functions unrelated to constructing the page elements
+     * Change settings functions
      */
 
-    // Clear Local Storage
-    const deleteData = function deleteLocalStorage() {
-        localStorage.clear();
+    const defaultColor = '#1D4ED8';
+ 
+    const colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || {};
+
+    // Sets primary color in colorSettings Object
+    const setPrimary = function setPrimaryColor(colorHex) {
+        colorSettings.primaryColor = colorHex;
     }
 
-    // Update theme colors in local storage
-    const updateColor = function updateColorLocalStorage(event) {
-        colorSettings.defaultColor = event.target.value;
+    // Sets palette in colorSettings Object
+    const setPalette = function setPaletteColors(colorHex) {
+        const palette = createPaletteFromColor(
+            "primary", 
+            colorHex, 
+            {
+                useLightness: false,
+            }
+        )
+        colorSettings.palette = palette.primary;
+    }
+
+    // Updates the colorSettings object with primary color and palette
+    const setColorScheme = function setColorSchemeSetting(colorHex) {
+        setPrimary(colorHex);
+        setPalette(colorHex);
+    }
+
+    // if (!localStorage.getItem("colorSettings")) {
+    //     setColorScheme(defaultColor);
+    // }
+
+    // Update theme colors in colorSettings
+    const updateColor = function updateColorValues(event) {
+        setColorScheme(event.target.value);  
     }
 
     // Update dark mode in local storage
@@ -32,14 +56,24 @@ const settingsUtils = function settingsUtilityFunctions(dom) {
         colorSettings.darkMode = event.target.checked;
     }
 
+    // Temp for debugging
+    const logLocalStorage = function() {
+        console.log(JSON.parse(localStorage.getItem('colorSettings')));
+    }
+
     // Saves changed settings
     const saveSettings = function saveSettingChanges() {
-        localStorage.setItem('colorSettings', colorSettings);
-        console.log("Saved");
+        localStorage.setItem('colorSettings', JSON.stringify(colorSettings));
+        logLocalStorage();
+    }
+
+     // Clear Local Storage
+     const deleteData = function deleteLocalStorage() {
+        localStorage.clear();
     }
 
     /*
-     * Page Element Construction
+     * Page Construction
      */
 
     // Page Title

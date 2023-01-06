@@ -5,8 +5,7 @@ import about from "./assets/data/about.json"
  */
 const aboutUtils = function aboutUtilityFunctions(dom) {
     
-    // Empty About Page
-    const aboutPage = dom.createElement({tag: 'div'});  // Base settings dom element
+    const aboutPage = dom.createElement({tag: 'div'});  // Base about dom element
 
     /*
      * Headers
