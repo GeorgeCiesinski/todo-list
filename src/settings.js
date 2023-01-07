@@ -7,9 +7,17 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
 
     // Returns a new colorSettings object
     const createColorSettings = function createNewColorSettingsObject(colorHex) {
+        const palette = createPaletteFromColor(
+            "primary", 
+            colorHex, 
+            {
+                useLightness: false,
+            }
+        );
+        console.log(palette);
         return {
             'primaryColor': colorHex,
-            'palette': createPaletteFromColor(colorHex)
+            'palette': palette.primary
         }
     }
 
@@ -40,16 +48,21 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
     // Saves changed settings
     const saveSettings = function saveSettingChanges() {
         localStorage.setItem('colorSettings', JSON.stringify(colorSettings));
+        Object.entries(colorSettings.palette).forEach((entry) => {
+            const [step, color] = entry;
+            document.documentElement.style.setProperty(
+                `--color-primary-${step}`, 
+                color
+            );
+        });
         logLocalStorage();
     }
 
      // Clear Local Storage
      const deleteData = function deleteLocalStorage() {
         localStorage.clear();
+        logLocalStorage();
     }
-
-    console.log(localStorage.getItem('colorSettings'));
-
 
     return {
         getPrimaryColor,
