@@ -8,7 +8,8 @@ module.exports = {
     nav: "./src/navLinks.js",
     copyright: "./src/copyright.js",
     settings: "./src/settings.js",
-    about: "./src/about.js"
+    about: "./src/about.js",
+    colorTheme: "./src/colorTheme.js"
   },
   plugins: [
     new HtmlWebpackPlugin({
