@@ -32,6 +32,7 @@ The Lists object contains all of the lists. The app starts with a default list, 
 
 Each Todo object contains information about that Todo. The app populates some fields automatically, such as date-added. Some fields are mandatory such as title. Some are optional such as description, due, and priority. 
 
+```
 {
     "title": "Clean fridge",
     "date-added": "date",
@@ -39,6 +40,7 @@ Each Todo object contains information about that Todo. The app populates some fi
     "due": "date",
     "priority": "low/medium/high"
 }
+```
 
 ## Planned Features
 
