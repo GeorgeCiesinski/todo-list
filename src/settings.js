@@ -3,12 +3,10 @@ import createColorSettings from "./colorTheme"
 /*
  * Utility functions for Settings Page
  */
-const settingsUtilities = function settingsUtilitiesFunctions() {
+const settingsUtilities = function settingsUtilitiesFunctions(dom) {
 
     const defaultColor = '#1D4ED8';
     let colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || createColorSettings(defaultColor);
-
-    console.log(colorSettings);
 
     const getPrimaryColor = function getPrimaryColor() {
         return colorSettings.primaryColor;
@@ -17,6 +15,7 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
     // Update theme colors in colorSettings
     const updateColorScheme = function updateColorValues(event) {
         colorSettings = createColorSettings(event.target.value);
+        dom.setPalette(colorSettings.palette)
     }
 
     // Update dark mode in local storage
@@ -32,13 +31,6 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
     // Saves changed settings
     const saveSettings = function saveSettingChanges() {
         localStorage.setItem('colorSettings', JSON.stringify(colorSettings));
-        Object.entries(colorSettings.palette).forEach((entry) => {
-            const [step, color] = entry;
-            document.documentElement.style.setProperty(
-                `--color-primary-${step}`, 
-                color
-            );
-        });
         logLocalStorage();
     }
 
@@ -63,7 +55,7 @@ const settingsUtilities = function settingsUtilitiesFunctions() {
 const settingsBuilder = function settingsBuilderFunctions(dom) {
     
     const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element  
-    const util = settingsUtilities();
+    const util = settingsUtilities(dom);
 
     /*
      * Page Construction

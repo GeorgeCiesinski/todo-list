@@ -110,10 +110,21 @@ const modifyDom = function modifyDomElements() {
         content.appendChild(element);
     }
 
+    const setPalette = function setPaletteCSS(palette) {
+        Object.entries(palette).forEach((entry) => {
+            const [step, color] = entry;
+            document.documentElement.style.setProperty(
+                `--color-primary-${step}`, 
+                color
+            );
+        });
+    }
+
     return {
         createElement,
         setContent,
-        switchContent
+        switchContent,
+        setPalette
     }
 };
 

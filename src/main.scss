@@ -82,7 +82,8 @@ body {
 
 // Header & Footer
 #site-header, #site-footer {
-    background-color: lightgrey;
+    color: var(--color-primary-50);
+    background-color: var(--color-primary-500);
 }
 
 #site-header {
@@ -102,7 +103,7 @@ body {
 
 // Sidebar
 #sidebar {
-    background-color: var(--color-primary-500);
+    background-color: var(--color-primary-300);
 }
 
 // Nav
@@ -127,7 +128,7 @@ body {
 // Content
 #content {
     flex: 1;
-    background-color: orange;
+    background-color: lightgrey;
 }
 
 #content>div {
