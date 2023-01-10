@@ -2,6 +2,12 @@
 
 A simple todo web app.
 
+## Features
+
+### Customize Color Theme
+
+The `Primary Color` setting in the Settings menu allows you to specify a color theme. Thanks to the Palettey library, a Tailwinds style 10 color palette is generated for the website to use. 
+
 ## JSON Objects
 
 The Todo app generates a dom based on a json object. The object contains different lists which can be added and removed. Each list contains Todo objects. 
@@ -54,4 +60,8 @@ Dark Mode Toggle in settings.
 
 ## Code Style
 
-Built using the [Airbnb Javascript Style](https://airbnb.io/javascript/).
+[Airbnb Javascript Style](https://airbnb.io/javascript/).
+
+## Credits
+
+Built using [https://github.com/bartbergmans/Palettey](https://github.com/bartbergmans/Palettey) by [bartbergmans](https://github.com/bartbergmans)

@@ -1,4 +1,5 @@
 import { createPaletteFromColor } from "palettey";
+import contrast from "./lib/color"
 
 // Temporary fix for createPaletteFromColor
 const fixPalette = function fixPaletteStep500(palette) {
@@ -8,7 +9,7 @@ const fixPalette = function fixPaletteStep500(palette) {
 }
 
 // Returns a new colorSettings object
-const createColorSettings = function createNewColorSettingsObject(colorHex) {
+const createColorSettings = function createNewColorSettingsObject(colorHex) {   
     let palette = createPaletteFromColor(
         "primary", 
         colorHex, 

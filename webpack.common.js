@@ -9,7 +9,8 @@ module.exports = {
     copyright: "./src/copyright.js",
     settings: "./src/settings.js",
     about: "./src/about.js",
-    colorTheme: "./src/colorTheme.js"
+    colorTheme: "./src/colorTheme.js",
+    color: "./src/lib/color.js"
   },
   plugins: [
     new HtmlWebpackPlugin({
