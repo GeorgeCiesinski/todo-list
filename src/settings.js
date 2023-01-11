@@ -11,12 +11,16 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     const getPrimaryColor = function getPrimaryColor() {
         return colorSettings.primaryColor;
     }
+    
+    const updateSASS = function updateSASSwithChanges() {
+        dom.setPalette(colorSettings.palette)
+        dom.setFont(colorSettings.primaryFontColor)
+    }
 
     // Update theme colors in colorSettings
     const updateColorScheme = function updateColorValues(event) {
         colorSettings = createColorSettings(event.target.value);
-        dom.setPalette(colorSettings.palette)
-        dom.setFont(colorSettings.primaryFontColor)
+        updateSASS();
     }
 
     // Update dark mode in local storage
@@ -27,6 +31,12 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     // Temp for debugging
     const logLocalStorage = function() {
         console.log(JSON.parse(localStorage.getItem('colorSettings')));
+    }
+
+    // Loads saved changes
+    const loadSettings = function loadSettingsFromLocalStorage() {
+        colorSettings = JSON.parse(localStorage.getItem('colorSettings'));
+        updateSASS();
     }
 
     // Saves changed settings
@@ -41,10 +51,13 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
         logLocalStorage();
     }
 
+    loadSettings();
+
     return {
         getPrimaryColor,
         updateColorScheme,
         updateDarkMode,
+        loadSettings,
         saveSettings,
         deleteData
     }
@@ -161,7 +174,25 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         darkModeInput.element.addEventListener('input', util.updateDarkMode);
     }
 
-    const createSaveButton = function createSaveButton() {
+    const createLoadButton = function createLoadButtonElement() {
+        const saveButtonDiv = dom.createElement({
+            parent: settingsPage.element,
+            tag: "div",
+            idName: 'load-button-div', 
+            className: 'settings-divs'
+        });
+        // Button
+        const saveButton = dom.createElement({
+            parent: saveButtonDiv.element,
+            tag: 'button',
+            idName: 'load-button',
+            className: 'buttons',
+            innerHTML: 'Load',
+        });
+        saveButton.element.addEventListener('click', util.loadSettings);
+    }
+
+    const createSaveButton = function createSaveButtonElement() {
         const saveButtonDiv = dom.createElement({
             parent: settingsPage.element,
             tag: "div",
@@ -172,6 +203,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         const saveButton = dom.createElement({
             parent: saveButtonDiv.element,
             tag: 'button',
+            idName: 'save-button',
             className: 'buttons',
             innerHTML: 'Save',
         });
@@ -212,6 +244,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         // Color Theme and Dark Mode
         createColors();
         createDarkMode();
+        createLoadButton();
         createSaveButton();
         // Data
         createDataHeader();
