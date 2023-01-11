@@ -10,6 +10,7 @@ const fixPalette = function fixPaletteStep500(palette) {
 
 // Returns a new colorSettings object
 const createColorSettings = function createNewColorSettingsObject(colorHex) {   
+    console.log(colorHex);
     const black = '#000000';
     const white = '#FFFFFF';
     const blackContrast = contrast(colorHex, black);

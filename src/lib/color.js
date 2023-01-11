@@ -4,7 +4,7 @@ const reLum = function relativeLuminance(RGB) {
     newRGB /= 255;
     return newRGB <= 0.03928 ?
     newRGB / 12.92 :
-    (newRGB + 0.055) / 1.055 ** 2.4;
+    ((newRGB + 0.055) / 1.055) ** 2.4;
 }
 
 // Measure the luminance of the color
