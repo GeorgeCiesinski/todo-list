@@ -120,11 +120,18 @@ const modifyDom = function modifyDomElements() {
         });
     }
 
+    const setFont = function setFontColorCSS(fontColor) {
+        document.documentElement.style.setProperty(
+            '--font-color', fontColor
+        )
+    }
+
     return {
         createElement,
         setContent,
         switchContent,
-        setPalette
+        setPalette,
+        setFont
     }
 };
 

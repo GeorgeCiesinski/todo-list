@@ -67,6 +67,7 @@ html {
     --color-primary-700: #163BA2;
     --color-primary-800: #123187;
     --color-primary-900: #0D225E;
+    --font-color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -82,7 +83,7 @@ body {
 
 // Header & Footer
 #site-header, #site-footer {
-    color: var(--color-primary-50);
+    color: var(--font-color);
     background-color: var(--color-primary-500);
 }
 

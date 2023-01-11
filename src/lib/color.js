@@ -1,16 +1,16 @@
 // Measure the relative luminance of each RGB value
-const reLum = function relativeLuminance(value) {
-    let newValue = value;
-    newValue /= 255;
-    return newValue <= 0.03928 ?
-    newValue / 12.92 :
-    (newValue + 0.055) / 1.055 ** 2.4;
+const reLum = function relativeLuminance(RGB) {
+    let newRGB = RGB;
+    newRGB /= 255;
+    return newRGB <= 0.03928 ?
+    newRGB / 12.92 :
+    (newRGB + 0.055) / 1.055 ** 2.4;
 }
 
 // Measure the luminance of the color
 const lum = function luminance(r, g, b) {
     const a = [r, g, b].map(reLum);
-    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    return Number(a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722).toFixed(3);
 }
 
 // Convert hex values to RGB
@@ -29,8 +29,7 @@ const contrast = function findContrast(hex1, hex2) {
     const lum2 = lum(rgb2[0], rgb2[1], rgb2[2]);
     const brightest = Math.max(lum1, lum2);
     const darkest = Math.min(lum1, lum2);
-    return (brightest + 0.05) /
-        (darkest + 0.05);
+    return (brightest + 0.05) / (darkest + 0.05);
 }
 
 export default contrast;

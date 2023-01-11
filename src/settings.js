@@ -16,6 +16,7 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     const updateColorScheme = function updateColorValues(event) {
         colorSettings = createColorSettings(event.target.value);
         dom.setPalette(colorSettings.palette)
+        dom.setFont(colorSettings.primaryFontColor)
     }
 
     // Update dark mode in local storage

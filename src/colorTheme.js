@@ -10,16 +10,24 @@ const fixPalette = function fixPaletteStep500(palette) {
 
 // Returns a new colorSettings object
 const createColorSettings = function createNewColorSettingsObject(colorHex) {   
+    const black = '#000000';
+    const white = '#FFFFFF';
+    const blackContrast = contrast(colorHex, black);
+    const whiteContrast = contrast(colorHex, white);
+    console.log(`Black Contrast: ${blackContrast}, White Contrast: ${whiteContrast}`);
+    const primaryFontColor = blackContrast > whiteContrast ? black : white;
     let palette = createPaletteFromColor(
         "primary", 
         colorHex, 
-        {
+        { 
             useLightness: false,
         }
     ).primary;
-    palette = fixPalette(palette);
+    palette = fixPalette(palette);  // Temporary fix until palette lib is updated
+    
     return {
         'primaryColor': colorHex,
+        'primaryFontColor': primaryFontColor,
         'palette': palette
     }
 }
