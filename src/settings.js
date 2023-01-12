@@ -80,12 +80,11 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
     }
 
     // Creates color div
-    const createColors = function createColorPalette() {
+    const createColors = function createColorsElement(parent) {
         const colorDiv = dom.createElement({
-            parent: settingsPage.element, 
+            parent, 
             tag: 'div', 
-            idName: 'color-div', 
-            className: 'settings-divs'
+            idName: 'color-div'
         });
         // Label
         dom.createElement({
@@ -125,12 +124,11 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
     }
 
     // Creates dark mode div
-    const createDarkMode = function createDarkMode() {
+    const createDarkMode = function createDarkModeElement(parent) {
         const darkModeDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent,
             tag: "div",
-            idName: 'dark-mode-div', 
-            className: 'settings-divs'
+            idName: 'dark-mode-div'
         });
         // Label
         dom.createElement({
@@ -167,6 +165,18 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
             ],
         });
         darkModeInput.element.addEventListener('input', util.updateDarkMode);
+    }
+
+    // Contains load and save buttons
+    const createSettingsDiv = function createButtonsDivElement() {
+        const settingsDiv = dom.createElement({
+            parent: settingsPage.element,
+            tag: "div",
+            idName: 'color-settings-div', 
+            className: 'settings-divs'
+        });
+        createColors(settingsDiv.element);
+        createDarkMode(settingsDiv.element);
     }
 
     const createLoadButton = function createLoadButtonElement(parent) {
@@ -247,8 +257,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         // Page Header
         createTitle();
         // Color Theme and Dark Mode
-        createColors();
-        createDarkMode();
+        createSettingsDiv();
         createButtonsDiv();
         // Data
         createDataHeader();
