@@ -137,7 +137,7 @@ body {
 // Content
 #content {
     flex: 1;
-    background-color: lightgrey;
+    background-color: var(--color-primary-200);
 }
 
 #content>div {
@@ -183,4 +183,9 @@ body {
     border-radius: 5px;
     height: 25px;
     width: 130px;
+}
+
+// Footer
+.github-link {
+    color: var(--font-color);
 }
