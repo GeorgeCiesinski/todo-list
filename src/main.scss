@@ -57,6 +57,7 @@ table {
 }
 
 html {
+    // Default Colors
     --color-primary-50: #F2F5FD;
     --color-primary-100: #E4EAFB;
     --color-primary-200: #C5D2F7;
@@ -68,6 +69,8 @@ html {
     --color-primary-800: #123187;
     --color-primary-900: #0D225E;
     --font-color: white;
+    // Fonts
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -119,7 +122,12 @@ body {
 }
 
 .nav-link {
-    
+    display: block;
+    transition: 0.3s;
+}
+.nav-link:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 #lists {
@@ -144,4 +152,14 @@ body {
 
 #content>div>h2, #content>div>h3 {
     margin: 15px 0px;
+}
+
+// Settings
+#buttons-div {
+    display: flex;
+    gap: 10px;
+}
+
+.settings-buttons {
+    width: 130px;
 }

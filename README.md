@@ -4,6 +4,10 @@ A simple todo web app.
 
 ## Features
 
+### Local Storage
+
+Lists and Settings are stored using local storage. This means that when you leave the page and come back, your lists and color theme should remain.
+
 ### Customize Color Theme
 
 The `Primary Color` setting in the Settings menu allows you to specify a color theme. Thanks to the Palettey library, a Tailwinds style 10 color palette is generated for the website to use. 

@@ -10,12 +10,10 @@ const fixPalette = function fixPaletteStep500(palette) {
 
 // Returns a new colorSettings object
 const createColorSettings = function createNewColorSettingsObject(colorHex) {   
-    console.log(colorHex);
     const black = '#000000';
     const white = '#FFFFFF';
     const blackContrast = contrast(colorHex, black);
     const whiteContrast = contrast(colorHex, white);
-    console.log(`Black Contrast: ${blackContrast}, White Contrast: ${whiteContrast}`);
     const primaryFontColor = blackContrast > whiteContrast ? black : white;
     let palette = createPaletteFromColor(
         "primary", 

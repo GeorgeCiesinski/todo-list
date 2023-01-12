@@ -3,7 +3,7 @@ import aboutData from "./assets/data/about.json"
 /*
  * Builds about page
  */
-const aboutBuilder = function aboutUtilityFunctions(dom) {
+const aboutBuilder = function aboutBuilderFunctions(dom) {
     
     const aboutPage = dom.createElement({tag: 'div'});  // Base about dom element
 

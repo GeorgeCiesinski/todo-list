@@ -8,10 +8,12 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     const defaultColor = '#1D4ED8';
     let colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || createColorSettings(defaultColor);
 
+    // Returns primary color from colorSettings
     const getPrimaryColor = function getPrimaryColor() {
         return colorSettings.primaryColor;
     }
     
+    // Updates SASS with variables in colorSettings
     const updateSASS = function updateSASSwithChanges() {
         dom.setPalette(colorSettings.palette)
         dom.setFont(colorSettings.primaryFontColor)
@@ -28,11 +30,6 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
         colorSettings.darkMode = event.target.checked;
     }
 
-    // Temp for debugging
-    const logLocalStorage = function() {
-        console.log(JSON.parse(localStorage.getItem('colorSettings')));
-    }
-
     // Loads saved changes
     const loadSettings = function loadSettingsFromLocalStorage() {
         colorSettings = JSON.parse(localStorage.getItem('colorSettings'));
@@ -42,13 +39,11 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     // Saves changed settings
     const saveSettings = function saveSettingChanges() {
         localStorage.setItem('colorSettings', JSON.stringify(colorSettings));
-        logLocalStorage();
     }
 
      // Clear Local Storage
      const deleteData = function deleteLocalStorage() {
         localStorage.clear();
-        logLocalStorage();
     }
 
     loadSettings();
@@ -174,40 +169,50 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         darkModeInput.element.addEventListener('input', util.updateDarkMode);
     }
 
-    const createLoadButton = function createLoadButtonElement() {
+    const createLoadButton = function createLoadButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent,
             tag: "div",
-            idName: 'load-button-div', 
-            className: 'settings-divs'
+            idName: 'load-button-div'
         });
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv.element,
             tag: 'button',
             idName: 'load-button',
-            className: 'buttons',
-            innerHTML: 'Load',
+            className: 'settings-buttons',
+            innerHTML: 'Load Settings',
         });
         saveButton.element.addEventListener('click', util.loadSettings);
     }
 
-    const createSaveButton = function createSaveButtonElement() {
+    const createSaveButton = function createSaveButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent,
             tag: "div",
-            idName: 'save-button-div', 
-            className: 'settings-divs'
+            idName: 'save-button-div'
         });
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv.element,
             tag: 'button',
             idName: 'save-button',
-            className: 'buttons',
-            innerHTML: 'Save',
+            className: 'settings-buttons',
+            innerHTML: 'Save Settings',
         });
         saveButton.element.addEventListener('click', util.saveSettings);
+    }
+
+    // Contains load and save buttons
+    const createButtonsDiv = function createButtonsDivElement() {
+        const buttonsDiv = dom.createElement({
+            parent: settingsPage.element,
+            tag: "div",
+            idName: 'buttons-div', 
+            className: 'settings-divs'
+        });
+        createLoadButton(buttonsDiv.element);
+        createSaveButton(buttonsDiv.element);
     }
 
     // Data
@@ -231,7 +236,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         const deleteDataButton = dom.createElement({
             parent: deleteDataDiv.element,
             tag: 'button',
-            className: 'buttons',
+            className: 'settings-buttons',
             innerHTML: 'Delete Local Data',
         });
         deleteDataButton.element.addEventListener('click', util.deleteData);
@@ -244,8 +249,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         // Color Theme and Dark Mode
         createColors();
         createDarkMode();
-        createLoadButton();
-        createSaveButton();
+        createButtonsDiv();
         // Data
         createDataHeader();
         createDeleteData();
