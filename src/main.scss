@@ -107,7 +107,7 @@ body {
 
 // Sidebar
 #sidebar {
-    background-color: var(--color-primary-300);
+    background-color: var(--color-primary-400);
 }
 
 // Nav
@@ -146,6 +146,14 @@ body {
 
 #content>div>h2, #content>div>h3 {
     margin: 15px 0px;
+}
+
+// Lists
+#list-element {
+    width: 60vw;
+    height: 60vw;
+    max-height: 500px;
+    background-color: var(--color-primary-300);
 }
 
 // Settings

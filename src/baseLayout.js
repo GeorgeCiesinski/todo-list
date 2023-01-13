@@ -1,5 +1,6 @@
-import navLinks from "./navLinks";
-import copyright from "./copyright";
+import navLinks from "./navLinks"
+import copyright from "./copyright"
+import lists from "./lists"
 
 /*
  *Builds the base layout: 
@@ -12,6 +13,7 @@ import copyright from "./copyright";
 const baseLayout = function createBaseLayoutElements(dom) {
 
     const nav = navLinks(dom);  // Navbar
+    const list = lists(dom);
 
     const createHeader = function createHeaderElement() {
         const logoText = 'What TODO';
@@ -51,6 +53,8 @@ const baseLayout = function createBaseLayoutElements(dom) {
             idName: 'content'
         });
         dom.setContent(content.element);
+        list.showPage();  // Populate content with lists page
+        list.showList(0);  // Show first list in array
     }
 
     // Create App Body and append sidebar and content

@@ -97,16 +97,16 @@ const modifyDom = function modifyDomElements() {
         content = element;
     }
 
-    // Remove elements from content div
-    const clearContent = function clearElementsFromContent() {
-        while (content.firstChild) {
-            content.removeChild(content.lastChild);
+    // Remove elements from div
+    const clearElement = function clearElementsFromParent(element) {
+        while (element.firstChild) {
+            element.removeChild(element.lastChild);
         }
     }
 
     // Appends element to content div
     const switchContent = function switchContentWithNewElement(element) {
-        clearContent();  
+        clearElement(content);  
         content.appendChild(element);
     }
 

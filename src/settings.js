@@ -5,7 +5,9 @@ import createColorSettings from "./colorTheme"
  */
 const settingsUtilities = function settingsUtilitiesFunctions(dom) {
 
-    const defaultColor = '#1D4ED8';
+    const defaultColor = '#1D4ED8';  // Used to generate default palette
+    
+    // Load colorSettings or create new ones if don't exist
     let colorSettings = JSON.parse(localStorage.getItem('colorSettings')) || createColorSettings(defaultColor);
 
     // Returns primary color from colorSettings
@@ -46,7 +48,7 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
         localStorage.clear();
     }
 
-    loadSettings();
+    updateSASS();
 
     return {
         getPrimaryColor,
@@ -63,8 +65,13 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
  */
 const settingsBuilder = function settingsBuilderFunctions(dom) {
     
-    const settingsPage = dom.createElement({tag: 'div'});  // Base settings dom element  
     const util = settingsUtilities(dom);
+    const settingsPage = dom.createElement(
+        {
+            tag: 'div',
+            idName: 'settings-page'
+        }
+    );  // Base settings dom element  
 
     /*
      * Page Construction

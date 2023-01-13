@@ -5,7 +5,12 @@ import aboutData from "./assets/data/about.json"
  */
 const aboutBuilder = function aboutBuilderFunctions(dom) {
     
-    const aboutPage = dom.createElement({tag: 'div'});  // Base about dom element
+    const aboutPage = dom.createElement(
+        {
+            tag: 'div',
+            idName: 'about-page'
+        }
+    );  // Base about dom element
 
     /*
      * Headers
