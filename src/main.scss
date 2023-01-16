@@ -149,11 +149,26 @@ body {
 }
 
 // Lists
+.list-elements {
+    border: none;
+    background-color: var(--color-primary-300);
+    margin: 5px;
+}
+.list-elements:focus {
+    background-color: white;
+}
+
 #list-element {
+    display: flex;
+    flex-direction: column;
     width: 60vw;
     height: 60vw;
     max-height: 500px;
     background-color: var(--color-primary-300);
+}
+
+#list-title {
+    font-size: 25px;
 }
 
 // Settings

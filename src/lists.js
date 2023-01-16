@@ -56,21 +56,42 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         }
     );
 
-    const test = function test() {
-        // const date = new Date(2022, 0, 5);
-        // console.log(date.toString());
-        // console.log(format(date, 'yyyy/MM/dd'));
-        util.loadLists();
+    dom.setList(listElement.element);
+
+    const createTitle = function createTitleElement(title) {
+        dom.createElement({
+            parent: listElement.element,
+            tag: 'input',
+            idName: 'list-title',
+            className: 'list-elements',
+            attributes: [
+                {
+                    name: 'value',
+                    value: title
+                }
+            ]
+        })
     }
 
-    const clearCurrentList = function clearCurrentListElement() {
-        dom.clearElement(listsPage.element);
+    const createDescription = function createDescriptionElement(description) {
+        dom.createElement({
+            parent: listElement.element,
+            tag: 'input',
+            idName: 'list-description',
+            className: 'list-elements',
+            attributes: [
+                {
+                    name: 'value',
+                    value: description
+                }
+            ]
+        })
     }
 
     const showList = function showListByIndex(index) {
         const currentList = util.getList(index);
-        console.log(currentList);
-        console.log(currentList.name);
+        createTitle(currentList.name);
+        createDescription(currentList.description);
     }
 
     // Shows lists page
@@ -80,8 +101,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     return {
         showList,
-        showPage,
-        test
+        showPage
     }
 }
 

@@ -2,9 +2,9 @@
  * Contains all functions that modify DOM
  */
 const modifyDom = function modifyDomElements() {
-
-    // Content element
-    let content = null;
+    
+    let content = null;  // Content element
+    let list = null;  // List element
 
     /* Set attribute for a given element
      * 
@@ -92,16 +92,21 @@ const modifyDom = function modifyDomElements() {
 
     }
 
-    // Sets content div once it is first created
-    const setContent = function setContentDomNode(element) {
-        content = element;
-    }
-
     // Remove elements from div
     const clearElement = function clearElementsFromParent(element) {
         while (element.firstChild) {
             element.removeChild(element.lastChild);
         }
+    }
+
+    // Sets content div when it is first created
+    const setContent = function setContentDomNode(element) {
+        content = element;
+    }
+
+    // Sets list div when it is first created
+    const setList = function setListDomNode(element) {
+        list = element;
     }
 
     // Appends element to content div
@@ -129,6 +134,7 @@ const modifyDom = function modifyDomElements() {
     return {
         createElement,
         setContent,
+        setList,
         switchContent,
         setPalette,
         setFont
