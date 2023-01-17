@@ -107,6 +107,7 @@ body {
 
 // Sidebar
 #sidebar {
+    width: 10vw;
     background-color: var(--color-primary-400);
 }
 
@@ -140,7 +141,7 @@ body {
     background-color: var(--color-primary-200);
 }
 
-#content>div {
+#settings-page, #about-page {
     margin: 20px;
 }
 
@@ -149,26 +150,93 @@ body {
 }
 
 // Lists
+.list-elements, .todo-items {
+    margin: 10px;
+}
+
+.todo-items>div, .collapsible-todo-elements>div {
+    margin: 10px;
+}
+
 .list-elements {
     border: none;
     background-color: var(--color-primary-300);
-    margin: 10px;
 }
 .list-elements:focus {
     background-color: white;
 }
 
-#list-element {
+#list-div, .todo-items {
+    border-radius: 10px;
+}
+
+#list-div {
     display: flex;
     flex-direction: column;
     width: 60vw;
-    height: 60vw;
-    max-height: 500px;
+    margin: 20px 20vw 20px 10vw;
     background-color: var(--color-primary-300);
 }
 
 #list-title {
     font-size: 25px;
+}
+
+#todos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.todo-items {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-primary-400);
+}
+
+.visible-todo-elements {
+    display: flex;
+    align-items: center;
+}
+
+.item-checkbox {
+    height: 20px;
+    width: 20px;
+}
+
+.item-names, .due-date, .created-date, .priority-input {
+    border: none;
+    background-color: var(--color-primary-400);
+}
+.item-names:focus, .due-date:focus, .created-date:focus, .priority-input:focus {
+    background-color: white;
+}
+
+.item-names {
+    font-size: 110%;
+}
+
+.collapsible-todo-elements {
+
+}
+
+.item-tracking-div, .deletion-div {
+    display: flex;
+    justify-content: space-between
+}
+
+.description-div {
+    display: flex;
+    align-items: center;
+}
+
+.item-description {
+    flex: 1;
+    // resize: none;
+}
+
+.item-description {
+    
 }
 
 // Settings

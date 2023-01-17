@@ -6,16 +6,16 @@
             "todos": [
                 {
                     "name": "Clean fridge",
-                    "date-added": "2023/01/05",
+                    "added": "2023-01-05",
                     "description": "Throw out rotten food and wash stains",
                     "checklist": [],
-                    "date-due": "2023/01/07",
+                    "due": "2023-01-07",
                     "priority": 1,
                     "checked": true
                 },
                 {
                     "name": "Car Maintenance",
-                    "date-added": "2023/01/06",
+                    "added": "2023-01-06",
                     "description": "Prepare car for spring",
                     "checklist": [
                         {
@@ -31,16 +31,16 @@
                             "checked": false
                         }
                     ],
-                    "date-due": "2023/03/01",
+                    "due": "2023-03-01",
                     "priority": 3,
                     "checked": false
                 },
                 {
                     "name": "Submit Tax Return",
-                    "date-added": "2023/01/07",
+                    "added": "2023-01-07",
                     "description": "Throw out rotten food and wash stains",
                     "checklist": [],
-                    "date-due": "2023/04/01",
+                    "due": "2023-04-01",
                     "priority": 2,
                     "checked": false
                 }
