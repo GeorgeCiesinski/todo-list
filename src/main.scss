@@ -51,7 +51,9 @@ table {
     Meyer's Reset End
 */
 
-// Universal Styling
+/*
+    Universal Styling
+*/
 * {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -83,6 +85,10 @@ body {
     flex-direction: column;
     height: 100vh;
 }
+
+/*
+    Specific Styling
+*/
 
 // Header & Footer
 #site-header, #site-footer {
