@@ -154,7 +154,7 @@ body {
     margin: 10px;
 }
 
-.todo-items>div, .collapsible-todo-elements>div {
+.visible-todo-elements, .collapsible-todo-elements>div {
     margin: 10px;
 }
 
@@ -194,9 +194,13 @@ body {
     background-color: var(--color-primary-400);
 }
 
-.visible-todo-elements {
+.visible-todo-elements, .left-visible-elements, .right-visible-elements {
     display: flex;
     align-items: center;
+} 
+
+.visible-todo-elements {
+    justify-content: space-between
 }
 
 .item-checkbox {
@@ -220,10 +224,6 @@ body {
     font-size: 110%;
 }
 
-.collapsible-todo-elements {
-
-}
-
 .item-tracking-div, .deletion-div {
     display: flex;
     justify-content: space-between
@@ -231,7 +231,9 @@ body {
 
 .description-div {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
 }
 
 .item-description {

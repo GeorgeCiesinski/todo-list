@@ -44,6 +44,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     const util = listsUtilities(dom);
 
+    // Root page element for lists 
     const listsPage = dom.createElement(
         {
             tag: 'div',
@@ -51,6 +52,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         }
     );
 
+    // List element containing list data
     const listElement = dom.createElement(
         {
             parent: listsPage.element,
@@ -58,7 +60,6 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             idName: 'list-div'
         }
     );
-
     dom.setList(listElement.element);
 
     // List Title
@@ -93,16 +94,26 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
-    // This div is still visible when the todo item is collapsed
-    const createItemDiv = function createItemDivElements(parent, item) {
+    // Div is still visible when the todo item is collapsed
+    const createVisibleDiv = function createVisibleDivElements(parent, item) {
         const itemDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'visible-todo-elements',
         });
+        const leftDiv = dom.createElement({
+            parent: itemDiv.element,
+            tag: 'div',
+            className: 'left-visible-elements',
+        });
+        const rightDiv = dom.createElement({
+            parent: itemDiv.element,
+            tag: 'div',
+            className: 'right-visible-elements',
+        });
         // Checkbox
         const itemCheckbox = dom.createElement({
-            parent: itemDiv.element,
+            parent: leftDiv.element,
             tag: 'input',
             className: 'item-checkbox',
             attributes: [
@@ -114,7 +125,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
         // Item Name
         const itemName = dom.createElement({
-            parent: itemDiv.element,
+            parent: leftDiv.element,
             tag: 'input',
             className: 'item-names',
             attributes: [
@@ -124,8 +135,16 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
+        // Collapse Button
+        const collapseButton = dom.createElement({
+            parent: rightDiv.element,
+            tag: 'button',
+            className: 'collapse-buttons',
+            innerHTML: '+'
+        })
     }
 
+    // Create due date div
     const createDueDate = function createDueDateElements(parent, item) {
         const dueDiv = dom.createElement({
             parent,
@@ -157,6 +176,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
+    // Create priority div
     const createPriority = function createPriorityElements(parent, item) {
         const priorityDiv = dom.createElement({
             parent,
@@ -196,6 +216,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
+    // Create item tracking div
     const createItemTracking = function createItemTrackingElements(parent, item) {
         const itemTrackingDiv = dom.createElement({
             parent,
@@ -206,11 +227,18 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         createPriority(itemTrackingDiv.element, item);
     }
 
+    // Create item description div
     const createItemDescription = function createItemDescriptionElements(parent, item) {
         const descriptionDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'description-div',
+        });
+        const descriptionLabel = dom.createElement({
+            parent: descriptionDiv.element,
+            tag: 'label',
+            className: 'label',
+            innerHTML: 'Notes'
         });
         const description = dom.createElement({
             parent: descriptionDiv.element,
@@ -220,6 +248,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
+    // Create created date div
     const createCreated = function createCreatedElements(parent, item) {
         const createdDiv = dom.createElement({
             parent,
@@ -251,21 +280,24 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
+    const createDelete = function createDeleteElement(parent, item) {
+        const deleteItem = dom.createElement({
+            parent,
+            tag: 'button',
+            className: 'delete-item-button',
+            innerHTML: 'X'
+        });
+    }
+
+    // Create item deletion div
     const createItemDeletion = function createItemDeletionElements(parent, item) {
         const deletionDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'deletion-div',
         });
-        // Create Date Added
         createCreated(deletionDiv.element, item);
-        // Create Delete
-        const deleteItem = dom.createElement({
-            parent: deletionDiv.element,
-            tag: 'button',
-            className: 'delete-item-button',
-            innerHTML: 'X'
-        })
+        createDelete(deletionDiv.element, item);
     }
 
     const createCollapsibleDiv = function createCollapsibleDivElements(parent, item) {
@@ -274,21 +306,19 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'collapsible-todo-elements',
         });
-        // Item Tracking
         createItemTracking(collapsibleDiv.element, item);
-        // Create Description
         createItemDescription(collapsibleDiv.element, item);
-        // Item Deletion
         createItemDeletion(collapsibleDiv.element, item);
     }
 
+    // Create div with visible and collapsible elements
     const createTodoItem = function createTodoItemElement(parent, item) {
         const itemDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'todo-items',
         });
-        createItemDiv(itemDiv.element, item);
+        createVisibleDiv(itemDiv.element, item);
         createCollapsibleDiv(itemDiv.element, item);
     }
 
