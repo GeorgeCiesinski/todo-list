@@ -212,6 +212,10 @@ body {
     background-color: white;
 }
 
+.priority-input {
+    width: 25px;
+}
+
 .item-names {
     font-size: 110%;
 }
@@ -232,7 +236,10 @@ body {
 
 .item-description {
     flex: 1;
-    // resize: none;
+    background-color: var(--color-primary-200);
+    border: none;
+    border-radius: 5px;
+    resize: none;
 }
 
 .item-description {
