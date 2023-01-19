@@ -122,6 +122,7 @@ const modifyDom = function modifyDomElements() {
         list.appendChild(element);
     }
 
+    // Adds color variables to CSS
     const setPalette = function setPaletteCSS(palette) {
         Object.entries(palette).forEach((entry) => {
             const [step, color] = entry;
@@ -132,6 +133,7 @@ const modifyDom = function modifyDomElements() {
         });
     }
 
+    // Adds font variable to CSS
     const setFont = function setFontColorCSS(fontColor) {
         document.documentElement.style.setProperty(
             '--font-color', fontColor

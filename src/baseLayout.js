@@ -40,7 +40,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
         });
         // Add Nav if sidebar was successfully created
         if (sidebar.success) {
-            nav.build(sidebar.element);
+            nav.build(sidebar.element, list.listIndex);
         }
         
     }

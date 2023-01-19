@@ -10,6 +10,11 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Array of Lists - Load lists or create new lists if don't exist
     let lists = JSON.parse(localStorage.getItem('lists')) || createDefault();
 
+    // Returns an array of lists
+    const listsArray = function returnListsArray() {
+        return lists; 
+    }
+
     // Returns length of list
     const listsLength = function returnListsLength() {
         return lists.length;
@@ -31,6 +36,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     }
 
     return {
+        listsArray,
         saveLists,
         loadLists,
         listsLength,
@@ -42,6 +48,13 @@ const listsUtilities = function listsUtilitiesFunctions() {
 const listsBuilder = function listsBuilderFunctions(dom) {
 
     const util = listsUtilities();
+
+    // List titles and index for navLinks
+    const listIndex = []
+    const listsArray = util.listsArray();
+    for (let i = 0; i < listsArray.length; i += 1) {
+        listIndex[i] = listsArray[i].title;
+    }
 
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -294,7 +307,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             className: 'delete-item-button',
             innerHTML: 'X'
         });
-        console.log(item);
+        // console.log(item);
     }
 
     // Create item deletion div
@@ -360,6 +373,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 
     return {
+        listIndex,
         showList,
         showPage,
         createEventListeners

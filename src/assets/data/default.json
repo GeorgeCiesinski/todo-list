@@ -45,6 +45,52 @@
                     "checked": false
                 }
             ]
+        },
+        {
+            "title": "Default List 2",
+            "description": "Basic list for any kind of todo's",
+            "todos": [
+                {
+                    "name": "Clean fridge",
+                    "added": "2023-01-05",
+                    "description": "Throw out rotten food and wash stains",
+                    "checklist": [],
+                    "due": "2023-01-07",
+                    "priority": 1,
+                    "checked": true
+                },
+                {
+                    "name": "Car Maintenance",
+                    "added": "2023-01-06",
+                    "description": "Prepare car for spring",
+                    "checklist": [
+                        {
+                            "name": "Change Tires",
+                            "checked": false
+                        },
+                        {
+                            "name": "Replace Oil",
+                            "checked": false
+                        },
+                        {
+                            "name": "Car Wash",
+                            "checked": false
+                        }
+                    ],
+                    "due": "2023-03-01",
+                    "priority": 3,
+                    "checked": false
+                },
+                {
+                    "name": "Submit Tax Return",
+                    "added": "2023-01-07",
+                    "description": "Throw out rotten food and wash stains",
+                    "checklist": [],
+                    "due": "2023-04-01",
+                    "priority": 2,
+                    "checked": false
+                }
+            ]
         }
     ]
 }

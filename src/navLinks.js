@@ -9,23 +9,25 @@ const navLinks = function createNavElements(dom) {
     const settingsBuilder = settings(dom);
     const aboutBuilder = about(dom);
 
+    const listsLinks = function createListsLinks(parent) {
+
+    }
+
     // Create lists link
-    const listsItem = function createListsNav(sidebar) {
+    const listsItem = function createListsNav(sidebar, listsIndex) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: "li", 
             idName: "lists", 
             className: "nav-item"
         });
-        if (listItem.success) {
-            dom.createElement({
-                parent: listItem.element,
-                tag: "a",
-                idName: "list-link",
-                className: "nav-link",
-                innerHTML: "Lists"
-            });
-        }
+        dom.createElement({
+            parent: listItem.element,
+            tag: "a",
+            idName: "list-link",
+            className: "nav-link",
+            innerHTML: "Lists"
+        });
     }
 
     // Create settings link
@@ -69,10 +71,10 @@ const navLinks = function createNavElements(dom) {
     }
 
     // Build page
-    const build = function buildSidebarNavLinks(sidebar) {
+    const build = function buildSidebarNavLinks(sidebar, listIndex) {
         const navList = dom.createElement({parent: sidebar, tag: "ul", idName: "nav-list"});
         if (navList.success) {
-            listsItem(navList.element);
+            listsItem(navList.element, listIndex);
             settingsItem(navList.element);
             aboutItem(navList.element);
         }
