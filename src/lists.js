@@ -67,18 +67,18 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // List element containing list data
     const listElement = dom.createElement(
         {
-            parent: listsPage.element,
+            parent: listsPage,
             tag: 'div',
             idName: 'list-div'
         }
     );
 
-    dom.setList(listElement.element);
+    dom.setList(listElement);
 
     // List Title
     const createTitle = function createTitleElement(title) {
         dom.createElement({
-            parent: listElement.element,
+            parent: listElement,
             tag: 'input',
             idName: 'list-title',
             className: 'list-elements',
@@ -94,7 +94,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // List Description
     const createDescription = function createDescriptionElement(description) {
         dom.createElement({
-            parent: listElement.element,
+            parent: listElement,
             tag: 'input',
             idName: 'list-description',
             className: 'list-elements',
@@ -116,7 +116,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
         // Checkbox
         dom.createElement({
-            parent: leftDiv.element,
+            parent: leftDiv,
             tag: 'input',
             className: 'item-checkbox',
             attributes: [
@@ -128,7 +128,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
         // Item Name
         dom.createElement({
-            parent: leftDiv.element,
+            parent: leftDiv,
             tag: 'input',
             className: 'item-names',
             attributes: [
@@ -183,15 +183,15 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             className: 'right-visible-elements',
         });
         // Priority
-        createPriority(rightDiv.element, item);
+        createPriority(rightDiv, item);
         // Collapse Button
         const collapseButton = dom.createElement({
-            parent: rightDiv.element,
+            parent: rightDiv,
             tag: 'button',
             className: 'collapse-buttons',
             innerHTML: '<i class="fa-solid fa-plus"></i>'  // Font awesome plus icon
         });
-        dom.addClass(collapseButton.element, 'collapsed');
+        dom.addClass(collapseButton, 'collapsed');
     }
 
     // Div is still visible when the todo item is collapsed
@@ -201,8 +201,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'visible-todo-elements',
         });
-        createLeftVisibleDiv(itemDiv.element, item);
-        createRightVisibleDiv(itemDiv.element, item);
+        createLeftVisibleDiv(itemDiv, item);
+        createRightVisibleDiv(itemDiv, item);
     }
 
     // Create due date div
@@ -214,14 +214,14 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
         // Label
         dom.createElement({
-            parent: dueDiv.element,
+            parent: dueDiv,
             tag: 'label',
             className: 'date-labels',
             innerHTML: 'Due: '
         });
         // Date
         dom.createElement({
-            parent: dueDiv.element,
+            parent: dueDiv,
             tag: 'input',
             className: 'due-date',
             attributes: [
@@ -244,7 +244,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'item-tracking-div',
         });
-        createDueDate(itemTrackingDiv.element, item);
+        createDueDate(itemTrackingDiv, item);
     }
 
     // Create item description div
@@ -255,13 +255,13 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             className: 'description-div',
         });
         dom.createElement({
-            parent: descriptionDiv.element,
+            parent: descriptionDiv,
             tag: 'label',
             className: 'label',
             innerHTML: 'Notes'
         });
         dom.createElement({
-            parent: descriptionDiv.element,
+            parent: descriptionDiv,
             tag: 'textarea',
             className: 'item-description',
             innerHTML: item.description
@@ -277,14 +277,14 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
         // Label
         dom.createElement({
-            parent: createdDiv.element,
+            parent: createdDiv,
             tag: 'label',
             className: 'date-labels',
             innerHTML: 'Created: '
         });
         // Date
         dom.createElement({
-            parent: createdDiv.element,
+            parent: createdDiv,
             tag: 'input',
             className: 'created-date',
             attributes: [
@@ -317,8 +317,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'deletion-div',
         });
-        createCreated(deletionDiv.element, item);
-        createDelete(deletionDiv.element, item);
+        createCreated(deletionDiv, item);
+        createDelete(deletionDiv, item);
     }
 
     const createCollapsibleDiv = function createCollapsibleDivElements(parent, item) {
@@ -327,9 +327,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'collapsible-todo-elements',
         });
-        createItemTracking(collapsibleDiv.element, item);
-        createItemDescription(collapsibleDiv.element, item);
-        createItemDeletion(collapsibleDiv.element, item);
+        createItemTracking(collapsibleDiv, item);
+        createItemDescription(collapsibleDiv, item);
+        createItemDeletion(collapsibleDiv, item);
     }
 
     // Create div with visible and collapsible elements
@@ -339,19 +339,19 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'div',
             className: 'todo-items',
         });
-        createVisibleDiv(itemDiv.element, item);
-        createCollapsibleDiv(itemDiv.element, item);
+        createVisibleDiv(itemDiv, item);
+        createCollapsibleDiv(itemDiv, item);
     }
 
     // Creates todo div
     const createTodos = function createTodoElement(todos) {
         const todosDiv = dom.createElement({
-            parent: listElement.element,
+            parent: listElement,
             tag: 'div',
             idName: 'todos',
         });
         // Create todo items
-        todos.forEach(item => createTodoItem(todosDiv.element, item));
+        todos.forEach(item => createTodoItem(todosDiv, item));
     }
 
     // Builds listElement from list by index
@@ -364,7 +364,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     // Shows lists page
     const showPage = function switchPage() {
-        dom.switchContent(listsPage.element);
+        dom.switchContent(listsPage);
     }
 
     // Adds event listeners to page

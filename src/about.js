@@ -19,7 +19,7 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
     // Page Title
     const createTitle = function createTitleHeader() {
         dom.createElement({
-            parent: aboutPage.element,
+            parent: aboutPage,
             tag: 'h2',
             innerHTML: "About"
         });
@@ -28,11 +28,11 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
     // App Info
     const createInfo = function createInfoDiv() {
         const infoDiv = dom.createElement({
-            parent: aboutPage.element,
+            parent: aboutPage,
             tag: 'div',
         });
         dom.createElement({
-            parent: infoDiv.element,
+            parent: infoDiv,
             tag: 'p',
             innerHTML: aboutData.info
         });
@@ -44,23 +44,23 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
     */
     const createCredits = function createCreditSection() {
         dom.createElement({
-            parent: aboutPage.element,
+            parent: aboutPage,
             tag: 'h3',
             innerHTML: "Credits"
         });
         const creditsDiv = dom.createElement({
-            parent: aboutPage.element,
+            parent: aboutPage,
             tag: 'div',
         });
         // Unordered List
         const list = dom.createElement({
-            parent: creditsDiv.element,
+            parent: creditsDiv,
             tag: 'ul'
         });
         // Loop through credits.json and add contents as list items
         aboutData.credits.forEach(credit => {
             dom.createElement({
-                parent: list.element,
+                parent: list,
                 tag: "li",
                 innerHTML: credit.innerHTML
             });
@@ -76,7 +76,7 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
 
     // Shows built page
     const showPage = function switchPage() {
-        dom.switchContent(aboutPage.element);
+        dom.switchContent(aboutPage);
     }
 
     build();

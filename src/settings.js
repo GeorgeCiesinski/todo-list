@@ -66,6 +66,7 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
 const settingsBuilder = function settingsBuilderFunctions(dom) {
     
     const util = settingsUtilities(dom);
+    
     const settingsPage = dom.createElement(
         {
             tag: 'div',
@@ -80,7 +81,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
     // Page Title
     const createTitle = function createTitleHeader() {
         dom.createElement({
-            parent: settingsPage.element,
+            parent: settingsPage,
             tag: 'h2',
             innerHTML: "Settings"
         });
@@ -95,7 +96,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Label
         dom.createElement({
-            parent: colorDiv.element,
+            parent: colorDiv,
             tag: 'label',
             className: 'labels',
             innerHTML: 'Primary Color: ',
@@ -108,7 +109,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Input
         const colorInput = dom.createElement({
-            parent: colorDiv.element,
+            parent: colorDiv,
             tag: 'input',
             className: 'inputs',
             idName: 'color-input',
@@ -127,7 +128,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
                 }
             ],
         });
-        colorInput.element.addEventListener('input', util.updateColorScheme);
+        colorInput.addEventListener('input', util.updateColorScheme);
     }
 
     // Creates dark mode div
@@ -139,7 +140,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Label
         dom.createElement({
-            parent: darkModeDiv.element,
+            parent: darkModeDiv,
             tag: 'label',
             className: 'labels',
             innerHTML: 'Dark Mode: ',
@@ -152,7 +153,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Input
         const darkModeInput = dom.createElement({
-            parent: darkModeDiv.element,
+            parent: darkModeDiv,
             tag: 'input',
             className: 'inputs',
             idName: 'dark-mode-input',
@@ -171,19 +172,19 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
                 }
             ],
         });
-        darkModeInput.element.addEventListener('input', util.updateDarkMode);
+        darkModeInput.addEventListener('input', util.updateDarkMode);
     }
 
     // Contains load and save buttons
     const createSettingsDiv = function createButtonsDivElement() {
         const settingsDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent: settingsPage,
             tag: "div",
             idName: 'color-settings-div', 
             className: 'settings-divs'
         });
-        createColors(settingsDiv.element);
-        createDarkMode(settingsDiv.element);
+        createColors(settingsDiv);
+        createDarkMode(settingsDiv);
     }
 
     const createLoadButton = function createLoadButtonElement(parent) {
@@ -194,13 +195,13 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Button
         const saveButton = dom.createElement({
-            parent: saveButtonDiv.element,
+            parent: saveButtonDiv,
             tag: 'button',
             idName: 'load-button',
             className: 'settings-buttons',
             innerHTML: 'Load Settings',
         });
-        saveButton.element.addEventListener('click', util.loadSettings);
+        saveButton.addEventListener('click', util.loadSettings);
     }
 
     const createSaveButton = function createSaveButtonElement(parent) {
@@ -211,31 +212,31 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
         });
         // Button
         const saveButton = dom.createElement({
-            parent: saveButtonDiv.element,
+            parent: saveButtonDiv,
             tag: 'button',
             idName: 'save-button',
             className: 'settings-buttons',
             innerHTML: 'Save Settings',
         });
-        saveButton.element.addEventListener('click', util.saveSettings);
+        saveButton.addEventListener('click', util.saveSettings);
     }
 
     // Contains load and save buttons
     const createButtonsDiv = function createButtonsDivElement() {
         const buttonsDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent: settingsPage,
             tag: "div",
             idName: 'buttons-div', 
             className: 'settings-divs'
         });
-        createLoadButton(buttonsDiv.element);
-        createSaveButton(buttonsDiv.element);
+        createLoadButton(buttonsDiv);
+        createSaveButton(buttonsDiv);
     }
 
     // Data
     const createDataHeader = function createHeader() {
         dom.createElement({
-            parent: settingsPage.element,
+            parent: settingsPage,
             tag: 'h3',
             innerHTML: "Data"
         });
@@ -244,19 +245,19 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
     // Create Delete Data Div
     const createDeleteData = function createDeleteData() {
         const deleteDataDiv = dom.createElement({
-            parent: settingsPage.element,
+            parent: settingsPage,
             tag: "div",
             idName: 'delete-data-div', 
             className: 'settings-divs'
         });
         // Button
         const deleteDataButton = dom.createElement({
-            parent: deleteDataDiv.element,
+            parent: deleteDataDiv,
             tag: 'button',
             className: 'settings-buttons',
             innerHTML: 'Delete Local Data',
         });
-        deleteDataButton.element.addEventListener('click', util.deleteData);
+        deleteDataButton.addEventListener('click', util.deleteData);
     }
 
     // Builds page page
@@ -273,7 +274,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
 
     // Shows built page
     const showPage = function switchPage() {
-        dom.switchContent(settingsPage.element);
+        dom.switchContent(settingsPage);
     }
 
     build();  // Builds page

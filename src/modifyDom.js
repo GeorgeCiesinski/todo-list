@@ -80,14 +80,17 @@ const modifyDom = function modifyDomElements() {
             if (attributes) {
                 attributes.forEach(attribute => addAttributes(element, attribute));
             }
-            // Result
             result.success = true;
             result.element = element;
         } else {
             console.error('Unable to create element without a tag.');
             result.success = false;
         }
-        return result;
+
+        if (result.success) {
+            return result.element;
+        }
+        
     }
 
     const addClass = function addClassToElement(element, className) {

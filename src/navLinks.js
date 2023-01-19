@@ -22,7 +22,7 @@ const navLinks = function createNavElements(dom) {
             className: "nav-item"
         });
         dom.createElement({
-            parent: listItem.element,
+            parent: listItem,
             tag: "a",
             idName: "list-link",
             className: "nav-link",
@@ -38,16 +38,14 @@ const navLinks = function createNavElements(dom) {
             idName: "settings", 
             className: "nav-item"
         });
-        if (listItem.success) {
-            const settingsLink = dom.createElement({
-                parent: listItem.element,
-                tag: "a",
-                idName: "settings-link",
-                className: "nav-link",
-                innerHTML: "Settings"
-            });
-            settingsLink.element.addEventListener("click", settingsBuilder.showPage);
-        }
+        const settingsLink = dom.createElement({
+            parent: listItem,
+            tag: "a",
+            idName: "settings-link",
+            className: "nav-link",
+            innerHTML: "Settings"
+        });
+        settingsLink.addEventListener("click", settingsBuilder.showPage);
     }
 
     // Create about link
@@ -58,26 +56,22 @@ const navLinks = function createNavElements(dom) {
             idName: "about", 
             className: "nav-item"
         });
-        if (listItem.success) {
-            const aboutLink = dom.createElement({
-                parent: listItem.element,
-                tag: "a",
-                idName: "about-link",
-                className: "nav-link",
-                innerHTML: "About"
-            });
-            aboutLink.element.addEventListener("click", aboutBuilder.showPage);
-        }
+        const aboutLink = dom.createElement({
+            parent: listItem,
+            tag: "a",
+            idName: "about-link",
+            className: "nav-link",
+            innerHTML: "About"
+        });
+        aboutLink.addEventListener("click", aboutBuilder.showPage);
     }
 
     // Build page
     const build = function buildSidebarNavLinks(sidebar, listIndex) {
         const navList = dom.createElement({parent: sidebar, tag: "ul", idName: "nav-list"});
-        if (navList.success) {
-            listsItem(navList.element, listIndex);
-            settingsItem(navList.element);
-            aboutItem(navList.element);
-        }
+        listsItem(navList, listIndex);
+        settingsItem(navList);
+        aboutItem(navList);
     }
 
     return {

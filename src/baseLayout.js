@@ -22,14 +22,12 @@ const baseLayout = function createBaseLayoutElements(dom) {
             tag: 'header', 
             idName: 'site-header'
         });
-        if (header.success) {
-            dom.createElement({
-                parent: header.element, 
-                tag: 'h1', 
-                idName: 'logo-text', 
-                innerHTML: logoText
-            });
-        }
+        dom.createElement({
+            parent: header, 
+            tag: 'h1', 
+            idName: 'logo-text', 
+            innerHTML: logoText
+        });
     }
     
     const createSidebar = function createSidebarElement(parent) {
@@ -39,10 +37,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
             idName: 'sidebar'
         });
         // Add Nav if sidebar was successfully created
-        if (sidebar.success) {
-            nav.build(sidebar.element, list.listIndex);
-        }
-        
+        nav.build(sidebar, list.listIndex);
     }
 
     // Empty content div
@@ -52,7 +47,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
             tag: 'div', 
             idName: 'content'
         });
-        dom.setContent(content.element);
+        dom.setContent(content);
         list.showPage();  // Populate content with lists page
         list.showList(0);  // Show first list in array
         list.createEventListeners();  // Event Listeners
@@ -65,10 +60,8 @@ const baseLayout = function createBaseLayoutElements(dom) {
             tag: 'div', 
             idName: 'app-body'
         });
-        if (appBody.success) {
-            createSidebar(appBody.element);
-            createContent(appBody.element);
-        }
+        createSidebar(appBody);
+        createContent(appBody);
     }
 
     const createFooter = function createFooterElement() {
@@ -78,14 +71,12 @@ const baseLayout = function createBaseLayoutElements(dom) {
             tag: 'footer', 
             idName: 'site-footer'
         }); 
-        if (footer.success) {
-            dom.createElement({
-                parent: footer.element, 
-                tag: 'h3', 
-                idName: 'copyright', 
-                innerHTML: copyrightHTML
-            });
-        }
+        dom.createElement({
+            parent: footer, 
+            tag: 'h3', 
+            idName: 'copyright', 
+            innerHTML: copyrightHTML
+        });
     }
     
     // Build Page
