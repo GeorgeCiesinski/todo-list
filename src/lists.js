@@ -5,8 +5,7 @@ const listsUtilities = function listsUtilitiesFunctions(dom) {
 
     // Create Default List
     const createDefault = function createDefaultList() {
-        const newList = listsData.lists;
-        return newList;
+        return listsData.lists;
     }
 
     // Array of Lists - Load lists or create new lists if don't exist
@@ -32,11 +31,17 @@ const listsUtilities = function listsUtilitiesFunctions(dom) {
         lists = JSON.parse(localStorage.getItem('lists'));
     }
 
+    const collapseItem = function collapseItemElements() {
+        const content = this.parentNode.nextElementSibling;
+        console.log(content);
+    }
+
     return {
         saveLists,
         loadLists,
         listsLength,
-        getList
+        getList,
+        collapseItem
     }
 }
 
@@ -141,7 +146,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             tag: 'button',
             className: 'collapse-buttons',
             innerHTML: '+'
-        })
+        });
     }
 
     // Create due date div
@@ -346,9 +351,15 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.switchContent(listsPage.element);
     }
 
+    // Adds event listeners to page
+    const createEventListeners = function addEventListenersToElements() {
+        dom.createCollapse();
+    }
+
     return {
         showList,
-        showPage
+        showPage,
+        createEventListeners
     }
 }
 

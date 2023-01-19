@@ -55,6 +55,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
         dom.setContent(content.element);
         list.showPage();  // Populate content with lists page
         list.showList(0);  // Show first list in array
+        list.createEventListeners();  // Event Listeners
     }
 
     // Create App Body and append sidebar and content

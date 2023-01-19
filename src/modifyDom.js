@@ -131,13 +131,33 @@ const modifyDom = function modifyDomElements() {
         )
     }
 
+    // Collapse todo item content
+    const collapseContent = function collapseContentElement() {
+        this.classList.toggle("active");
+        // Get 'collapsible-todo-elements' which is a sibling of parent 'visible-todo-elements'
+        const contentElement = this.parentNode.parentNode.nextElementSibling;
+        // Toggle collapse
+        if (contentElement.style.display === "block") {
+            contentElement.style.display = "none";
+        } else {
+            contentElement.style.display = "block";
+        }
+    }
+
+    // Adds event listener to each todo item - collapses content
+    const createCollapse = function createCollapseEventListener() {
+        const collapseButtons = document.querySelectorAll('.collapse-buttons');
+        collapseButtons.forEach(button => button.addEventListener('click', collapseContent));
+    }
+
     return {
         createElement,
         setContent,
         setList,
         switchContent,
         setPalette,
-        setFont
+        setFont,
+        createCollapse
     }
 };
 

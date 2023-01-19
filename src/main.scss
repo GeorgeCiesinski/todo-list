@@ -191,7 +191,6 @@ body {
 #todos {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 .todo-items {
@@ -207,6 +206,11 @@ body {
 
 .visible-todo-elements {
     justify-content: space-between
+}
+
+.collapsible-todo-elements {
+    display: none;
+    overflow: hidden;
 }
 
 .item-checkbox {
