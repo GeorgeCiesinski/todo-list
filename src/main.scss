@@ -204,6 +204,10 @@ body {
     align-items: center;
 } 
 
+.left-visible-elements, .right-visible-elements {
+    gap: 10px;
+}
+
 .visible-todo-elements {
     justify-content: space-between
 }
@@ -224,6 +228,11 @@ body {
 .item-checkbox {
     height: 20px;
     width: 20px;
+}
+
+.date-labels {
+    display: inline-block;
+    min-width: 65px;
 }
 
 .item-names, .due-date, .created-date, .priority-input {

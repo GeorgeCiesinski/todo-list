@@ -117,6 +117,11 @@ const modifyDom = function modifyDomElements() {
         content.appendChild(element);
     }
 
+    const switchList = function switchListWithNewElement(element) {
+        clearElement(list);
+        list.appendChild(element);
+    }
+
     const setPalette = function setPaletteCSS(palette) {
         Object.entries(palette).forEach((entry) => {
             const [step, color] = entry;
@@ -166,6 +171,7 @@ const modifyDom = function modifyDomElements() {
         setContent,
         setList,
         switchContent,
+        switchList,
         setPalette,
         setFont,
         createCollapse

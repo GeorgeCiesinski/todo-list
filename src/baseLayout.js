@@ -72,7 +72,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
     }
 
     const createFooter = function createFooterElement() {
-        const copyrightHTML = copyright();
+        const copyrightHTML = copyright();  // Generate current year copyright message
         const footer = dom.createElement({
             parent: document.body, 
             tag: 'footer', 
