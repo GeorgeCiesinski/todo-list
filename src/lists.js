@@ -145,8 +145,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             parent: rightDiv.element,
             tag: 'button',
             className: 'collapse-buttons',
-            innerHTML: '+'
+            innerHTML: '<i class="fa-solid fa-plus"></i>'  // Font awesome plus icon
         });
+        dom.addClass(collapseButton.element, 'collapsed');
     }
 
     // Create due date div

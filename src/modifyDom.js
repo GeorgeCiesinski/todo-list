@@ -87,9 +87,11 @@ const modifyDom = function modifyDomElements() {
             console.error('Unable to create element without a tag.');
             result.success = false;
         }
-
         return result;
+    }
 
+    const addClass = function addClassToElement(element, className) {
+        element.classList.add(className);
     }
 
     // Remove elements from div
@@ -133,7 +135,15 @@ const modifyDom = function modifyDomElements() {
 
     // Collapse todo item content
     const collapseContent = function collapseContentElement() {
-        this.classList.toggle("active");
+        if (this.classList.contains('collapsed')) {
+            this.classList.remove('collapsed');
+            this.classList.add('visible');
+            this.innerHTML = '<i class="fa-solid fa-minus"></i>';  // Change to minus icon
+        } else if (this.classList.contains('visible')) {
+            this.classList.remove('visible');
+            this.classList.add('collapsed');
+            this.innerHTML = '<i class="fa-solid fa-plus"></i>';  // Change to plus icon
+        }
         // Get 'collapsible-todo-elements' which is a sibling of parent 'visible-todo-elements'
         const contentElement = this.parentNode.parentNode.nextElementSibling;
         // Toggle collapse
@@ -152,6 +162,7 @@ const modifyDom = function modifyDomElements() {
 
     return {
         createElement,
+        addClass,
         setContent,
         setList,
         switchContent,

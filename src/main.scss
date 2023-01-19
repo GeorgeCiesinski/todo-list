@@ -172,7 +172,7 @@ body {
     background-color: white;
 }
 
-#list-div, .todo-items {
+#list-div, .todo-items, .collapse-buttons {
     border-radius: 10px;
 }
 
@@ -206,6 +206,14 @@ body {
 
 .visible-todo-elements {
     justify-content: space-between
+}
+
+.collapse-buttons {
+    height: 28px;
+    width: 28px;
+    color: var(--color-primary-100);
+    background-color: var(--color-primary-500);
+    border: none;
 }
 
 .collapsible-todo-elements {
