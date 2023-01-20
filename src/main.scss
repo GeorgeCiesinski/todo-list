@@ -124,17 +124,21 @@ body {
     flex-direction: column;
 }
 
-.nav-item {
+.nav-items, .list-nav-items {
     margin: 20px;
 }
 
-.nav-link {
-    display: block;
+.nav-links, .list-link-items {
+    display: inline-block;
     transition: 0.3s;
 }
-.nav-link:hover {
-    transform: scale(1.1);
+.nav-links:hover, .list-link-items:hover {
     cursor: pointer;
+    transform: scale(1.1);
+} 
+
+.nav-links {
+    font-size: 125%;
 }
 
 #lists {

@@ -9,8 +9,7 @@ const navLinks = function createNavElements(dom, lists) {
     const settingsBuilder = settings(dom);
     const aboutBuilder = about(dom);
 
-    const navList = function navigateToListByIndex(event) {
-        console.log(event.target);
+    const listNavigation = function navigateToListByIndex(event) {
         lists.showList(event.target.getAttribute('index'));
     }
 
@@ -24,12 +23,12 @@ const navLinks = function createNavElements(dom, lists) {
             const listLI = dom.createElement({
                 parent: listUL,
                 tag: 'li',
-                className: 'list-item-nav'
+                className: 'list-nav-items'
             });
             const listLink = dom.createElement({
                 parent: listLI,
                 tag: 'a',
-                className: 'list-item-link',
+                className: 'list-link-items',
                 innerHTML: item,
                 attributes: [
                     {
@@ -38,7 +37,7 @@ const navLinks = function createNavElements(dom, lists) {
                     }
                 ]
             });
-            dom.clickEvent(listLink, navList);  // 
+            dom.clickEvent(listLink, listNavigation);
         });
     }
 
@@ -50,14 +49,15 @@ const navLinks = function createNavElements(dom, lists) {
             idName: "lists", 
             className: "nav-items"
         });
-        dom.createElement({
+        const listLink = dom.createElement({
             parent: listItem,
             tag: "a",
             idName: "list-link",
-            className: "nav-link",
+            className: "nav-links",
             innerHTML: "Lists"
         });
         listsLinks(listItem, listsIndex);
+        dom.clickEvent(listLink, lists.showPage);
     }
 
     // Create settings link
@@ -66,16 +66,16 @@ const navLinks = function createNavElements(dom, lists) {
             parent: sidebar, 
             tag: "li", 
             idName: "settings", 
-            className: "nav-item"
+            className: "nav-items"
         });
         const settingsLink = dom.createElement({
             parent: listItem,
             tag: "a",
             idName: "settings-link",
-            className: "nav-link",
+            className: "nav-links",
             innerHTML: "Settings"
         });
-        settingsLink.addEventListener("click", settingsBuilder.showPage);
+        dom.clickEvent(settingsLink, settingsBuilder.showPage);
     }
 
     // Create about link
@@ -84,16 +84,16 @@ const navLinks = function createNavElements(dom, lists) {
             parent: sidebar, 
             tag: "li", 
             idName: "about", 
-            className: "nav-item"
+            className: "nav-items"
         });
         const aboutLink = dom.createElement({
             parent: listItem,
             tag: "a",
             idName: "about-link",
-            className: "nav-link",
+            className: "nav-links",
             innerHTML: "About"
         });
-        aboutLink.addEventListener("click", aboutBuilder.showPage);
+        dom.clickEvent(aboutLink, aboutBuilder.showPage);
     }
 
     // Build page
