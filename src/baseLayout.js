@@ -12,8 +12,8 @@ import lists from "./lists"
  */
 const baseLayout = function createBaseLayoutElements(dom) {
 
-    const nav = navLinks(dom);  // Navbar
     const list = lists(dom);
+    const nav = navLinks(dom, list);  // Navbar
 
     const createHeader = function createHeaderElement() {
         const logoText = 'What TODO';

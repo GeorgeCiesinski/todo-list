@@ -4,13 +4,42 @@ import about from "./about"
 /*
  *Builds the nav elements in the sidebar
  */
-const navLinks = function createNavElements(dom) {
+const navLinks = function createNavElements(dom, lists) {
 
     const settingsBuilder = settings(dom);
     const aboutBuilder = about(dom);
 
-    const listsLinks = function createListsLinks(parent) {
+    const navList = function navigateToListByIndex(event) {
+        console.log(event.target);
+        lists.showList(event.target.getAttribute('index'));
+    }
 
+    const listsLinks = function createListsLinks(parent, listsIndex) {
+        const listUL = dom.createElement({
+            parent,
+            tag: 'ul',
+            idName: 'list-items'
+        });
+        listsIndex.forEach(item => {
+            const listLI = dom.createElement({
+                parent: listUL,
+                tag: 'li',
+                className: 'list-item-nav'
+            });
+            const listLink = dom.createElement({
+                parent: listLI,
+                tag: 'a',
+                className: 'list-item-link',
+                innerHTML: item,
+                attributes: [
+                    {
+                        name: 'index',
+                        value: listsIndex.indexOf(item)
+                    }
+                ]
+            });
+            dom.clickEvent(listLink, navList);  // 
+        });
     }
 
     // Create lists link
@@ -19,7 +48,7 @@ const navLinks = function createNavElements(dom) {
             parent: sidebar, 
             tag: "li", 
             idName: "lists", 
-            className: "nav-item"
+            className: "nav-items"
         });
         dom.createElement({
             parent: listItem,
@@ -28,6 +57,7 @@ const navLinks = function createNavElements(dom) {
             className: "nav-link",
             innerHTML: "Lists"
         });
+        listsLinks(listItem, listsIndex);
     }
 
     // Create settings link

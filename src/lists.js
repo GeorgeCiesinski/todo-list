@@ -356,7 +356,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     // Builds listElement from list by index
     const showList = function showListByIndex(index) {
+        dom.clearList();
         const currentList = util.getList(index);
+        console.log(currentList);
         createTitle(currentList.title);
         createDescription(currentList.description);
         createTodos(currentList.todos);

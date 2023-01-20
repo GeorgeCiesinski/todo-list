@@ -120,9 +120,9 @@ const modifyDom = function modifyDomElements() {
         content.appendChild(element);
     }
 
-    const switchList = function switchListWithNewElement(element) {
+    // Clears list for rebuild
+    const clearList = function clearListElement() {
         clearElement(list);
-        list.appendChild(element);
     }
 
     // Adds color variables to CSS
@@ -143,19 +143,25 @@ const modifyDom = function modifyDomElements() {
         )
     }
 
+    // Adds a click event listener to an element
+    const clickEvent = function createClickEventListener(element, action) {
+        element.addEventListener('click', action);
+    }
+
     // Collapse todo item content
-    const collapseContent = function collapseContentElement() {
-        if (this.classList.contains('collapsed')) {
-            this.classList.remove('collapsed');
-            this.classList.add('visible');
-            this.innerHTML = '<i class="fa-solid fa-minus"></i>';  // Change to minus icon
-        } else if (this.classList.contains('visible')) {
-            this.classList.remove('visible');
-            this.classList.add('collapsed');
-            this.innerHTML = '<i class="fa-solid fa-plus"></i>';  // Change to plus icon
+    const collapseContent = function collapseContentElement(event) {
+        const { currentTarget } = event;
+        if (currentTarget.classList.contains('collapsed')) {
+            currentTarget.classList.remove('collapsed');
+            currentTarget.classList.add('visible');
+            currentTarget.innerHTML = '<i class="fa-solid fa-minus"></i>';  // Change to minus icon
+        } else if (currentTarget.classList.contains('visible')) {
+            currentTarget.classList.remove('visible');
+            currentTarget.classList.add('collapsed');
+            currentTarget.innerHTML = '<i class="fa-solid fa-plus"></i>';  // Change to plus icon
         }
         // Get 'collapsible-todo-elements' which is a sibling of parent 'visible-todo-elements'
-        const contentElement = this.parentNode.parentNode.nextElementSibling;
+        const contentElement = currentTarget.parentNode.parentNode.nextElementSibling;
         // Toggle collapse
         if (contentElement.style.display === "block") {
             contentElement.style.display = "none";
@@ -167,7 +173,7 @@ const modifyDom = function modifyDomElements() {
     // Adds event listener to each todo item - collapses content
     const createCollapse = function createCollapseEventListener() {
         const collapseButtons = document.querySelectorAll('.collapse-buttons');
-        collapseButtons.forEach(button => button.addEventListener('click', collapseContent));
+        collapseButtons.forEach(button => clickEvent(button, collapseContent));
     }
 
     return {
@@ -176,9 +182,10 @@ const modifyDom = function modifyDomElements() {
         setContent,
         setList,
         switchContent,
-        switchList,
+        clearList,
         setPalette,
         setFont,
+        clickEvent,
         createCollapse
     }
 };
