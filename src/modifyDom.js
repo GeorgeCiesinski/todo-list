@@ -90,30 +90,36 @@ const modifyDom = function modifyDomElements() {
         if (result.success) {
             return result.element;
         }
-        
+
+        return null;  // Return null if failed
     }
 
+    // Add class to an element
     const addClass = function addClassToElement(element, className) {
         element.classList.add(className);
     }
 
+    // Remove class from an element
     const removeClass = function addClassToElement(element, className) {
         element.classList.remove(className);
     }
 
+    // Remove active class from previous elements and add to new element
     const switchActiveClass = function switchActiveClassForElement(element, className) {
-        const activeItems = document.querySelectorAll(className);
+        const activeItems = document.querySelectorAll(`.${className}`);
         activeItems.forEach(item => removeClass(item, className));
         addClass(element, className);
     }
 
+    // Switch which element is the active Nav link
     const switchNavLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = '.active-nav-links';
+        const activeClass = 'active-nav-links';
         switchActiveClass(element, activeClass);
     }
 
+    // Switch which element is the active List link
     const switchListLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = '.active-list-link-items';
+        const activeClass = 'active-list-link-items';
         switchActiveClass(element, activeClass);
     }
 

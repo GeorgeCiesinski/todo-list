@@ -9,10 +9,6 @@ const navLinks = function createNavElements(dom, lists) {
     const settingsBuilder = settings(dom);
     const aboutBuilder = about(dom);
 
-    const listNavigation = function navigateToListByIndex(event) {
-        lists.showList(event.target.getAttribute('index'));
-    }
-
     const listsLinks = function createListsLinks(parent, listsIndex) {
         const listUL = dom.createElement({
             parent,
@@ -37,7 +33,10 @@ const navLinks = function createNavElements(dom, lists) {
                     }
                 ]
             });
-            dom.clickEvent(listLink, listNavigation);
+            if (listsIndex.indexOf(item) === 0) {
+                dom.addClass(listLink, 'active-list-link-items');
+            }
+            dom.clickEvent(listLink, lists.switchList);
         });
     }
 
@@ -56,8 +55,8 @@ const navLinks = function createNavElements(dom, lists) {
             className: "nav-links",
             innerHTML: "Lists"
         });
-        dom.addClass(listLink, '.active-nav-links')  // Sets Lists as the active page
-        listsLinks(listItem, listsIndex);
+        dom.addClass(listLink, 'active-nav-links')  // Sets Lists as the active page
+        listsLinks(listItem, listsIndex);  // Adds list navigation under listLink
         dom.clickEvent(listLink, lists.showPage);
     }
 

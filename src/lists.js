@@ -363,6 +363,13 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         createTodos(currentList.todos);
     }
 
+    const switchList = function switchListEvent(event) {
+        const linkElement = event.target;
+        const index = event.target.getAttribute('index')
+        showList(index);
+        dom.switchListLinks(linkElement);
+    }
+
     // Shows lists page
     const showPage = function switchPage(event) {
         if (event) {
@@ -379,6 +386,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     return {
         listIndex,
         showList,
+        switchList,
         showPage,
         createEventListeners
     }

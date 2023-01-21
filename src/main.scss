@@ -146,8 +146,12 @@ body {
     flex: 1;
 }
 
-.active-nav-links {
-    font-size: 200%;
+.active-nav-links::before {
+    content: '> ';
+}
+
+.active-list-link-items {
+    text-decoration: underline;
 }
 
 // Content
