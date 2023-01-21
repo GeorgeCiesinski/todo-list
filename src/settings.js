@@ -66,7 +66,7 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
 const settingsBuilder = function settingsBuilderFunctions(dom) {
     
     const util = settingsUtilities(dom);
-    
+
     const settingsPage = dom.createElement(
         {
             tag: 'div',
@@ -273,7 +273,10 @@ const settingsBuilder = function settingsBuilderFunctions(dom) {
     }
 
     // Shows built page
-    const showPage = function switchPage() {
+    const showPage = function switchPage(event) {
+        if (event) {
+            dom.switchNavLinks(event.target);
+        }
         dom.switchContent(settingsPage);
     }
 

@@ -97,6 +97,26 @@ const modifyDom = function modifyDomElements() {
         element.classList.add(className);
     }
 
+    const removeClass = function addClassToElement(element, className) {
+        element.classList.remove(className);
+    }
+
+    const switchActiveClass = function switchActiveClassForElement(element, className) {
+        const activeItems = document.querySelectorAll(className);
+        activeItems.forEach(item => removeClass(item, className));
+        addClass(element, className);
+    }
+
+    const switchNavLinks = function switchNavLinksActiveClass(element) {
+        const activeClass = '.active-nav-links';
+        switchActiveClass(element, activeClass);
+    }
+
+    const switchListLinks = function switchNavLinksActiveClass(element) {
+        const activeClass = '.active-list-link-items';
+        switchActiveClass(element, activeClass);
+    }
+
     // Remove elements from div
     const clearElement = function clearElementsFromParent(element) {
         while (element.firstChild) {
@@ -179,6 +199,8 @@ const modifyDom = function modifyDomElements() {
     return {
         createElement,
         addClass,
+        switchNavLinks,
+        switchListLinks,
         setContent,
         setList,
         switchContent,

@@ -56,6 +56,7 @@ const navLinks = function createNavElements(dom, lists) {
             className: "nav-links",
             innerHTML: "Lists"
         });
+        dom.addClass(listLink, '.active-nav-links')  // Sets Lists as the active page
         listsLinks(listItem, listsIndex);
         dom.clickEvent(listLink, lists.showPage);
     }

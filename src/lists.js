@@ -354,7 +354,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         todos.forEach(item => createTodoItem(todosDiv, item));
     }
 
-    // Builds listElement from list by index
+    // Builds and rebuilds listElement from list by index
     const showList = function showListByIndex(index) {
         dom.clearList();
         const currentList = util.getList(index);
@@ -364,7 +364,10 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 
     // Shows lists page
-    const showPage = function switchPage() {
+    const showPage = function switchPage(event) {
+        if (event) {
+            dom.switchNavLinks(event.target);
+        }
         dom.switchContent(listsPage);
     }
 

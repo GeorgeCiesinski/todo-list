@@ -93,7 +93,7 @@ body {
 // Header & Footer
 #site-header, #site-footer {
     color: var(--font-color);
-    background-color: var(--color-primary-500);
+    background-color: var(--color-primary-600);
 }
 
 #site-header {
@@ -114,6 +114,7 @@ body {
 // Sidebar
 #sidebar {
     width: 20vw;
+    color: var(--font-color);
     background-color: var(--color-primary-400);
 }
 
@@ -143,6 +144,10 @@ body {
 
 #lists {
     flex: 1;
+}
+
+.active-nav-links {
+    font-size: 200%;
 }
 
 // Content
@@ -184,6 +189,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 40vw;
+    min-width: 390px;
     margin: 20px 30vw 20px 10vw;
     background-color: var(--color-primary-300);
 }
@@ -219,7 +225,7 @@ body {
 .collapse-buttons {
     height: 28px;
     width: 28px;
-    color: var(--color-primary-100);
+    color: var(--font-color);
     background-color: var(--color-primary-500);
     border: none;
 }

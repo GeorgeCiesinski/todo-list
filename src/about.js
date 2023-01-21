@@ -75,7 +75,10 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
     }
 
     // Shows built page
-    const showPage = function switchPage() {
+    const showPage = function switchPage(event) {
+        if (event) {
+            dom.switchNavLinks(event.target);
+        }
         dom.switchContent(aboutPage);
     }
 
