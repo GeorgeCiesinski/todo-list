@@ -123,19 +123,19 @@ const modifyDom = function modifyDomElements() {
         switchActiveClass(element, activeClass);
     }
 
-    // Remove elements from div
+    // Remove children from parent element
     const clearElement = function clearElementsFromParent(element) {
         while (element.firstChild) {
             element.removeChild(element.lastChild);
         }
     }
 
-    // Sets content div when it is first created
+    // Sets content element when it is first created
     const setContent = function setContentDomNode(element) {
         content = element;
     }
 
-    // Sets list div when it is first created
+    // Sets list element when it is first created
     const setList = function setListDomNode(element) {
         list = element;
     }

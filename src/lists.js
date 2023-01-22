@@ -2,13 +2,19 @@ import listsData from "./assets/data/default.json"
 
 const listsUtilities = function listsUtilitiesFunctions() {
 
+    // Loads list from local storage
+    const loadLists = function loadListsFromLocalStorage() {
+        return JSON.parse(localStorage.getItem('lists'));
+    }
+
     // Create Default List
     const createDefault = function createDefaultList() {
+        console.log('Generating default list');
         return listsData.lists;
     }
 
     // Array of Lists - Load lists or create new lists if don't exist
-    let lists = JSON.parse(localStorage.getItem('lists')) || createDefault();
+    const lists = loadLists() || createDefault();
 
     // Returns an array of lists
     const listsArray = function returnListsArray() {
@@ -30,18 +36,12 @@ const listsUtilities = function listsUtilitiesFunctions() {
         localStorage.setItem('lists', JSON.stringify(lists));
     }
 
-    // Loads list from local storage
-    const loadLists = function loadListsFromLocalStorage() {
-        lists = JSON.parse(localStorage.getItem('lists'));
-    }
-
     return {
         listsArray,
         saveLists,
         loadLists,
         listsLength,
         getList,
-        // collapseItem
     }
 }
 
@@ -64,7 +64,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         }
     );
 
-    // List element containing list data
+    // List element containing list data elements
     const listElement = dom.createElement(
         {
             parent: listsPage,
@@ -76,7 +76,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     dom.setList(listElement);
 
     // List Title
-    const createTitle = function createTitleElement(title) {
+    const createTitle = function createTitleElement(currentList) {
         dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -85,14 +85,18 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             attributes: [
                 {
                     name: 'value',
-                    value: title
+                    value: currentList.title
+                },
+                {
+                    name: 'index',
+                    value: currentList.index
                 }
             ]
         });
     }
 
     // List Description
-    const createDescription = function createDescriptionElement(description) {
+    const createDescription = function createDescriptionElement(currentList) {
         dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -101,7 +105,11 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             attributes: [
                 {
                     name: 'value',
-                    value: description
+                    value: currentList.description
+                },
+                {
+                    name: 'index',
+                    value: currentList.index
                 }
             ]
         });
@@ -305,7 +313,13 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             parent,
             tag: 'button',
             className: 'delete-item-button',
-            innerHTML: 'X'
+            innerHTML: 'X',
+            // attributes: [
+            //     {
+            //         name: 'index',
+            //         value: 
+            //     }
+            // ]
         });
         // console.log(item);
     }
@@ -344,23 +358,30 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 
     // Creates todo div
-    const createTodos = function createTodoElement(todos) {
+    const createTodos = function createTodoElement(currentList) {
         const todosDiv = dom.createElement({
             parent: listElement,
             tag: 'div',
             idName: 'todos',
         });
+        const { todos } = currentList
         // Create todo items
-        todos.forEach(item => createTodoItem(todosDiv, item));
+        todos.forEach(item => {
+            const todoItem = item;
+            todoItem.index = todos.indexOf(item);
+            createTodoItem(todosDiv, todoItem);
+        });
     }
 
     // Builds and rebuilds listElement from list by index
     const showList = function showListByIndex(index) {
         dom.clearList();
         const currentList = util.getList(index);
-        createTitle(currentList.title);
-        createDescription(currentList.description);
-        createTodos(currentList.todos);
+        currentList.index = index;
+        console.log(currentList);
+        createTitle(currentList);
+        createDescription(currentList);
+        createTodos(currentList);
     }
 
     const switchList = function switchListEvent(event) {
