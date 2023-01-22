@@ -174,6 +174,10 @@ const modifyDom = function modifyDomElements() {
         element.addEventListener('click', action);
     }
 
+    const keyUpEvent = function createKeyUpEvent(element, action) {
+        element.addEventListener('keyup', action)
+    }
+
     // Collapse todo item content
     const collapseContent = function collapseContentElement(event) {
         const { currentTarget } = event;
@@ -214,6 +218,7 @@ const modifyDom = function modifyDomElements() {
         setPalette,
         setFont,
         clickEvent,
+        keyUpEvent,
         createCollapse
     }
 };

@@ -2,6 +2,16 @@ import listsData from "./assets/data/default.json"
 
 const listsUtilities = function listsUtilitiesFunctions() {
 
+    let lastChange = null;
+    let lastSave = null;
+
+    // Save listsObject to local storage
+    const saveLists = function saveListsToDLocalStorage(listsObject) {
+        console.log('New save occurred.');
+        localStorage.setItem('lists', JSON.stringify(listsObject));
+        lastSave = new Date();
+    }
+
     // Loads list from local storage
     const loadLists = function loadListsFromLocalStorage() {
         return JSON.parse(localStorage.getItem('lists'));
@@ -10,7 +20,9 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Create Default List
     const createDefault = function createDefaultList() {
         console.log('Generating default list');
-        return listsData.lists;
+        const defaultList = listsData.lists;
+        saveLists(defaultList);
+        return defaultList;
     }
 
     // Array of Lists - Load lists or create new lists if don't exist
@@ -31,10 +43,26 @@ const listsUtilities = function listsUtilitiesFunctions() {
         return lists[index];
     }
 
-    // Save lists to local storage
-    const saveLists = function saveListsToDLocalStorage() {
-        localStorage.setItem('lists', JSON.stringify(lists));
+    const changeTitle = function changeListTitle(event) {
+        const element = event.target;
+        const listIndex = element.getAttribute('index');
+        const currentList = lists[listIndex];
+        currentList.title = element.value;
+        lastChange = new Date();
+        // console.log(lists);        
     }
+
+    // Compares lastSave to lastChange to see if new changes occurred
+    const checkChanges = function checkIfListsChanged() {
+        if ((lastSave === null && lastChange !== null) || (lastChange > lastSave)) {
+            // If more than 5 seconds since last change, save list
+            if (new Date() - lastChange >= 5000) {
+                saveLists(lists);
+            }
+        }
+    }
+
+    setInterval(checkChanges, 5000);
 
     return {
         listsArray,
@@ -42,6 +70,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
         loadLists,
         listsLength,
         getList,
+        changeTitle
     }
 }
 
@@ -77,7 +106,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     // List Title
     const createTitle = function createTitleElement(currentList) {
-        dom.createElement({
+        const title = dom.createElement({
             parent: listElement,
             tag: 'input',
             idName: 'list-title',
@@ -93,6 +122,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
+        dom.keyUpEvent(title, util.changeTitle);
     }
 
     // List Description
@@ -378,7 +408,6 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.clearList();
         const currentList = util.getList(index);
         currentList.index = index;
-        console.log(currentList);
         createTitle(currentList);
         createDescription(currentList);
         createTodos(currentList);
