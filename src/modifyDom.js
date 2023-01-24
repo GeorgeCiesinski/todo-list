@@ -3,6 +3,7 @@
  */
 const modifyDom = function modifyDomElements() {
     
+    let nav = null;  // Nav element
     let content = null;  // Content element
     let list = null;  // List element
 
@@ -22,7 +23,7 @@ const modifyDom = function modifyDomElements() {
             element.setAttribute(name, value);
         }
         catch(err) {
-            console.error("Failed to add attribute to element.", err);
+            console.error('Failed to add attribute to element.', err);
         }
     }
 
@@ -130,6 +131,11 @@ const modifyDom = function modifyDomElements() {
         }
     }
 
+    // Sets nav element when it is first created
+    const setNav = function setNavDomNode(element) {
+        nav = element;
+    }
+
     // Sets content element when it is first created
     const setContent = function setContentDomNode(element) {
         content = element;
@@ -144,6 +150,11 @@ const modifyDom = function modifyDomElements() {
     const switchContent = function switchContentWithNewElement(element) {
         clearElement(content);  
         content.appendChild(element);
+    }
+    
+    // Clears list for rebuild
+    const clearNav = function clearListElement() {
+        clearElement(nav);
     }
 
     // Clears list for rebuild
@@ -211,9 +222,11 @@ const modifyDom = function modifyDomElements() {
         addClass,
         switchNavLinks,
         switchListLinks,
+        setNav,
         setContent,
         setList,
         switchContent,
+        clearNav,
         clearList,
         setPalette,
         setFont,

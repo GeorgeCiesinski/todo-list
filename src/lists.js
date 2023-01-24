@@ -1,4 +1,5 @@
 import listsData from "./assets/data/default.json"
+import navLinks from "./navLinks"
 
 const listsUtilities = function listsUtilitiesFunctions() {
 
@@ -28,9 +29,13 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Array of Lists - Load lists or create new lists if don't exist
     const lists = loadLists() || createDefault();
 
-    // Returns an array of lists
-    const listsArray = function returnListsArray() {
-        return lists; 
+    // Create a new array with list titles to populate navbar
+    const listNavData = function generateListNavData() {
+        const newArray = [];
+        for (let i = 0; i < lists.length; i += 1) {
+            newArray[i] = lists[i].title;
+        }
+        return newArray;
     }
 
     // Returns length of list
@@ -49,7 +54,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
         const currentList = lists[listIndex];
         currentList.title = element.value;
         lastChange = new Date();
-        // console.log(lists);        
     }
 
     // Compares lastSave to lastChange to see if new changes occurred
@@ -65,7 +69,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     setInterval(checkChanges, 5000);
 
     return {
-        listsArray,
+        listNavData,
         saveLists,
         loadLists,
         listsLength,
@@ -79,11 +83,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     const util = listsUtilities();
 
     // List titles and index for navLinks
-    const listIndex = []
-    const listsArray = util.listsArray();
-    for (let i = 0; i < listsArray.length; i += 1) {
-        listIndex[i] = listsArray[i].title;
-    }
+    const listNavData = util.listNavData();
 
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -102,6 +102,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         }
     );
 
+    // Set list in dom
     dom.setList(listElement);
 
     // List Title
@@ -434,7 +435,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 
     return {
-        listIndex,
+        listNavData,
         showList,
         switchList,
         showPage,

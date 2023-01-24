@@ -37,7 +37,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
             idName: 'sidebar'
         });
         // Add Nav if sidebar was successfully created
-        nav.build(sidebar, list.listIndex);
+        nav.build(sidebar, list.listNavData);
     }
 
     // Empty content div
