@@ -10,7 +10,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
     const saveLists = function saveListsToDLocalStorage(listsObject) {
         console.log('New save occurred.');
         localStorage.setItem('lists', JSON.stringify(listsObject));
-        console.log(listsObject);
         lastSave = new Date();
     }
 
@@ -82,7 +81,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     let currentList = util.getList(0);
     let currentListIndex = 0;
-
+    let listsNav = null;  // listsLink instance - defined later
+    
     // Root page element for lists 
     const listsPage = dom.createElement(
         {
@@ -108,6 +108,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         const element = event.target;
         currentList.title = element.value;
         util.updateChange();
+        listsNav.build(util.listNavData(), currentListIndex);  // Build Nav Links for Lists
     }
 
     // List Title
@@ -438,7 +439,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.switchListLinks(element);
     }
 
-    const listsNav = listsLinks(dom, switchList);
+    listsNav = listsLinks(dom, switchList);
 
     // Shows lists page
     const showPage = function switchPage(event) {
@@ -446,8 +447,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             dom.switchNavLinks(event.target);
         }
         dom.switchContent(listsPage);
-        buildList();
-        listsNav.build(util.listNavData());
+        buildList();  // Build current list
+        listsNav.build(util.listNavData(), currentListIndex);  // Build Nav Links for Lists
     }
 
     return {

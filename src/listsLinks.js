@@ -1,7 +1,7 @@
 // Nav elements within sidebar
 const listsLinks = function listsLinksBuilderFunctions(dom, switchList) {
 
-    const createListItem = function createListFunctionElements(listNavData, item) {
+    const createListItem = function createListFunctionElements(item, itemIndex, currentListIndex) {
         const listLI = dom.createElement({
             parent: dom.getNav(),
             tag: 'li',
@@ -15,20 +15,20 @@ const listsLinks = function listsLinksBuilderFunctions(dom, switchList) {
             attributes: [
                 {
                     name: 'index',
-                    value: listNavData.indexOf(item)
+                    value: itemIndex
                 }
             ]
         });
-        if (listNavData.indexOf(item) === 0) {
+        if (itemIndex === currentListIndex) {
             dom.addClass(listLink, 'active-list-link-items');
         }
         dom.clickEvent(listLink, switchList);
     }
     
-    const build = function generateListLinksElements(listNavData) {
+    const build = function generateListLinksElements(listNavData, currentListIndex) {
         dom.clearNav();  // Clear existing navLinks
         listNavData.forEach(item => {
-            createListItem(listNavData, item);
+            createListItem(item, listNavData.indexOf(item), currentListIndex);
         });
     }
 
