@@ -121,11 +121,11 @@ const modifyDom = function modifyDomElements() {
      */
 
     // Sets nav element when it is first created
-    const setNav = function setNavDomNode(element) {
+    const setNavElement = function setNavElementDomNode(element) {
         nav = element;
     }
 
-    const getNav = function getNavDomNode() {
+    const getNavElement = function getNavElementDomNode() {
         if (nav) {
             return nav;
         }
@@ -138,8 +138,15 @@ const modifyDom = function modifyDomElements() {
     }
 
     // Sets list element when it is first created
-    const setList = function setListDomNode(element) {
+    const setListElement = function setListElementDomNode(element) {
         list = element;
+    }
+
+    const getListElement = function getListElementDomNode() {
+        if (list) {
+            return list;
+        }
+        return null;
     }
 
     /*
@@ -251,10 +258,11 @@ const modifyDom = function modifyDomElements() {
     return {
         createElement,
         addClass,
-        setNav,
-        getNav,
+        setNavElement,
+        getNavElement,
         setContent,
-        setList,
+        setListElement,
+        getListElement,
         clearNav,
         clearList,
         switchNavLinks,

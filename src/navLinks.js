@@ -31,7 +31,7 @@ const navLinks = function createNavElements(dom, lists) {
         });
         dom.addClass(listLink, 'active-nav-links');  // Set Lists as the active page
         dom.clickEvent(listLink, lists.showPage);
-        dom.setNav(listUL);
+        dom.setNavElement(listUL);
     }
 
     // Create settings link

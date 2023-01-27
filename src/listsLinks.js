@@ -3,7 +3,7 @@ const listsLinks = function listsLinksBuilderFunctions(dom, switchList) {
 
     const createListItem = function createListFunctionElements(item, itemIndex, currentListIndex) {
         const listLI = dom.createElement({
-            parent: dom.getNav(),
+            parent: dom.getNavElement(),
             tag: 'li',
             className: 'list-nav-items'
         });
