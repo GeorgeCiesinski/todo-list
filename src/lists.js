@@ -1,5 +1,5 @@
 import listsData from "./assets/data/default.json"
-import navLinks from "./navLinks"
+import listsLinks from "./listsLinks"
 
 const listsUtilities = function listsUtilitiesFunctions() {
 
@@ -10,6 +10,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     const saveLists = function saveListsToDLocalStorage(listsObject) {
         console.log('New save occurred.');
         localStorage.setItem('lists', JSON.stringify(listsObject));
+        console.log(listsObject);
         lastSave = new Date();
     }
 
@@ -48,11 +49,8 @@ const listsUtilities = function listsUtilitiesFunctions() {
         return lists[index];
     }
 
-    const changeTitle = function changeListTitle(event) {
-        const element = event.target;
-        const listIndex = element.getAttribute('index');
-        const currentList = lists[listIndex];
-        currentList.title = element.value;
+    // Updates last change
+    const updateChange = function updateChangeTime() {
         lastChange = new Date();
     }
 
@@ -74,7 +72,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
         loadLists,
         listsLength,
         getList,
-        changeTitle
+        updateChange
     }
 }
 
@@ -82,8 +80,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     const util = listsUtilities();
 
-    // List titles and index for navLinks
-    const listNavData = util.listNavData();
+    let currentList = util.getList(0);
+    let currentListIndex = 0;
 
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -105,8 +103,15 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Set list in dom
     dom.setList(listElement);
 
+    // Change Title Event
+    const changeTitle = function changeListTitle(event) {
+        const element = event.target;
+        currentList.title = element.value;
+        util.updateChange();
+    }
+
     // List Title
-    const createTitle = function createTitleElement(currentList) {
+    const createTitle = function createTitleElement() {
         const title = dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -119,15 +124,15 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 },
                 {
                     name: 'index',
-                    value: currentList.index
+                    value: currentListIndex
                 }
             ]
         });
-        dom.keyUpEvent(title, util.changeTitle);
+        dom.keyUpEvent(title, changeTitle);
     }
 
     // List Description
-    const createDescription = function createDescriptionElement(currentList) {
+    const createDescription = function createDescriptionElement() {
         dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -140,7 +145,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 },
                 {
                     name: 'index',
-                    value: currentList.index
+                    value: currentListIndex
                 }
             ]
         });
@@ -389,13 +394,13 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 
     // Creates todo div
-    const createTodos = function createTodoElement(currentList) {
+    const createTodos = function createTodoElement() {
         const todosDiv = dom.createElement({
             parent: listElement,
             tag: 'div',
             idName: 'todos',
         });
-        const { todos } = currentList
+        const { todos } = currentList;
         // Create todo items
         todos.forEach(item => {
             const todoItem = item;
@@ -404,22 +409,36 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         });
     }
 
+    // Adds event listeners to page
+    const createEventListeners = function addEventListenersToElements() {
+        dom.createCollapse();
+    }
+
     // Builds and rebuilds listElement from list by index
-    const showList = function showListByIndex(index) {
+    const buildList = function buildListByIndex() {
         dom.clearList();
-        const currentList = util.getList(index);
-        currentList.index = index;
         createTitle(currentList);
         createDescription(currentList);
         createTodos(currentList);
+        createEventListeners();
     }
 
-    const switchList = function switchListEvent(event) {
-        const linkElement = event.target;
-        const index = event.target.getAttribute('index')
-        showList(index);
-        dom.switchListLinks(linkElement);
+    // Changes currentList and currentListIndex
+    const switchCurrent = function switchCurrentList(index) {
+        currentList = util.getList(index);
+        currentListIndex = index;
     }
+
+    // Handle list nav event and show requested list
+    const switchList = function switchListEvent(event) {
+        const element = event.target;
+        const index = element.getAttribute('index');
+        switchCurrent(index);
+        buildList();
+        dom.switchListLinks(element);
+    }
+
+    const listsNav = listsLinks(dom, switchList);
 
     // Shows lists page
     const showPage = function switchPage(event) {
@@ -427,16 +446,12 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             dom.switchNavLinks(event.target);
         }
         dom.switchContent(listsPage);
-    }
-
-    // Adds event listeners to page
-    const createEventListeners = function addEventListenersToElements() {
-        dom.createCollapse();
+        buildList();
+        listsNav.build(util.listNavData());
     }
 
     return {
-        listNavData,
-        showList,
+        buildList,
         switchList,
         showPage,
         createEventListeners

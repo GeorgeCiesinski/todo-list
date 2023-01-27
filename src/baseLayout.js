@@ -37,7 +37,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
             idName: 'sidebar'
         });
         // Add Nav if sidebar was successfully created
-        nav.build(sidebar, list.listNavData);
+        nav.build(sidebar);
     }
 
     // Empty content div
@@ -48,9 +48,6 @@ const baseLayout = function createBaseLayoutElements(dom) {
             idName: 'content'
         });
         dom.setContent(content);
-        list.showPage();  // Populate content with lists page
-        list.showList(0);  // Show first list in array
-        list.createEventListeners();  // Event Listeners
     }
 
     // Create App Body and append sidebar and content
@@ -84,6 +81,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
         createHeader();
         createAppBody();
         createFooter();
+        list.showPage();  // Populate content with lists page
     }
 
     // Build on load

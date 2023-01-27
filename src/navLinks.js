@@ -8,37 +8,9 @@ const navLinks = function createNavElements(dom, lists) {
 
     const settingsBuilder = settings(dom);
     const aboutBuilder = about(dom);
-    let listUL = null;
-
-    const listsLinks = function createListsLinks(listNavData) {
-        dom.clearNav();
-        listNavData.forEach(item => {
-            const listLI = dom.createElement({
-                parent: listUL,
-                tag: 'li',
-                className: 'list-nav-items'
-            });
-            const listLink = dom.createElement({
-                parent: listLI,
-                tag: 'a',
-                className: 'list-link-items',
-                innerHTML: item,
-                attributes: [
-                    {
-                        name: 'index',
-                        value: listNavData.indexOf(item)
-                    }
-                ]
-            });
-            if (listNavData.indexOf(item) === 0) {
-                dom.addClass(listLink, 'active-list-link-items');
-            }
-            dom.clickEvent(listLink, lists.switchList);
-        });
-    }
 
     // Create lists link
-    const listsItem = function createListsNav(sidebar, listNavData) {
+    const listsItem = function createListsNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: 'li', 
@@ -52,7 +24,7 @@ const navLinks = function createNavElements(dom, lists) {
             className: 'nav-links',
             innerHTML: 'Lists'
         });
-        listUL = dom.createElement({
+        const listUL = dom.createElement({
             parent: listItem,
             tag: 'ul',
             idName: 'list-items'
@@ -60,7 +32,6 @@ const navLinks = function createNavElements(dom, lists) {
         dom.addClass(listLink, 'active-nav-links');  // Set Lists as the active page
         dom.clickEvent(listLink, lists.showPage);
         dom.setNav(listUL);
-        listsLinks(listNavData);  // Add list navigation under listLink
     }
 
     // Create settings link
@@ -100,9 +71,9 @@ const navLinks = function createNavElements(dom, lists) {
     }
 
     // Build page
-    const build = function buildSidebarNavLinks(sidebar, listNavData) {
+    const build = function buildSidebarNavLinks(sidebar) {
         const navList = dom.createElement({parent: sidebar, tag: 'ul', idName: 'nav-list'});
-        listsItem(navList, listNavData);
+        listsItem(navList);
         settingsItem(navList);
         aboutItem(navList);
     }

@@ -95,6 +95,10 @@ const modifyDom = function modifyDomElements() {
         return null;  // Return null if failed
     }
 
+    /*
+     * Element Classes
+     */
+
     // Add class to an element
     const addClass = function addClassToElement(element, className) {
         element.classList.add(className);
@@ -112,28 +116,20 @@ const modifyDom = function modifyDomElements() {
         addClass(element, className);
     }
 
-    // Switch which element is the active Nav link
-    const switchNavLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = 'active-nav-links';
-        switchActiveClass(element, activeClass);
-    }
-
-    // Switch which element is the active List link
-    const switchListLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = 'active-list-link-items';
-        switchActiveClass(element, activeClass);
-    }
-
-    // Remove children from parent element
-    const clearElement = function clearElementsFromParent(element) {
-        while (element.firstChild) {
-            element.removeChild(element.lastChild);
-        }
-    }
+    /*
+     * Set and Get Elements
+     */
 
     // Sets nav element when it is first created
     const setNav = function setNavDomNode(element) {
         nav = element;
+    }
+
+    const getNav = function getNavDomNode() {
+        if (nav) {
+            return nav;
+        }
+        return null;
     }
 
     // Sets content element when it is first created
@@ -146,10 +142,15 @@ const modifyDom = function modifyDomElements() {
         list = element;
     }
 
-    // Appends element to content div
-    const switchContent = function switchContentWithNewElement(element) {
-        clearElement(content);  
-        content.appendChild(element);
+    /*
+     * Update Content
+     */
+
+    // Remove children from parent element
+    const clearElement = function clearElementsFromParent(element) {
+        while (element.firstChild) {
+            element.removeChild(element.lastChild);
+        }
     }
     
     // Clears list for rebuild
@@ -161,6 +162,28 @@ const modifyDom = function modifyDomElements() {
     const clearList = function clearListElement() {
         clearElement(list);
     }
+
+    // Switch which element is the active Nav link
+    const switchNavLinks = function switchNavLinksActiveClass(element) {
+        const activeClass = 'active-nav-links';
+        switchActiveClass(element, activeClass);
+    }
+
+    // Switch which element is the active List link
+    const switchListLinks = function switchNavLinksActiveClass(element) {
+        const activeClass = 'active-list-link-items';
+        switchActiveClass(element, activeClass);
+    }
+
+    // Appends element to content div
+    const switchContent = function switchContentWithNewElement(element) {
+        clearElement(content);  
+        content.appendChild(element);
+    }
+
+    /*
+     * Modify CSS
+     */
 
     // Adds color variables to CSS
     const setPalette = function setPaletteCSS(palette) {
@@ -180,6 +203,10 @@ const modifyDom = function modifyDomElements() {
         )
     }
 
+    /*
+     * Create Events
+     */
+
     // Adds a click event listener to an element
     const clickEvent = function createClickEventListener(element, action) {
         element.addEventListener('click', action);
@@ -188,6 +215,10 @@ const modifyDom = function modifyDomElements() {
     const keyUpEvent = function createKeyUpEvent(element, action) {
         element.addEventListener('keyup', action)
     }
+
+    /*
+     * Actions - Called by events
+     */
 
     // Collapse todo item content
     const collapseContent = function collapseContentElement(event) {
@@ -220,14 +251,15 @@ const modifyDom = function modifyDomElements() {
     return {
         createElement,
         addClass,
-        switchNavLinks,
-        switchListLinks,
         setNav,
+        getNav,
         setContent,
         setList,
-        switchContent,
         clearNav,
         clearList,
+        switchNavLinks,
+        switchContent,
+        switchListLinks,
         setPalette,
         setFont,
         clickEvent,
