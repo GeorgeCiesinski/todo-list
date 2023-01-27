@@ -36,16 +36,19 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
     const loadSettings = function loadSettingsFromLocalStorage() {
         colorSettings = JSON.parse(localStorage.getItem('colorSettings'));
         updateSASS();
+        console.log("Loading Settings.");
     }
 
     // Saves changed settings
     const saveSettings = function saveSettingChanges() {
         localStorage.setItem('colorSettings', JSON.stringify(colorSettings));
+        console.log("Settings Saved.");
     }
 
      // Clear Local Storage
      const deleteData = function deleteLocalStorage() {
         localStorage.clear();
+        console.log("Data Deleted.");
     }
 
     updateSASS();

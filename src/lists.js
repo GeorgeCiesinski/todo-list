@@ -54,17 +54,20 @@ const listsUtilities = function listsUtilitiesFunctions() {
         lastChange = new Date();
     }
 
+    const timeDelay = 3000;  // 3 Seconds
+
     // Compares lastSave to lastChange to see if new changes occurred
     const checkChanges = function checkIfListsChanged() {
         if ((lastSave === null && lastChange !== null) || (lastChange > lastSave)) {
-            // If more than 5 seconds since last change, save list
-            if (new Date() - lastChange >= 5000) {
+            // If more than timedelay since last change, save list
+            if (new Date() - lastChange >= timeDelay) {
                 saveLists(lists);
             }
         }
     }
 
-    setInterval(checkChanges, 5000);
+    // Checks for changes every timeDelay period
+    setInterval(checkChanges, timeDelay);
 
     return {
         listNavData,
@@ -105,7 +108,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Set list in dom
     dom.setListElement(listElement);
 
-    // Change Title Event
+    // Change Title Event - Changes the list.title variable and updates the last change time
     const changeTitle = function changeListTitle(event) {
         const element = event.target;
         currentList.title = element.value;
@@ -134,9 +137,16 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.keyUpEvent(title, changeTitle);
     }
 
+    // Change Title Event - Changes the list.title variable and updates the last change time
+    const changeDescription = function changeListDescription(event) {
+        const element = event.target;
+        currentList.description = element.value;
+        util.updateChange();
+    }
+
     // List Description
     const createDescription = function createDescriptionElement() {
-        dom.createElement({
+        const description = dom.createElement({
             parent: listElement,
             tag: 'input',
             idName: 'list-description',
@@ -152,6 +162,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
+        dom.keyUpEvent(description, changeDescription);
     }
 
     // Adds event listeners to page
