@@ -181,7 +181,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.clearList();
         createTitle(currentList);
         createDescription(currentList);
-        todos.build();
+        todos.build(currentList);
         createEventListeners();
     }
 
@@ -196,7 +196,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         const element = event.target;
         const index = Number(element.getAttribute('index'));
         switchCurrent(index);
-        buildList();
+        buildList(currentList);
         dom.switchListLinks(element);
     }
 

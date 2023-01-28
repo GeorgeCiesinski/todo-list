@@ -1,4 +1,4 @@
-const todosBuilder = function todosBuilderFunctions(dom, currentList) {
+const todosBuilder = function todosBuilderFunctions(dom) {
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -318,7 +318,7 @@ const todosBuilder = function todosBuilderFunctions(dom, currentList) {
     }
 
     // Creates todo div
-    const build = function createTodoElement() {
+    const build = function createTodoElement(currentList) {
         const todosDiv = dom.createElement({
             parent: dom.getListElement(),
             tag: 'div',
