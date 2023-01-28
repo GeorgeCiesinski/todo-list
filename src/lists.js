@@ -81,12 +81,18 @@ const listsUtilities = function listsUtilitiesFunctions() {
 
 const listsBuilder = function listsBuilderFunctions(dom) {
 
+    // Todos Builder - builds individual todo items
     const todos = todosBuilder(dom);
+
+    // Lists Utilities - manage lists objects
     const util = listsUtilities();
     
+    // Current list and list index
     let currentList = util.getList(0);
     let currentListIndex = 0;
-    let listsNav = null;  // listsLink instance - defined later
+
+    // listsLink instance - defined later
+    let listsNav = null; 
     
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -194,16 +200,21 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.switchListLinks(element);
     }
 
+    // Define listsNav instance declared previously
     listsNav = listsLinks(dom, switchList);
 
     // Shows lists page
     const showPage = function switchPage(event) {
+        // If called by event, change clicked link to show as active link
         if (event) {
             dom.switchNavLinks(event.target);
         }
+        // Switch content element to display listsPage
         dom.switchContent(listsPage);
-        buildList();  // Build current list
-        listsNav.build(util.listNavData(), currentListIndex);  // Build Nav Links for Lists
+        // Build current list
+        buildList();  
+        // Build Nav Links for Lists
+        listsNav.build(util.listNavData(), currentListIndex); 
     }
 
     return {

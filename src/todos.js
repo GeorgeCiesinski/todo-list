@@ -87,7 +87,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         dom.addClass(collapseButton, 'collapsed');
     }
 
-    // Div is still visible when the todo item is collapsed
+    // Create non collapsible div - always visible
     const createVisibleDiv = function createVisibleDivElements(parent, item) {
         const itemDiv = dom.createElement({
             parent,
@@ -220,6 +220,8 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         createDelete(deletionDiv, item);
     }
 
+
+    // Create collapsible div - collapsed by default
     const createCollapsibleDiv = function createCollapsibleDivElements(parent, item) {
         const collapsibleDiv = dom.createElement({
             parent,
@@ -231,7 +233,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         createItemDeletion(collapsibleDiv, item);
     }
 
-    // Create div with visible and collapsible elements
+    // Create todo parent div
     const createTodoItem = function createTodoItemElement(parent, item) {
         const itemDiv = dom.createElement({
             parent,
