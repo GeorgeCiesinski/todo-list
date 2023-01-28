@@ -81,15 +81,15 @@ const listsUtilities = function listsUtilitiesFunctions() {
 
 const listsBuilder = function listsBuilderFunctions(dom) {
 
-    // Todos Builder - builds individual todo items
-    const todos = todosBuilder(dom);
-
     // Lists Utilities - manage lists objects
     const util = listsUtilities();
     
     // Current list and list index
     let currentList = util.getList(0);
     let currentListIndex = 0;
+
+    // Todos Builder - builds individual todo items
+    const todos = todosBuilder(dom, currentList);
 
     // listsLink instance - defined later
     let listsNav = null; 
@@ -181,7 +181,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.clearList();
         createTitle(currentList);
         createDescription(currentList);
-        todos.build(currentList);
+        todos.build();
         createEventListeners();
     }
 

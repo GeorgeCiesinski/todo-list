@@ -185,7 +185,7 @@ body {
     background-color: white;
 }
 
-#list-div, .todo-items, .collapse-buttons {
+#list-div, .todo-items, .collapse-buttons, .delete-item-buttons {
     border-radius: 10px;
 }
 
@@ -226,12 +226,25 @@ body {
     justify-content: space-between
 }
 
-.collapse-buttons {
+.collapse-buttons, .delete-item-buttons {
     height: 28px;
     width: 28px;
+    border: none;
+}
+
+.collapse-buttons {
     color: var(--font-color);
     background-color: var(--color-primary-500);
-    border: none;
+}
+
+.delete-item-buttons {
+    color: var(--color-primary-500);
+    background-color: var(--color-primary-100);
+    transition: 1s;
+}
+.delete-item-buttons:hover {
+    color: var(--color-primary-900);
+    background-color: var(--color-primary-200);
 }
 
 .collapsible-todo-elements {
@@ -249,7 +262,7 @@ body {
     min-width: 65px;
 }
 
-.item-names, .due-date, .created-date, .priority-input {
+.item-names, .inner-item-names, .due-date, .created-date, .priority-input {
     border: none;
     background-color: var(--color-primary-400);
 }
@@ -272,6 +285,11 @@ body {
 
 .checklist-item-divs {
     margin-left: 20px;
+}
+
+.inner-labels {
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .description-div {

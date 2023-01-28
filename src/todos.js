@@ -1,4 +1,4 @@
-const todosBuilder = function todosBuilderFunctions(dom) {
+const todosBuilder = function todosBuilderFunctions(dom, currentList) {
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -180,7 +180,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         dom.createElement({
             parent: checkListItemDiv,
             tag: 'input',
-            className: 'item-names',
+            className: 'inner-item-names',
             attributes: [
                 {
                     name: 'value',
@@ -200,7 +200,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         dom.createElement({
             parent: innerCheckListDiv,
             tag: 'label',
-            className: 'label',
+            className: 'inner-labels',
             innerHTML: 'Checklist:'
         });
         item.checklist.forEach(innerItem => {
@@ -267,16 +267,15 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         dom.createElement({
             parent,
             tag: 'button',
-            className: 'delete-item-button',
-            innerHTML: 'X',
-            // attributes: [
-            //     {
-            //         name: 'index',
-            //         value: 
-            //     }
-            // ]
+            className: 'delete-item-buttons',
+            innerHTML: '<i class="fa-solid fa-trash"></i>',
+            attributes: [
+                {
+                    name: 'index',
+                    value: item.index
+                }
+            ]
         });
-        // console.log(item);
     }
 
     // Create item deletion div
@@ -319,7 +318,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
     }
 
     // Creates todo div
-    const build = function createTodoElement(currentList) {
+    const build = function createTodoElement() {
         const todosDiv = dom.createElement({
             parent: dom.getListElement(),
             tag: 'div',
