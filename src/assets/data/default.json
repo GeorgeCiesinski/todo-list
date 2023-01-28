@@ -57,6 +57,15 @@
                     "checklist": [],
                     "due": "2023-01-07",
                     "priority": 1,
+                    "checked": false
+                },
+                {
+                    "name": "Sell shares",
+                    "added": "2023-01-07",
+                    "description": "Sell ALL the shares",
+                    "checklist": [],
+                    "due": "2023-04-01",
+                    "priority": 2,
                     "checked": true
                 },
                 {
@@ -79,15 +88,6 @@
                     ],
                     "due": "2023-03-01",
                     "priority": 3,
-                    "checked": false
-                },
-                {
-                    "name": "Sell shares",
-                    "added": "2023-01-07",
-                    "description": "Sell ALL the shares",
-                    "checklist": [],
-                    "due": "2023-04-01",
-                    "priority": 2,
                     "checked": false
                 }
             ]

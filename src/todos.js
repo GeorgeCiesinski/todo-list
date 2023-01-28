@@ -8,17 +8,24 @@ const todosBuilder = function todosBuilderFunctions(dom) {
             className: 'left-visible-elements',
         });
         // Checkbox
-        dom.createElement({
+        const checkBox = dom.createElement({
             parent: leftDiv,
             tag: 'input',
-            className: 'item-checkbox',
+            className: 'item-checkboxes',
             attributes: [
                 {
                     name: 'type',
                     value: 'checkbox'
+                },
+                {   
+                    name: 'index',
+                    value: item.index
                 }
             ]
         });
+        if (item.checked) {
+            checkBox.checked = true;
+        };
         // Item Name
         dom.createElement({
             parent: leftDiv,
@@ -140,6 +147,69 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         createDueDate(itemTrackingDiv, item);
     }
 
+    // Creates left side of visible div
+    const createInnerCheckListItem = function createLeftVisibleItemElements(parent, index, checkListItem) {
+        const checkListItemDiv = dom.createElement({
+            parent,
+            tag: 'div',
+            className: 'checklist-item-divs',
+        });
+        // Checkbox
+        const checkBox = dom.createElement({
+            parent: checkListItemDiv,
+            tag: 'input',
+            className: 'inner-item-checkboxes',
+            attributes: [
+                {
+                    name: 'type',
+                    value: 'checkbox'
+                },
+                {   
+                    name: 'index',
+                    value: index
+                },{
+                    name: 'item',
+                    value: checkListItem.index
+                }
+            ]
+        });
+        if (checkListItem.checked) {
+            checkBox.checked = true;
+        };
+        // Item Name
+        dom.createElement({
+            parent: checkListItemDiv,
+            tag: 'input',
+            className: 'item-names',
+            attributes: [
+                {
+                    name: 'value',
+                    value: checkListItem.name
+                }
+            ]
+        });
+    }
+
+    // Create inner check list div - contains todo item checklist
+    const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item) {
+        const innerCheckListDiv = dom.createElement({
+            parent,
+            tag: 'div',
+            className: 'inner-checklist-div',
+        });
+        dom.createElement({
+            parent: innerCheckListDiv,
+            tag: 'label',
+            className: 'label',
+            innerHTML: 'Checklist:'
+        });
+        item.checklist.forEach(innerItem => {
+            const checkListItem = innerItem;
+            checkListItem.index = item.checklist.indexOf(checkListItem);
+            createInnerCheckListItem(innerCheckListDiv, item.index, checkListItem);
+        });
+    }
+
     // Create item description div
     const createItemDescription = function createItemDescriptionElements(parent, item) {
         const descriptionDiv = dom.createElement({
@@ -151,7 +221,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
             parent: descriptionDiv,
             tag: 'label',
             className: 'label',
-            innerHTML: 'Notes'
+            innerHTML: 'Notes:'
         });
         dom.createElement({
             parent: descriptionDiv,
@@ -229,6 +299,10 @@ const todosBuilder = function todosBuilderFunctions(dom) {
             className: 'collapsible-todo-elements',
         });
         createItemTracking(collapsibleDiv, item);
+        // If item contains checklist, create inner checklist
+        if (item.checklist.length > 0) {
+            createInnerCheckListDiv(collapsibleDiv, item)
+        };
         createItemDescription(collapsibleDiv, item);
         createItemDeletion(collapsibleDiv, item);
     }
