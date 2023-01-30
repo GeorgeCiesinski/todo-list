@@ -263,6 +263,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         });
     }
 
+    // Create button to delete todo item
     const createDelete = function createDeleteElement(parent, item) {
         dom.createElement({
             parent,

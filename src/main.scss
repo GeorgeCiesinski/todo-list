@@ -266,7 +266,7 @@ body {
     border: none;
     background-color: var(--color-primary-400);
 }
-.item-names:focus, .due-date:focus, .created-date:focus, .priority-input:focus {
+.item-names:focus, .inner-item-names:focus, .due-date:focus, .created-date:focus, .priority-input:focus {
     background-color: white;
 }
 
