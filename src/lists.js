@@ -33,7 +33,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Set list in dom
     dom.setListElement(listElement);
 
-    // Change Title Event - Changes the list.title variable and updates the last change time
+    // Change Title Event - Changes the list.title variable
     const changeTitle = function changeListTitle(event) {
         const element = event.target;
         const current = util.getCurrent();  // Current List

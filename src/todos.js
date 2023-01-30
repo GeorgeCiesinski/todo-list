@@ -1,11 +1,20 @@
 const todosBuilder = function todosBuilderFunctions(dom, util) {
-
+ 
     // Change todo checked event - changes checked state of todo item 
     const changeChecked = function changeTodoItemCheckedState(event) {
         const element = event.target;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].checked = element.checked;
+        util.updateChange();
+    }
+
+    // Change todo name event - changes the name of the todo item
+    const changeTodoName = function changeTodoItemName(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].name = element.value;
         util.updateChange();
     }
     
@@ -38,7 +47,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         // checkBox event
         dom.changeEvent(checkBox, changeChecked);
         // Item Name
-        dom.createElement({
+        const todoName = dom.createElement({
             parent: leftDiv,
             tag: 'input',
             className: 'item-names',
@@ -46,9 +55,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {
                     name: 'value',
                     value: item.name
+                },
+                {   
+                    name: 'index',
+                    value: item.index
                 }
             ]
         });
+        dom.keyUpEvent(todoName, changeTodoName);
     }
 
     // Change priority event - change priority of todo item
