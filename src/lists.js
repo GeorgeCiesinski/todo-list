@@ -4,22 +4,27 @@ import todosBuilder from "./todos"
 
 const listsUtilities = function listsUtilitiesFunctions() {
 
-    let lastChange = null;
-    let lastSave = null;
+    /*
+     * Save Lists
+     */
 
-    // Save listsObject to local storage
-    const saveLists = function saveListsToDLocalStorage(listsObject) {
+    let lastChange = null;  // Date() of last change
+    let lastSave = null;  // Date() of last save
+
+    const saveLists = function saveListsToLocalStorage(listsObject) {
         console.log('New save occurred.');
         localStorage.setItem('lists', JSON.stringify(listsObject));
         lastSave = new Date();
     }
 
-    // Loads list from local storage
+    /*
+     * Load / Create lists
+     */
+
     const loadLists = function loadListsFromLocalStorage() {
         return JSON.parse(localStorage.getItem('lists'));
     }
 
-    // Create Default List
     const createDefault = function createDefaultList() {
         console.log('Generating default list');
         const defaultList = listsData.lists;
@@ -29,6 +34,33 @@ const listsUtilities = function listsUtilitiesFunctions() {
 
     // Array of Lists - Load lists or create new lists if don't exist
     const lists = loadLists() || createDefault();
+
+    /*
+     * Current List
+     */
+
+    // Returns list located at index
+    const getList = function getListByIndex(index) {
+        return lists[index];
+    }
+
+    // Current list and list index
+    let currentListIndex = 0;
+    let currentList = getList(currentListIndex);
+
+    // Changes currentList and currentListIndex
+    const switchCurrent = function switchCurrentList(index) {
+        currentList = getList(index);
+        currentListIndex = index;
+    }
+
+    // Return a current list object {list, index}
+    const getCurrent = function getCurrentListData() {
+        return {
+            "list": currentList,
+            "index": currentListIndex
+        }
+    }
 
     // Create a new array with list titles to populate navbar
     const listNavData = function generateListNavData() {
@@ -42,11 +74,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Returns length of list
     const listsLength = function returnListsLength() {
         return lists.length;
-    }
-
-    // Returns list located at index
-    const getList = function getListByIndex(index) {
-        return lists[index];
     }
 
     // Updates last change
@@ -74,7 +101,8 @@ const listsUtilities = function listsUtilitiesFunctions() {
         saveLists,
         loadLists,
         listsLength,
-        getList,
+        switchCurrent,
+        getCurrent,
         updateChange
     }
 }
@@ -83,13 +111,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     // Lists Utilities - manage lists objects
     const util = listsUtilities();
-    
-    // Current list and list index
-    let currentList = util.getList(0);
-    let currentListIndex = 0;
 
     // Todos Builder - builds individual todo items
-    const todos = todosBuilder(dom, currentList);
+    const todos = todosBuilder(dom, util.getCurrent().list);
 
     // listsLink instance - defined later
     let listsNav = null; 
@@ -117,13 +141,14 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Change Title Event - Changes the list.title variable and updates the last change time
     const changeTitle = function changeListTitle(event) {
         const element = event.target;
-        currentList.title = element.value;
+        const current = util.getCurrent();  // Current List
+        current.list.title = element.value;
         util.updateChange();
-        listsNav.build(util.listNavData(), currentListIndex);  // Build Nav Links for Lists
+        listsNav.build(util.listNavData(), current.index);  // Build Nav Links for Lists
     }
 
     // List Title
-    const createTitle = function createTitleElement() {
+    const createTitle = function createTitleElement(current) {
         const title = dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -132,11 +157,11 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             attributes: [
                 {
                     name: 'value',
-                    value: currentList.title
+                    value: current.list.title
                 },
                 {
                     name: 'index',
-                    value: currentListIndex
+                    value: current.index
                 }
             ]
         });
@@ -146,12 +171,13 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Change Title Event - Changes the list.title variable and updates the last change time
     const changeDescription = function changeListDescription(event) {
         const element = event.target;
-        currentList.description = element.value;
+        const current = util.getCurrent();  // Current List
+        current.list.description = element.value;
         util.updateChange();
     }
 
     // List Description
-    const createDescription = function createDescriptionElement() {
+    const createDescription = function createDescriptionElement(current) {
         const description = dom.createElement({
             parent: listElement,
             tag: 'input',
@@ -160,11 +186,11 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             attributes: [
                 {
                     name: 'value',
-                    value: currentList.description
+                    value: current.list.description
                 },
                 {
                     name: 'index',
-                    value: currentListIndex
+                    value: current.index
                 }
             ]
         });
@@ -179,24 +205,19 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Builds and rebuilds listElement from list by index
     const buildList = function buildListByIndex() {
         dom.clearList();
-        createTitle(currentList);
-        createDescription(currentList);
-        todos.build(currentList);
+        const current = util.getCurrent();  // Current List
+        createTitle(current);
+        createDescription(current);
+        todos.build(current.list);
         createEventListeners();
-    }
-
-    // Changes currentList and currentListIndex
-    const switchCurrent = function switchCurrentList(index) {
-        currentList = util.getList(index);
-        currentListIndex = index;
     }
 
     // Handle list nav event and show requested list
     const switchList = function switchListEvent(event) {
         const element = event.target;
         const index = Number(element.getAttribute('index'));
-        switchCurrent(index);
-        buildList(currentList);
+        util.switchCurrent(index);
+        buildList();
         dom.switchListLinks(element);
     }
 
@@ -214,7 +235,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         // Build current list
         buildList();  
         // Build Nav Links for Lists
-        listsNav.build(util.listNavData(), currentListIndex); 
+        listsNav.build(util.listNavData(), util.getCurrent().index); 
     }
 
     return {
