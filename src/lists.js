@@ -1,6 +1,6 @@
 import listsLinks from "./listsLinks"
 import todosBuilder from "./todos"
-import listsUtilities from "./listUtilities"
+import listsUtilities from "./listsUtilities"
 
 const listsBuilder = function listsBuilderFunctions(dom) {
 
@@ -8,7 +8,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     const util = listsUtilities();
 
     // Todos Builder - builds individual todo items
-    const todos = todosBuilder(dom, util.getCurrent().list);
+    const todos = todosBuilder(dom, util);
 
     // listsLink instance - defined later
     let listsNav = null; 
@@ -100,7 +100,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Builds and rebuilds listElement from list by index
     const buildList = function buildListByIndex() {
         dom.clearList();
-        const current = util.getCurrent();  // Current List
+        const current = util.getCurrent();
         createTitle(current);
         createDescription(current);
         todos.build(current.list);

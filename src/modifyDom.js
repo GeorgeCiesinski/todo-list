@@ -220,7 +220,11 @@ const modifyDom = function modifyDomElements() {
     }
 
     const keyUpEvent = function createKeyUpEvent(element, action) {
-        element.addEventListener('keyup', action)
+        element.addEventListener('keyup', action);
+    }
+
+    const changeEvent = function createChangeEventListener(element, action) {
+        element.addEventListener('change', action);
     }
 
     /*
@@ -272,6 +276,7 @@ const modifyDom = function modifyDomElements() {
         setFont,
         clickEvent,
         keyUpEvent,
+        changeEvent,
         createCollapse
     }
 };

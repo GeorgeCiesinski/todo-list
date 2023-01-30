@@ -3,7 +3,7 @@ import copyright from "./copyright"
 import lists from "./lists"
 
 /*
- *Builds the base layout: 
+ * Builds the base layout: 
  * - Header
  * - App Body
  * - Sidebar

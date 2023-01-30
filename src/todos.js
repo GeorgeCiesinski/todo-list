@@ -1,4 +1,13 @@
-const todosBuilder = function todosBuilderFunctions(dom) {
+const todosBuilder = function todosBuilderFunctions(dom, util) {
+
+    // Change todo item checked state
+    const changeChecked = function changeTodoItemCheckedState(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].checked = element.checked;
+        util.updateChange();
+    }
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -26,6 +35,7 @@ const todosBuilder = function todosBuilderFunctions(dom) {
         if (item.checked) {
             checkBox.checked = true;
         };
+        dom.changeEvent(checkBox, changeChecked);
         // Item Name
         dom.createElement({
             parent: leftDiv,
@@ -319,13 +329,14 @@ const todosBuilder = function todosBuilderFunctions(dom) {
     }
 
     // Creates todo div
-    const build = function createTodoElement(currentList) {
+    const build = function createTodoElement() {
+        const current = util.getCurrent();
         const todosDiv = dom.createElement({
             parent: dom.getListElement(),
             tag: 'div',
             idName: 'todos',
         });
-        const { todos } = currentList;
+        const { todos } = current.list;
         // Create todo items
         todos.forEach(item => {
             const todoItem = item;

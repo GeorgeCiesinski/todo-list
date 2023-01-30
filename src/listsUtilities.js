@@ -1,5 +1,13 @@
 import listsData from "./assets/data/default.json";
 
+/*
+ * ListsUtilities - Manages Lists Object
+ * - Save/Load Lists
+ * - Create default list
+ * - Track current list data
+ * - Track lastChange and lastSave
+ * - Autosave after a delay
+ */
 const listsUtilities = function listsUtilitiesFunctions() {
 
     /*
