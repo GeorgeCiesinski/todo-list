@@ -1,6 +1,6 @@
 const todosBuilder = function todosBuilderFunctions(dom, util) {
 
-    // Change todo item checked state
+    // Change todo checked event - changes checked state of todo item 
     const changeChecked = function changeTodoItemCheckedState(event) {
         const element = event.target;
         const elementIndex = element.getAttribute('index');
@@ -35,6 +35,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         if (item.checked) {
             checkBox.checked = true;
         };
+        // checkBox event
         dom.changeEvent(checkBox, changeChecked);
         // Item Name
         dom.createElement({
@@ -50,6 +51,15 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         });
     }
 
+    // Change priority event - change priority of todo item
+    const changePriority = function changePriorityOfTodoItem(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].priority = element.value;
+        util.updateChange();
+    }
+
     // Create priority div
     const createPriority = function createPriorityElements(parent, item) {
         // Label
@@ -60,7 +70,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             innerHTML: 'Priority: '
         });
         // Priority
-        dom.createElement({
+        const priorityInput = dom.createElement({
             parent,
             tag: 'input',
             className: 'priority-input',
@@ -80,9 +90,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {
                     name: 'value',
                     value: item.priority
+                },
+                {   
+                    name: 'index',
+                    value: item.index
                 }
             ]
         });
+        dom.changeEvent(priorityInput, changePriority);
     }
 
     // Creates right side of visible div
