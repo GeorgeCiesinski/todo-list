@@ -2,6 +2,37 @@ import links from "./listsLinks"
 import todosBuilder from "./todos"
 import listsUtilities from "./listsUtilities"
 
+const listsEvents = function listEventFunctions(dom, util, listsLinks) {
+
+    // Change Title Event - Changes the list.title variable
+    const changeTitle = function changeListTitle(event) {
+        const element = event.target;
+        const current = util.getCurrent();  // Current List
+        current.list.title = element.value;
+        util.updateChange();
+        listsLinks.build();  // Build Nav Links for Lists
+    }
+
+    // Change Title Event - Changes the list.title variable and updates the last change time
+    const changeDescription = function changeListDescription(event) {
+        const element = event.target;
+        const current = util.getCurrent();  // Current List
+        current.list.description = element.value;
+        util.updateChange();
+    }
+
+    // Adds event listeners to page
+    const createEventListeners = function addEventListenersToElements() {
+        dom.createCollapse();
+    }
+
+    return {
+        changeTitle,
+        changeDescription,
+        createEventListeners
+    }
+}
+
 const listsBuilder = function listsBuilderFunctions(dom) {
 
     // Lists Utilities - manage lists objects
@@ -10,8 +41,12 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Todos Builder - builds individual todo items
     const todos = todosBuilder(dom, util);
 
-    // listsLink instance - defined later
+    /*
+     * listsLinks and events instances defined later
+     * - due to listsLinks requiring switchList function, and events needing listsLinks
+     */
     let listsLinks = null; 
+    let events = null;
     
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -33,15 +68,6 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Set list in dom
     dom.setListElement(listElement);
 
-    // Change Title Event - Changes the list.title variable
-    const changeTitle = function changeListTitle(event) {
-        const element = event.target;
-        const current = util.getCurrent();  // Current List
-        current.list.title = element.value;
-        util.updateChange();
-        listsLinks.build();  // Build Nav Links for Lists
-    }
-
     // List Title
     const createTitle = function createTitleElement(current) {
         const title = dom.createElement({
@@ -60,15 +86,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
-        dom.keyUpEvent(title, changeTitle);
-    }
-
-    // Change Title Event - Changes the list.title variable and updates the last change time
-    const changeDescription = function changeListDescription(event) {
-        const element = event.target;
-        const current = util.getCurrent();  // Current List
-        current.list.description = element.value;
-        util.updateChange();
+        dom.keyUpEvent(title, events.changeTitle);
     }
 
     // List Description
@@ -89,12 +107,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
-        dom.keyUpEvent(description, changeDescription);
-    }
-
-    // Adds event listeners to page
-    const createEventListeners = function addEventListenersToElements() {
-        dom.createCollapse();
+        dom.keyUpEvent(description, events.changeDescription);
     }
 
     // Builds and rebuilds listElement from list by index
@@ -104,7 +117,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         createTitle(current);
         createDescription(current);
         todos.build(current.list);
-        createEventListeners();
+        events.createEventListeners();
     }
 
     // Handle list nav event and show requested list
@@ -118,6 +131,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
 
     // Define listsLinks instance declared previously
     listsLinks = links(dom, util, switchList);
+    events = listsEvents(dom, util, listsLinks);
 
     // Shows lists page
     const showPage = function switchPage(event) {
@@ -137,7 +151,6 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         buildList,
         switchList,
         showPage,
-        createEventListeners
     }
 }
 
