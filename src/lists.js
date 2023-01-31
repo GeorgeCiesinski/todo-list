@@ -116,7 +116,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         const current = util.getCurrent();
         createTitle(current);
         createDescription(current);
-        todos.build(current.list);
+        todos.build();
         events.createEventListeners();
     }
 

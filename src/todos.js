@@ -27,10 +27,30 @@ const todosEvents = function todosEventFunctions(util) {
         util.updateChange();
     }
 
+    // Change priority event - change priority of todo item
+    const changeDue = function changeDueDateOfTodoItem(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].due = element.value;
+        util.updateChange();
+    }
+
+    // Change priority event - change priority of todo item
+    const changeTodoDescription = function changeDescriptionOfTodoItem(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].description = element.value;
+        util.updateChange();
+    }
+
     return {
         changeChecked,
         changeTodoName,
-        changePriority
+        changePriority,
+        changeDue,
+        changeTodoDescription
     }
 
 }
@@ -38,7 +58,6 @@ const todosEvents = function todosEventFunctions(util) {
 const todosBuilder = function todosBuilderFunctions(dom, util) {
 
     const events = todosEvents(util);
-
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -172,7 +191,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             innerHTML: 'Due: '
         });
         // Date
-        dom.createElement({
+        const dueDate = dom.createElement({
             parent: dueDiv,
             tag: 'input',
             className: 'due-date',
@@ -184,9 +203,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {
                     name: 'value',
                     value: item.due
+                },
+                {   
+                    name: 'index',
+                    value: item.index
                 }
             ]
         });
+        dom.changeEvent(dueDate, events.changeDue);
     }
 
     // Create item tracking div
@@ -275,12 +299,19 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             className: 'label',
             innerHTML: 'Notes:'
         });
-        dom.createElement({
+        const descriptionInput = dom.createElement({
             parent: descriptionDiv,
             tag: 'textarea',
             className: 'item-description',
-            innerHTML: item.description
+            attributes: [
+                {   
+                    name: 'index',
+                    value: item.index
+                }
+            ]
         });
+        descriptionInput.value = item.description;  // Text area value must be changed with value parameter
+        dom.keyUpEvent(descriptionInput, events.changeTodoDescription);
     }
 
     // Create created date div
