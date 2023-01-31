@@ -1,5 +1,8 @@
-// Nav elements within sidebar
-const listsLinks = function listsLinksBuilderFunctions(dom, switchList) {
+/*
+ * Builds Links to Available Lists
+ * 
+ */
+const listsLinks = function listsLinksBuilderFunctions(dom, util, switchList) {
 
     const createListItem = function createListFunctionElements(item, itemIndex, currentListIndex) {
         const listLI = dom.createElement({
@@ -25,10 +28,12 @@ const listsLinks = function listsLinksBuilderFunctions(dom, switchList) {
         dom.clickEvent(listLink, switchList);
     }
     
-    const build = function generateListLinksElements(listNavData, currentListIndex) {
+    const build = function generateListLinksElements() {
         dom.clearNav();  // Clear existing navLinks
+        const listNavData = util.listNavData();
+        const current = util.getCurrent();
         listNavData.forEach(item => {
-            createListItem(item, listNavData.indexOf(item), currentListIndex);
+            createListItem(item, listNavData.indexOf(item), current.index);
         });
     }
 

@@ -1,4 +1,4 @@
-import listsLinks from "./listsLinks"
+import links from "./listsLinks"
 import todosBuilder from "./todos"
 import listsUtilities from "./listsUtilities"
 
@@ -11,7 +11,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     const todos = todosBuilder(dom, util);
 
     // listsLink instance - defined later
-    let listsNav = null; 
+    let listsLinks = null; 
     
     // Root page element for lists 
     const listsPage = dom.createElement(
@@ -39,7 +39,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         const current = util.getCurrent();  // Current List
         current.list.title = element.value;
         util.updateChange();
-        listsNav.build(util.listNavData(), current.index);  // Build Nav Links for Lists
+        listsLinks.build();  // Build Nav Links for Lists
     }
 
     // List Title
@@ -116,8 +116,8 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.switchListLinks(element);
     }
 
-    // Define listsNav instance declared previously
-    listsNav = listsLinks(dom, switchList);
+    // Define listsLinks instance declared previously
+    listsLinks = links(dom, util, switchList);
 
     // Shows lists page
     const showPage = function switchPage(event) {
@@ -130,7 +130,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         // Build current list
         buildList();  
         // Build Nav Links for Lists
-        listsNav.build(util.listNavData(), util.getCurrent().index); 
+        listsLinks.build(); 
     }
 
     return {
