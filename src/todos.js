@@ -1,5 +1,5 @@
-const todosBuilder = function todosBuilderFunctions(dom, util) {
- 
+const todosEvents = function todosEventFunctions(util) {
+
     // Change todo checked event - changes checked state of todo item 
     const changeChecked = function changeTodoItemCheckedState(event) {
         const element = event.target;
@@ -17,6 +17,28 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         current.list.todos[elementIndex].name = element.value;
         util.updateChange();
     }
+
+    // Change priority event - change priority of todo item
+    const changePriority = function changePriorityOfTodoItem(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].priority = element.value;
+        util.updateChange();
+    }
+
+    return {
+        changeChecked,
+        changeTodoName,
+        changePriority
+    }
+
+}
+
+const todosBuilder = function todosBuilderFunctions(dom, util) {
+
+    const events = todosEvents(util);
+
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -45,7 +67,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             checkBox.checked = true;
         };
         // checkBox event
-        dom.changeEvent(checkBox, changeChecked);
+        dom.changeEvent(checkBox, events.changeChecked);
         // Item Name
         const todoName = dom.createElement({
             parent: leftDiv,
@@ -62,16 +84,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
-        dom.keyUpEvent(todoName, changeTodoName);
-    }
-
-    // Change priority event - change priority of todo item
-    const changePriority = function changePriorityOfTodoItem(event) {
-        const element = event.target;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].priority = element.value;
-        util.updateChange();
+        dom.keyUpEvent(todoName, events.changeTodoName);
     }
 
     // Create priority div
@@ -111,7 +124,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
-        dom.changeEvent(priorityInput, changePriority);
+        dom.changeEvent(priorityInput, events.changePriority);
     }
 
     // Creates right side of visible div
