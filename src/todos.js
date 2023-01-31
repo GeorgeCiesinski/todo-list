@@ -45,12 +45,21 @@ const todosEvents = function todosEventFunctions(util) {
         util.updateChange();
     }
 
+    const changeCreated = function changeCreatedDateOfTodoItem(event) {
+        const element = event.target;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        current.list.todos[elementIndex].added = element.value;
+        util.updateChange();
+    }
+
     return {
         changeChecked,
         changeTodoName,
         changePriority,
         changeDue,
-        changeTodoDescription
+        changeTodoDescription,
+        changeCreated
     }
 
 }
@@ -194,7 +203,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         const dueDate = dom.createElement({
             parent: dueDiv,
             tag: 'input',
-            className: 'due-date',
+            className: 'date-input',
             attributes: [
                 {
                     name: 'type',
@@ -329,10 +338,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             innerHTML: 'Created: '
         });
         // Date
-        dom.createElement({
+        const createdDate = dom.createElement({
             parent: createdDiv,
             tag: 'input',
-            className: 'created-date',
+            className: 'date-input',
             attributes: [
                 {
                     name: 'type',
@@ -341,9 +350,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {
                     name: 'value',
                     value: item.added
+                },
+                {
+                    name: 'index',
+                    value: item.index
                 }
             ]
         });
+        dom.changeEvent(createdDate, events.changeCreated);
     }
 
     // Create button to delete todo item

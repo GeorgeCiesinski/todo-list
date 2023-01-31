@@ -262,11 +262,11 @@ body {
     min-width: 65px;
 }
 
-.item-names, .inner-item-names, .due-date, .created-date, .priority-input {
+.item-names, .inner-item-names, .date-input, .priority-input {
     border: none;
     background-color: var(--color-primary-400);
 }
-.item-names:focus, .inner-item-names:focus, .due-date:focus, .created-date:focus, .priority-input:focus {
+.item-names:focus, .inner-item-names:focus, .date-input:focus, .priority-input:focus {
     background-color: white;
 }
 
