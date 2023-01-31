@@ -1,8 +1,8 @@
-const todosEvents = function todosEventFunctions(util) {
+const todosEvents = function todosEventFunctions(dom, util) {
 
     // Change todo checked event - changes checked state of todo item 
     const changeChecked = function changeTodoItemCheckedState(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].checked = element.checked;
@@ -11,7 +11,7 @@ const todosEvents = function todosEventFunctions(util) {
 
     // Change todo name event - changes the name of the todo item
     const changeTodoName = function changeTodoItemName(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].name = element.value;
@@ -20,7 +20,7 @@ const todosEvents = function todosEventFunctions(util) {
 
     // Change priority event - change priority of todo item
     const changePriority = function changePriorityOfTodoItem(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].priority = element.value;
@@ -29,7 +29,7 @@ const todosEvents = function todosEventFunctions(util) {
 
     // Change priority event - change priority of todo item
     const changeDue = function changeDueDateOfTodoItem(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].due = element.value;
@@ -38,7 +38,7 @@ const todosEvents = function todosEventFunctions(util) {
 
     // Change priority event - change priority of todo item
     const changeTodoDescription = function changeDescriptionOfTodoItem(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].description = element.value;
@@ -46,10 +46,22 @@ const todosEvents = function todosEventFunctions(util) {
     }
 
     const changeCreated = function changeCreatedDateOfTodoItem(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const elementIndex = element.getAttribute('index');
         const current = util.getCurrent();
         current.list.todos[elementIndex].added = element.value;
+        util.updateChange();
+    }
+
+    const deleteTodo = function deleteTodoItemAndElement(event) {
+        const element = event.currentTarget;
+        const elementIndex = element.getAttribute('index');
+        const current = util.getCurrent();
+        // Delete item from TODOS array
+        current.list.todos.splice(elementIndex, 1);
+        // Delete element from page
+        const todoElement = document.querySelector(`.todo-items[index='${elementIndex}']`);
+        dom.removeElement(todoElement);
         util.updateChange();
     }
 
@@ -59,14 +71,15 @@ const todosEvents = function todosEventFunctions(util) {
         changePriority,
         changeDue,
         changeTodoDescription,
-        changeCreated
+        changeCreated,
+        deleteTodo
     }
 
 }
 
 const todosBuilder = function todosBuilderFunctions(dom, util) {
 
-    const events = todosEvents(util);
+    const events = todosEvents(dom, util);
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
@@ -362,7 +375,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
 
     // Create button to delete todo item
     const createDelete = function createDeleteElement(parent, item) {
-        dom.createElement({
+        const deleteButton = dom.createElement({
             parent,
             tag: 'button',
             className: 'delete-item-buttons',
@@ -374,6 +387,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
+        dom.clickEvent(deleteButton, events.deleteTodo);
     }
 
     // Create item deletion div
@@ -410,6 +424,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent,
             tag: 'div',
             className: 'todo-items',
+            attributes: [
+                {
+                    'name': 'index',
+                    'value': item.index
+                }
+            ]
         });
         createVisibleDiv(itemDiv, item);
         createCollapsibleDiv(itemDiv, item);

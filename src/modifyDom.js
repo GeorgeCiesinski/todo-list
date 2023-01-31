@@ -95,6 +95,10 @@ const modifyDom = function modifyDomElements() {
         return null;  // Return null if failed
     }
 
+    const removeElement = function removeDomElement(element) {
+        element.remove();
+    }
+
     /*
      * Element Classes
      */
@@ -261,6 +265,7 @@ const modifyDom = function modifyDomElements() {
 
     return {
         createElement,
+        removeElement,
         addClass,
         setNavElement,
         getNavElement,

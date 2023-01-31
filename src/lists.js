@@ -6,7 +6,7 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
 
     // Change Title Event - Changes the list.title variable
     const changeTitle = function changeListTitle(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const current = util.getCurrent();  // Current List
         current.list.title = element.value;
         util.updateChange();
@@ -15,7 +15,7 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
 
     // Change Title Event - Changes the list.title variable and updates the last change time
     const changeDescription = function changeListDescription(event) {
-        const element = event.target;
+        const element = event.currentTarget;
         const current = util.getCurrent();  // Current List
         current.list.description = element.value;
         util.updateChange();
