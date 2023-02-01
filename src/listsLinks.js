@@ -17,7 +17,7 @@ const listsLinks = function listsLinksBuilderFunctions(dom, util, switchList) {
             innerHTML: item,
             attributes: [
                 {
-                    name: 'index',
+                    name: 'list',
                     value: itemIndex
                 }
             ]

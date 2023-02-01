@@ -39,7 +39,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
         util.updateChange();
     }
 
-    // Change priority event - change priority of todo item
+    // Change due date event - change due date of todo item
     const changeDue = function changeDueDateOfTodoItem(event) {
         const { todoItem, element } = returnEventVariables(event);
         todoItem.due = element.value;
@@ -53,12 +53,19 @@ const todosEvents = function todosEventFunctions(dom, util) {
         util.updateChange();
     }
 
+    // Change created date event - change created date of todo item
     const changeCreated = function changeCreatedDateOfTodoItem(event) {
         const { todoItem, element } = returnEventVariables(event);
         todoItem.added = element.value;
         util.updateChange();
     }
 
+    /*
+     * Updates Indices of items in arrays
+     * 
+     * When an item is deleted from the array, the elements need to be updated to reflect the index
+     * of the array item they represent
+     */
     const updateIndices = function updateTodoElementIndices(eventVariables) {
         const { elementIndex } = eventVariables;
         console.log(`elementIndex: ${elementIndex}`);
@@ -71,6 +78,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
         }
     }
 
+    // Deletes a todo item and element
     const deleteItemElement = function deleteItemAndElement(eventVariables) {
         const { elementIndex, todos, todosLength } = eventVariables;
         // Delete element from todos array
@@ -80,11 +88,12 @@ const todosEvents = function todosEventFunctions(dom, util) {
         dom.removeElement(todoElement);
         // Update the todos element indices to match todo array indices
         if (elementIndex < todosLength - 1) {
-            updateIndices(eventVariables);
+            // updateIndices(eventVariables);
         }
         console.log(todos);
     }
 
+    // Deletes a todo item
     const deleteTodo = function deleteTodoEvent(event) {
         const eventVariables = returnEventVariables(event);
         deleteItemElement(eventVariables);

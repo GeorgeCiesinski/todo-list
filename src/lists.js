@@ -123,7 +123,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Handle list nav event and show requested list
     const switchList = function switchListEvent(event) {
         const element = event.target;
-        const index = Number(element.getAttribute('index'));
+        const index = Number(element.getAttribute('list'));
         util.switchCurrent(index);
         buildList();
         dom.switchListLinks(element);
