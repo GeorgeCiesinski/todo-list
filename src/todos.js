@@ -290,7 +290,8 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {   
                     name: 'index',
                     value: itemIndex
-                },{
+                },
+                {
                     name: 'item',
                     value: innerItemIndex
                 }
@@ -308,6 +309,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 {
                     name: 'value',
                     value: innerItem.name
+                },
+                {   
+                    name: 'index',
+                    value: itemIndex
+                },
+                {
+                    name: 'item',
+                    value: innerItemIndex
                 }
             ]
         });
@@ -320,13 +329,21 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             className: 'checklist-item-right-divs',
         });
         const innerDeleteButton = dom.createElement({
-            parent,
+            parent: innerItemRightDiv,
             tag: 'button',
             className: 'delete-inner-item-buttons',
             innerHTML: '<i class="fa-regular fa-circle-xmark"></i>',
             attributes: [
                 {
                     name: 'index',
+                    value: innerItemIndex
+                },
+                {   
+                    name: 'index',
+                    value: itemIndex
+                },
+                {
+                    name: 'item',
                     value: innerItemIndex
                 }
             ]
