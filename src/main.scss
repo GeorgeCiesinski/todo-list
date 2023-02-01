@@ -285,11 +285,21 @@ body {
 
 .checklist-item-divs {
     margin-left: 20px;
+    display: flex;
 }
 
 .inner-labels {
     display: inline-block;
     margin-bottom: 10px;
+}
+
+.delete-inner-item-buttons {
+    border: none;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 1px;
+    background-color: var(--color-primary-400);
+    color: var(--color-primary-900);
 }
 
 .description-div {
