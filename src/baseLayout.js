@@ -81,7 +81,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
         createHeader();
         createAppBody();
         createFooter();
-        list.showPage();  // Populate content with lists page
+        list.showPage();  // Populate content with lists pages
     }
 
     // Build on load

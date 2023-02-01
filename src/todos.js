@@ -1,68 +1,94 @@
 const todosEvents = function todosEventFunctions(dom, util) {
 
+    // Returns common variables used by event functions
+    const returnEventVariables = function returnEventVariableObject(event) {
+        const element = event.currentTarget;  // Event Element
+        const elementIndex = element.getAttribute('index');  // Event Element Index
+        const current = util.getCurrent();  // Current list data
+        const { todos } = current.list;  // Current todos array
+        const todosLength = todos.length;  // Length of todos array
+        const todoItem = current.list.todos[elementIndex];  // Current Todo Item
+        return {
+            element,
+            elementIndex,
+            current,
+            todos,
+            todosLength,
+            todoItem
+        }
+    }
+
     // Change todo checked event - changes checked state of todo item 
     const changeChecked = function changeTodoItemCheckedState(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].checked = element.checked;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.checked = element.checked;
         util.updateChange();
     }
 
     // Change todo name event - changes the name of the todo item
     const changeTodoName = function changeTodoItemName(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].name = element.value;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.name = element.value;
         util.updateChange();
     }
 
     // Change priority event - change priority of todo item
     const changePriority = function changePriorityOfTodoItem(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].priority = element.value;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.priority = element.value;
         util.updateChange();
     }
 
     // Change priority event - change priority of todo item
     const changeDue = function changeDueDateOfTodoItem(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].due = element.value;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.due = element.value;
         util.updateChange();
     }
 
     // Change priority event - change priority of todo item
     const changeTodoDescription = function changeDescriptionOfTodoItem(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].description = element.value;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.description = element.value;
         util.updateChange();
     }
 
     const changeCreated = function changeCreatedDateOfTodoItem(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        current.list.todos[elementIndex].added = element.value;
+        const { todoItem, element } = returnEventVariables(event);
+        todoItem.added = element.value;
         util.updateChange();
     }
 
-    const deleteTodo = function deleteTodoItemAndElement(event) {
-        const element = event.currentTarget;
-        const elementIndex = element.getAttribute('index');
-        const current = util.getCurrent();
-        // Delete item from TODOS array
-        current.list.todos.splice(elementIndex, 1);
-        // Delete element from page
+    const updateIndices = function updateTodoElementIndices(eventVariables) {
+        const { elementIndex } = eventVariables;
+        console.log(`elementIndex: ${elementIndex}`);
+        const todoItems = document.querySelectorAll('.todo-items');
+        for (let i = 0; i < todoItems.length; i+=1) {
+            const itemIndex = todoItems[i].index;
+            if (itemIndex < elementIndex) {
+                todoItems[i].setAttribute = ('index', i);
+            }
+        }
+    }
+
+    const deleteItemElement = function deleteItemAndElement(eventVariables) {
+        const { elementIndex, todos, todosLength } = eventVariables;
+        // Delete element from todos array
+        todos.splice(elementIndex, 1);  
+        // Get the todoElement matching event index and remove it from dom
         const todoElement = document.querySelector(`.todo-items[index='${elementIndex}']`);
         dom.removeElement(todoElement);
-        util.updateChange();
+        // Update the todos element indices to match todo array indices
+        if (elementIndex < todosLength - 1) {
+            updateIndices(eventVariables);
+        }
+        console.log(todos);
+    }
+
+    const deleteTodo = function deleteTodoEvent(event) {
+        const eventVariables = returnEventVariables(event);
+        deleteItemElement(eventVariables);
+        // util.updateChange();
     }
 
     return {
@@ -82,7 +108,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     const events = todosEvents(dom, util);
     
     // Creates left side of visible div
-    const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item) {
+    const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, item, itemIndex) {
         const leftDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -100,7 +126,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {   
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -121,7 +147,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {   
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -129,7 +155,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create priority div
-    const createPriority = function createPriorityElements(parent, item) {
+    const createPriority = function createPriorityElements(parent, item, itemIndex) {
         // Label
         dom.createElement({
             parent,
@@ -161,7 +187,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {   
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -169,14 +195,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Creates right side of visible div
-    const createRightVisibleDiv = function createRightVisibleDivElements(parent, item) {
+    const createRightVisibleDiv = function createRightVisibleDivElements(parent, item, itemIndex) {
         const rightDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'right-visible-elements',
         });
         // Priority
-        createPriority(rightDiv, item);
+        createPriority(rightDiv, item, itemIndex);
         // Collapse Button
         const collapseButton = dom.createElement({
             parent: rightDiv,
@@ -188,18 +214,18 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create non collapsible div - always visible
-    const createVisibleDiv = function createVisibleDivElements(parent, item) {
+    const createVisibleDiv = function createVisibleDivElements(parent, item, itemIndex) {
         const itemDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'visible-todo-elements',
         });
-        createLeftVisibleDiv(itemDiv, item);
-        createRightVisibleDiv(itemDiv, item);
+        createLeftVisibleDiv(itemDiv, item, itemIndex);
+        createRightVisibleDiv(itemDiv, item, itemIndex);
     }
 
     // Create due date div
-    const createDueDate = function createDueDateElements(parent, item) {
+    const createDueDate = function createDueDateElements(parent, item, itemIndex) {
         const dueDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -228,7 +254,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {   
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -236,25 +262,25 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create item tracking div
-    const createItemTracking = function createItemTrackingElements(parent, item) {
+    const createItemTracking = function createItemTrackingElements(parent, item, itemIndex) {
         const itemTrackingDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'item-tracking-div',
         });
-        createDueDate(itemTrackingDiv, item);
+        createDueDate(itemTrackingDiv, item, itemIndex);
     }
 
     // Creates left side of visible div
-    const createInnerCheckListItem = function createLeftVisibleItemElements(parent, index, checkListItem) {
-        const checkListItemDiv = dom.createElement({
+    const createInnerCheckListItem = function createLeftVisibleItemElements(parent, index, innerItem, innerItemIndex) {
+        const innerItemDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'checklist-item-divs',
         });
         // Checkbox
         const checkBox = dom.createElement({
-            parent: checkListItemDiv,
+            parent: innerItemDiv,
             tag: 'input',
             className: 'inner-item-checkboxes',
             attributes: [
@@ -267,29 +293,29 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                     value: index
                 },{
                     name: 'item',
-                    value: checkListItem.index
+                    value: innerItemIndex
                 }
             ]
         });
-        if (checkListItem.checked) {
+        if (innerItem.checked) {
             checkBox.checked = true;
         };
         // Item Name
         dom.createElement({
-            parent: checkListItemDiv,
+            parent: innerItemDiv,
             tag: 'input',
             className: 'inner-item-names',
             attributes: [
                 {
                     name: 'value',
-                    value: checkListItem.name
+                    value: innerItem.name
                 }
             ]
         });
     }
 
     // Create inner check list div - contains todo item checklist
-    const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item) {
+    const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item, itemIndex) {
         const innerCheckListDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -302,14 +328,13 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             innerHTML: 'Checklist:'
         });
         item.checklist.forEach(innerItem => {
-            const checkListItem = innerItem;
-            checkListItem.index = item.checklist.indexOf(checkListItem);
-            createInnerCheckListItem(innerCheckListDiv, item.index, checkListItem);
+            const innerItemIndex = item.checklist.indexOf(innerItem);
+            createInnerCheckListItem(innerCheckListDiv, itemIndex, innerItem, innerItemIndex);
         });
     }
 
     // Create item description div
-    const createItemDescription = function createItemDescriptionElements(parent, item) {
+    const createItemDescription = function createItemDescriptionElements(parent, item, itemIndex) {
         const descriptionDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -328,7 +353,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             attributes: [
                 {   
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -337,7 +362,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create created date div
-    const createCreated = function createCreatedElements(parent, item) {
+    const createCreated = function createCreatedElements(parent, item, itemIndex) {
         const createdDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -366,7 +391,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -374,7 +399,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create button to delete todo item
-    const createDelete = function createDeleteElement(parent, item) {
+    const createDelete = function createDeleteElement(parent, item, itemIndex) {
         const deleteButton = dom.createElement({
             parent,
             tag: 'button',
@@ -383,7 +408,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             attributes: [
                 {
                     name: 'index',
-                    value: item.index
+                    value: itemIndex
                 }
             ]
         });
@@ -391,35 +416,35 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create item deletion div
-    const createItemDeletion = function createItemDeletionElements(parent, item) {
+    const createItemDeletion = function createItemDeletionElements(parent, item, itemIndex) {
         const deletionDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'deletion-div',
         });
-        createCreated(deletionDiv, item);
-        createDelete(deletionDiv, item);
+        createCreated(deletionDiv, item, itemIndex);
+        createDelete(deletionDiv, item, itemIndex);
     }
 
 
     // Create collapsible div - collapsed by default
-    const createCollapsibleDiv = function createCollapsibleDivElements(parent, item) {
+    const createCollapsibleDiv = function createCollapsibleDivElements(parent, item, itemIndex) {
         const collapsibleDiv = dom.createElement({
             parent,
             tag: 'div',
             className: 'collapsible-todo-elements',
         });
-        createItemTracking(collapsibleDiv, item);
+        createItemTracking(collapsibleDiv, item, itemIndex);
         // If item contains checklist, create inner checklist
         if (item.checklist.length > 0) {
-            createInnerCheckListDiv(collapsibleDiv, item)
+            createInnerCheckListDiv(collapsibleDiv, item, itemIndex)
         };
-        createItemDescription(collapsibleDiv, item);
-        createItemDeletion(collapsibleDiv, item);
+        createItemDescription(collapsibleDiv, item, itemIndex);
+        createItemDeletion(collapsibleDiv, item, itemIndex);
     }
 
     // Create todo parent div
-    const createTodoItem = function createTodoItemElement(parent, item) {
+    const createTodoItem = function createTodoItemElement(parent, item, itemIndex) {
         const itemDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -427,12 +452,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             attributes: [
                 {
                     'name': 'index',
-                    'value': item.index
+                    'value': itemIndex
                 }
             ]
         });
-        createVisibleDiv(itemDiv, item);
-        createCollapsibleDiv(itemDiv, item);
+        createVisibleDiv(itemDiv, item, itemIndex);
+        createCollapsibleDiv(itemDiv, item, itemIndex);
     }
 
     // Creates todo div
@@ -446,9 +471,8 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         const { todos } = current.list;
         // Create todo items
         todos.forEach(item => {
-            const todoItem = item;
-            todoItem.index = todos.indexOf(item);
-            createTodoItem(todosDiv, todoItem);
+            const itemIndex = todos.indexOf(item);
+            createTodoItem(todosDiv, item, itemIndex);
         });
     }
 
