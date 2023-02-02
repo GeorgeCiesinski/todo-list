@@ -92,11 +92,11 @@ const todosEvents = function todosEventFunctions(dom, util) {
         dom.removeElement(todoElement);
         // Update the todos element indices to match todo array indices
         if (elementIndex < todosLength - 1) {
-            // updateIndices(eventVariables);
             for (let i = elementIndex + 1; i < todosLength; i+=1) {
                 updateIndices(i);
             }
         }
+        // Que changes for save
         util.updateChange();
     }
 
@@ -104,9 +104,35 @@ const todosEvents = function todosEventFunctions(dom, util) {
      * Inner Checklist
      */
 
+    /*
+     * Updates Item attribute of items in arrays
+     * 
+     * When an item is deleted from the array, the remaining elements need to be updated to reflect the index
+     * of the array item they represent
+     */
+    const updateInnerIndices = function updateChecklistItemAttribute(elementIndex, i) {
+        const newItem = i - 1;  // Decrement index
+        const checklistElements = document.querySelectorAll(`.inner-checklist-elements[index="${elementIndex}"][item="${i}"]`);  // Gets all todo elements with correct index attribute
+        checklistElements.forEach(element => {
+            element.setAttribute('item', newItem);  // Set new value
+        });
+    }
+
     const deleteChecklistItem = function deleteChecklistItem(event) {
-        const { elementIndex, elementItem } = returnEventVariables(event);
-        console.log(`Element Index: ${elementIndex} | Element Item: ${elementItem}`);
+        const { elementIndex, elementItem, checklist, checklistLength } = returnEventVariables(event);
+        // Delete item from checklist array
+        checklist.splice(elementItem, 1);
+        // Get the checklist item element matching index and item, and remove it from dom
+        const itemElement = document.querySelector(`.checklist-item-divs[index='${elementIndex}'][item='${elementItem}']`);
+        dom.removeElement(itemElement);
+        if (elementItem < checklistLength - 1) {
+            // updateIndices(eventVariables);
+            for (let i = elementItem + 1; i < checklistLength; i+=1) {
+                updateInnerIndices(elementIndex, i);
+            }
+        }
+        // Que changes for save
+        util.updateChange();
     }
 
     return {
@@ -290,6 +316,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         createDueDate(itemTrackingDiv, item, itemIndex);
     }
 
+    // Create Left side of checklist item
     const createInnerChecklistLeft = function createLeftChecklistItemElements(parent, itemIndex, innerItem, innerItemIndex) {
         const innerItemLeftDiv = dom.createElement({
             parent,
@@ -316,11 +343,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
+        dom.addClass(checkBox, 'inner-checklist-elements');
         if (innerItem.checked) {
             checkBox.checked = true;
         };
         // Item Name
-        dom.createElement({
+        const innerItemLabel = dom.createElement({
             parent: innerItemLeftDiv,
             tag: 'input',
             className: 'inner-item-names',
@@ -339,8 +367,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
+        dom.addClass(innerItemLabel, 'inner-checklist-elements');
     }
 
+    // Create Right side of checklist item
     const createInnerChecklistRight = function createRightChecklistItemElements(parent, itemIndex, innerItem, innerItemIndex) {
         const innerItemRightDiv = dom.createElement({
             parent,
@@ -367,6 +397,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
+        dom.addClass(innerDeleteButton, 'inner-checklist-elements');
         dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
     }
 
@@ -390,7 +421,18 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 parent: innerCheckListDiv,
                 tag: 'div',
                 className: 'checklist-item-divs',
+                attributes: [
+                    {   
+                        name: 'index',
+                        value: itemIndex
+                    },
+                    {
+                        name: 'item',
+                        value: innerItemIndex
+                    }
+                ]
             });
+            dom.addClass(innerItemDiv, 'inner-checklist-elements');
             createInnerChecklistLeft(innerItemDiv, itemIndex, innerItem, innerItemIndex);
             createInnerChecklistRight(innerItemDiv, itemIndex, innerItem, innerItemIndex);
         });
