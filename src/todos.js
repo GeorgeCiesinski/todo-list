@@ -3,7 +3,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
     // Returns common variables used by event functions
     const returnEventVariables = function returnEventVariableObject(event) {
         const element = event.currentTarget;  // Event Element
-        const elementIndex = element.getAttribute('index');  // Event Element Index
+        const elementIndex = Number(element.getAttribute('index'));  // Event Element Index
         const current = util.getCurrent();  // Current list data
         const { todos } = current.list;  // Current todos array
         const todosLength = todos.length;  // Length of todos array
@@ -66,16 +66,12 @@ const todosEvents = function todosEventFunctions(dom, util) {
      * When an item is deleted from the array, the elements need to be updated to reflect the index
      * of the array item they represent
      */
-    const updateIndices = function updateTodoElementIndices(eventVariables) {
-        const { elementIndex } = eventVariables;
-        console.log(`elementIndex: ${elementIndex}`);
-        const todoItems = document.querySelectorAll('.todo-items');
-        for (let i = 0; i < todoItems.length; i+=1) {
-            const itemIndex = todoItems[i].index;
-            if (itemIndex < elementIndex) {
-                todoItems[i].setAttribute = ('index', i);
-            }
-        }
+    const updateIndices = function updateTodoElementIndices(i) {
+        const newIndex = i - 1;  // Decrement index
+        const todoElements = document.querySelectorAll(`[index="${i}"]`);  // Gets all todo elements with correct index attribute
+        todoElements.forEach(element => {
+            element.setAttribute('index', newIndex);  // Set new value
+        });
     }
 
     // Deletes a todo item and element
@@ -89,15 +85,17 @@ const todosEvents = function todosEventFunctions(dom, util) {
         // Update the todos element indices to match todo array indices
         if (elementIndex < todosLength - 1) {
             // updateIndices(eventVariables);
+            for (let i = elementIndex + 1; i < todosLength; i+=1) {
+                updateIndices(i);
+            }
         }
-        console.log(todos);
     }
 
     // Deletes a todo item
     const deleteTodo = function deleteTodoEvent(event) {
         const eventVariables = returnEventVariables(event);
         deleteItemElement(eventVariables);
-        // util.updateChange();
+        util.updateChange();
     }
 
     return {
