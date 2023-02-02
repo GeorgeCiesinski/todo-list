@@ -2,9 +2,11 @@ const todosEvents = function todosEventFunctions(dom, util) {
 
     // Returns common variables used by event functions
     const returnEventVariables = function returnEventVariableObject(event) {
+        // Element Data from event
         const element = event.currentTarget;  // Event Element
         const elementIndex = Number(element.getAttribute('index'));  // Event Element Index
         const elementItem = Number(element.getAttribute('item'));  // Event Element Item# if exists
+        // Current List Data matching element index and item
         const current = util.getCurrent();  // Current list data
         const { todos } = current.list;  // Current todos array
         const todosLength = todos.length;  // Length of todos array
@@ -104,6 +106,20 @@ const todosEvents = function todosEventFunctions(dom, util) {
      * Inner Checklist
      */
 
+    // Change inner item checked event - changes checked state of todo item 
+    const changeInnerChecked = function changeChecklistItemCheckedState(event) {
+        const { checklistItem, element } = returnEventVariables(event);
+        checklistItem.checked = element.checked;
+        util.updateChange();
+    }
+
+    // Change inner item name event - changes the name of the todo item
+    const changeInnerName = function changeInnerItemName(event) {
+        const { checklistItem, element } = returnEventVariables(event);
+        checklistItem.name = element.value;
+        util.updateChange();
+    }
+
     /*
      * Updates Item attribute of items in arrays
      * 
@@ -143,6 +159,8 @@ const todosEvents = function todosEventFunctions(dom, util) {
         changeTodoDescription,
         changeCreated,
         deleteTodo,
+        changeInnerChecked,
+        changeInnerName,
         deleteChecklistItem
     }
 
@@ -344,6 +362,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             ]
         });
         dom.addClass(checkBox, 'inner-checklist-elements');
+        dom.clickEvent(checkBox, events.changeInnerChecked);
         if (innerItem.checked) {
             checkBox.checked = true;
         };
@@ -368,6 +387,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             ]
         });
         dom.addClass(innerItemLabel, 'inner-checklist-elements');
+        dom.keyUpEvent(innerItemLabel, events.changeInnerName);
     }
 
     // Create Right side of checklist item
