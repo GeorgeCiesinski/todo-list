@@ -16,7 +16,7 @@ const baseLayout = function createBaseLayoutElements(dom) {
 
     // Pages
     const list = lists(dom);
-    const settingsBuilder = settings(dom);
+    const settingsBuilder = settings(dom, list);
     const aboutBuilder = about(dom);
 
     // Navbar

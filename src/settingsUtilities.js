@@ -3,7 +3,7 @@ import createColorSettings from "./colorTheme"
 /*
  * Utility functions for Settings Page
  */
-const settingsUtilities = function settingsUtilitiesFunctions(dom) {
+const settingsUtilities = function settingsUtilitiesFunctions(dom, list) {
 
     const defaultColor = '#1D4ED8';  // Used to generate default palette
     
@@ -49,6 +49,7 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom) {
      const deleteData = function deleteLocalStorage() {
         localStorage.clear();
         console.log("Data Deleted.");
+        list.deleteDataRefresh();
     }
 
     updateSASS();

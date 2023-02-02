@@ -146,11 +146,16 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         // Build Nav Links for Lists
         listsLinks.build(); 
     }
+    
+    const deleteDataRefresh = function refreshElementsAfterDataDelete() {
+        util.deleteRefresh();
+    }
 
     return {
         buildList,
         switchList,
-        showPage
+        showPage,
+        deleteDataRefresh
     }
 }
 
