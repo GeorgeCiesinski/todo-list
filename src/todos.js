@@ -421,24 +421,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
     }
 
-    // Create inner check list div - contains todo item checklist
-    const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item, itemIndex) {
-        const innerCheckListDiv = dom.createElement({
-            parent,
-            tag: 'div',
-            className: 'inner-checklist-div',
-        });
-        dom.createElement({
-            parent: innerCheckListDiv,
-            tag: 'label',
-            className: 'inner-labels',
-            innerHTML: 'Checklist:'
-        });
+    const createInnerChecklistItems = function createInnerCheckListItemElements(parent, item, itemIndex) {
         // Create inner check list items
         item.checklist.forEach(innerItem => {
             const innerItemIndex = item.checklist.indexOf(innerItem);
             const innerItemDiv = dom.createElement({
-                parent: innerCheckListDiv,
+                parent,
                 tag: 'div',
                 className: 'checklist-item-divs',
                 attributes: [
@@ -456,6 +444,24 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             createInnerChecklistLeft(innerItemDiv, itemIndex, innerItem, innerItemIndex);
             createInnerChecklistRight(innerItemDiv, itemIndex, innerItem, innerItemIndex);
         });
+    }
+
+    // Create inner check list div - contains todo item checklist
+    const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item, itemIndex) {
+        const innerCheckListDiv = dom.createElement({
+            parent,
+            tag: 'div',
+            className: 'inner-checklist-div',
+        });
+        dom.createElement({
+            parent: innerCheckListDiv,
+            tag: 'label',
+            className: 'inner-labels',
+            innerHTML: 'Checklist:'
+        });
+        if (item.checklist.length > 0) {
+            createInnerChecklistItems(innerCheckListDiv, item, itemIndex);
+        };
     }
 
     // Create item description div
@@ -560,10 +566,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             className: 'collapsible-todo-elements',
         });
         createItemTracking(collapsibleDiv, item, itemIndex);
-        // If item contains checklist, create inner checklist
-        if (item.checklist.length > 0) {
-            createInnerCheckListDiv(collapsibleDiv, item, itemIndex)
-        };
+        createInnerCheckListDiv(collapsibleDiv, item, itemIndex);
         createItemDescription(collapsibleDiv, item, itemIndex);
         createItemDeletion(collapsibleDiv, item, itemIndex);
     }
