@@ -11,9 +11,16 @@ import listsData from "./assets/data/default.json";
 const listsUtilities = function listsUtilitiesFunctions() {
 
     /*
-     * Save Lists
+     * Local lists variables
      */
 
+    let lists = null;  // Loaded lists object
+    let currentListIndex = null;  // Current List Index for continuity
+    let currentList = null;  // Current List for continuity
+
+    /*
+     * Save Lists
+     */
     let lastChange = null;  // Date() of last change
     let lastSave = null;  // Date() of last save
 
@@ -39,7 +46,12 @@ const listsUtilities = function listsUtilitiesFunctions() {
     }
 
     // Array of Lists - Load lists or create new lists if don't exist
-    const lists = loadLists() || createDefault();
+    const assignListsObject = function loadListsOrCreateDefaultLists() {
+        lists = loadLists() || createDefault();
+    }
+
+    // Load or create lists
+    assignListsObject();
 
     /*
      * Current List
@@ -50,14 +62,18 @@ const listsUtilities = function listsUtilitiesFunctions() {
         return lists[index];
     }
 
-    // Current list and list index
-    let currentListIndex = 0;
-    let currentList = getList(currentListIndex);
-
     // Changes currentList and currentListIndex
     const switchCurrent = function switchCurrentList(index) {
         currentList = getList(index);
         currentListIndex = index;
+    }
+
+    // Load first list when app loads
+    switchCurrent(0);
+
+    const deleteRefresh = function refreshListAfterDataDelete() {
+        assignListsObject();
+        switchCurrent(0);
     }
 
     // Return a current list object {list, index}
@@ -108,6 +124,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
         loadLists,
         listsLength,
         switchCurrent,
+        deleteRefresh,
         getCurrent,
         updateChange
     }

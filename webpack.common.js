@@ -11,6 +11,7 @@ module.exports = {
     listsUtilities: "./src/listsUtilities.js",
     todos: "./src/todos.js",
     settings: "./src/settings.js",
+    settingsUtilities: "./src/settingsUtilities.js",
     about: "./src/about.js",
     colorTheme: "./src/colorTheme.js",
     color: "./src/lib/color.js"

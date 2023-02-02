@@ -150,7 +150,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     return {
         buildList,
         switchList,
-        showPage,
+        showPage
     }
 }
 

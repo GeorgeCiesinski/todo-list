@@ -1,13 +1,7 @@
-import settings from "./settings"
-import about from "./about"
-
 /*
  *Builds the nav elements in the sidebar
  */
-const navLinks = function createNavElements(dom, lists) {
-
-    const settingsBuilder = settings(dom);
-    const aboutBuilder = about(dom);
+const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBuilder) {
 
     // Create lists link
     const listsItem = function createListsNav(sidebar) {

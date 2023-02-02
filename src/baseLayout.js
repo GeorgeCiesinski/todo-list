@@ -1,6 +1,8 @@
 import navLinks from "./navLinks"
 import copyright from "./copyright"
 import lists from "./lists"
+import settings from "./settings"
+import about from "./about"
 
 /*
  * Builds the base layout: 
@@ -12,8 +14,13 @@ import lists from "./lists"
  */
 const baseLayout = function createBaseLayoutElements(dom) {
 
+    // Pages
     const list = lists(dom);
-    const nav = navLinks(dom, list);  // Navbar
+    const settingsBuilder = settings(dom);
+    const aboutBuilder = about(dom);
+
+    // Navbar
+    const nav = navLinks(dom, list, settingsBuilder, aboutBuilder);
 
     const createHeader = function createHeaderElement() {
         const logoText = 'What TODO';
