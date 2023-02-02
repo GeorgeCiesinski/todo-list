@@ -286,6 +286,14 @@ body {
 .checklist-item-divs {
     margin-left: 20px;
     display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checklist-item-left-divs, .checklist-item-right-divs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .inner-labels {

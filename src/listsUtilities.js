@@ -34,7 +34,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
     const createDefault = function createDefaultList() {
         // console.log('Generating default list');
         const defaultList = listsData.lists;
-        console.log('Second', defaultList);
         saveLists(defaultList);
         return defaultList;
     }

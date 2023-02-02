@@ -4,17 +4,25 @@ const todosEvents = function todosEventFunctions(dom, util) {
     const returnEventVariables = function returnEventVariableObject(event) {
         const element = event.currentTarget;  // Event Element
         const elementIndex = Number(element.getAttribute('index'));  // Event Element Index
+        const elementItem = Number(element.getAttribute('item'));  // Event Element Item# if exists
         const current = util.getCurrent();  // Current list data
         const { todos } = current.list;  // Current todos array
         const todosLength = todos.length;  // Length of todos array
         const todoItem = current.list.todos[elementIndex];  // Current Todo Item
+        const { checklist } = todoItem;
+        const checklistLength = todoItem.checklist.length;  // Length of Checklist
+        const checklistItem = todoItem.checklist[elementItem];  // Current Checklist Item
         return {
             element,
             elementIndex,
+            elementItem,
             current,
             todos,
             todosLength,
-            todoItem
+            todoItem,
+            checklist,
+            checklistLength,
+            checklistItem
         }
     }
 
@@ -74,9 +82,9 @@ const todosEvents = function todosEventFunctions(dom, util) {
         });
     }
 
-    // Deletes a todo item and element
-    const deleteItemElement = function deleteItemAndElement(eventVariables) {
-        const { elementIndex, todos, todosLength } = eventVariables;
+    // Deletes a todo item
+    const deleteTodo = function deleteTodoEvent(event) {
+        const { elementIndex, todos, todosLength } = returnEventVariables(event);
         // Delete element from todos array
         todos.splice(elementIndex, 1);  
         // Get the todoElement matching event index and remove it from dom
@@ -89,13 +97,16 @@ const todosEvents = function todosEventFunctions(dom, util) {
                 updateIndices(i);
             }
         }
+        util.updateChange();
     }
 
-    // Deletes a todo item
-    const deleteTodo = function deleteTodoEvent(event) {
-        const eventVariables = returnEventVariables(event);
-        deleteItemElement(eventVariables);
-        util.updateChange();
+    /*
+     * Inner Checklist
+     */
+
+    const deleteChecklistItem = function deleteChecklistItem(event) {
+        const { elementIndex, elementItem } = returnEventVariables(event);
+        console.log(`Element Index: ${elementIndex} | Element Item: ${elementItem}`);
     }
 
     return {
@@ -105,7 +116,8 @@ const todosEvents = function todosEventFunctions(dom, util) {
         changeDue,
         changeTodoDescription,
         changeCreated,
-        deleteTodo
+        deleteTodo,
+        deleteChecklistItem
     }
 
 }
@@ -355,6 +367,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 }
             ]
         });
+        dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
     }
 
     // Create inner check list div - contains todo item checklist
