@@ -106,6 +106,15 @@ const todosEvents = function todosEventFunctions(dom, util) {
      * Inner Checklist
      */
 
+    const addChecklistItem = function addChecklistItemToArray(event) {
+        const { checklist } = returnEventVariables(event);
+        const newItem = {
+            'name': '',
+            'checked': false
+        }
+        return checklist.push(newItem);
+    }
+
     // Change inner item checked event - changes checked state of todo item 
     const changeInnerChecked = function changeChecklistItemCheckedState(event) {
         const { checklistItem, element } = returnEventVariables(event);
@@ -159,6 +168,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
         changeTodoDescription,
         changeCreated,
         deleteTodo,
+        addChecklistItem,
         changeInnerChecked,
         changeInnerName,
         deleteChecklistItem
@@ -417,10 +427,8 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
     }
 
-    const createInnerChecklistItems = function createInnerCheckListItemElements(parent, item, itemIndex) {
-        // Create inner check list items
-        item.checklist.forEach(innerItem => {
-            const innerItemIndex = item.checklist.indexOf(innerItem);
+    const createChecklistItem = function createChecklistItemElements(parent, item, itemIndex, innerItem) {
+        const innerItemIndex = item.checklist.indexOf(innerItem);
             const innerItemDiv = dom.createElement({
                 parent,
                 tag: 'div',
@@ -439,6 +447,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             dom.addClass(innerItemDiv, 'inner-checklist-elements');
             createInnerChecklistLeft(innerItemDiv, itemIndex, innerItem, innerItemIndex);
             createInnerChecklistRight(innerItemDiv, itemIndex, innerItem, innerItemIndex);
+    }
+
+    const createInnerChecklistItems = function createInnerCheckListItemElements(parent, item, itemIndex) {
+        // Create inner check list items
+        item.checklist.forEach(innerItem => {
+            createChecklistItem(parent, item, itemIndex, innerItem);
         });
     }
 
