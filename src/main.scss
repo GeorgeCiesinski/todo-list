@@ -301,13 +301,22 @@ body {
     margin-bottom: 10px;
 }
 
-.delete-inner-item-buttons {
+.delete-inner-item-buttons, .add-inner-item-buttons {
     border: none;
     border-radius: 10px;
+}
+
+.delete-inner-item-buttons {
     margin: 2px;
     padding: 1px;
     background-color: var(--color-primary-400);
     color: var(--color-primary-900);
+}
+
+.add-inner-item-buttons {
+    margin: 4px;
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
 }
 
 .description-div {

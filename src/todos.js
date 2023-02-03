@@ -403,10 +403,6 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             className: 'delete-inner-item-buttons',
             innerHTML: '<i class="fa-regular fa-circle-xmark"></i>',
             attributes: [
-                {
-                    name: 'index',
-                    value: innerItemIndex
-                },
                 {   
                     name: 'index',
                     value: itemIndex
@@ -446,6 +442,26 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         });
     }
 
+    const createAddChecklistItemButton = function createAddChecklistItemButtonElement(parent, item, itemIndex) {
+        const addItemDiv = dom.createElement({
+            parent,
+            tag: 'div',
+            className: 'checklist-item-divs',
+        });
+        const innerAddButton = dom.createElement({
+            parent: addItemDiv,
+            tag: 'button',
+            className: 'add-inner-item-buttons',
+            innerHTML: '<i class="fa-solid fa-plus"></i> Add Step',
+            attributes: [
+                {   
+                    name: 'index',
+                    value: itemIndex
+                }
+            ]
+        });
+    }
+
     // Create inner check list div - contains todo item checklist
     const createInnerCheckListDiv = function createInnerCheckListDivElements(parent, item, itemIndex) {
         const innerCheckListDiv = dom.createElement({
@@ -462,6 +478,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         if (item.checklist.length > 0) {
             createInnerChecklistItems(innerCheckListDiv, item, itemIndex);
         };
+        createAddChecklistItemButton(innerCheckListDiv, item, itemIndex);
     }
 
     // Create item description div
