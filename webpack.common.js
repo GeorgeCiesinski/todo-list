@@ -10,6 +10,7 @@ module.exports = {
     lists: "./src/lists.js",
     listsUtilities: "./src/listsUtilities.js",
     todos: "./src/todos.js",
+    todosEvents: "./src/todosEvents.js",
     settings: "./src/settings.js",
     settingsUtilities: "./src/settingsUtilities.js",
     about: "./src/about.js",
