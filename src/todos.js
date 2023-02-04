@@ -287,7 +287,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: rightDiv,
             tag: 'button',
             className: 'collapse-buttons',
-            innerHTML: '<i class="fa-solid fa-plus"></i>'  // Font awesome plus icon
+            innerHTML: '<i class="fa-solid fa-chevron-down"></i>'  // Font awesome plus icon
         });
         dom.addClass(collapseButton, 'collapsed');
     }
