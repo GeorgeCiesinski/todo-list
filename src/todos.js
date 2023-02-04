@@ -346,7 +346,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create Left side of checklist item
-    const createInnerChecklistLeft = function createLeftChecklistItemElements(parent, todoIndex, innerItem, innerItemIndex) {
+    const createInnerChecklistLeft = function createLeftChecklistItemElements(parent, todoIndex, checklistItem, checklistItemIndex) {
         const innerItemLeftDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -368,13 +368,13 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {
                     name: 'item',
-                    value: innerItemIndex
+                    value: checklistItemIndex
                 }
             ]
         });
         dom.addClass(checkBox, 'inner-checklist-elements');
         dom.clickEvent(checkBox, events.changeInnerChecked);
-        if (innerItem.checked) {
+        if (checklistItem.checked) {
             checkBox.checked = true;
         };
         // Item Name
@@ -385,7 +385,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             attributes: [
                 {
                     name: 'value',
-                    value: innerItem.name
+                    value: checklistItem.name
                 },
                 {   
                     name: 'index',
@@ -393,7 +393,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {
                     name: 'item',
-                    value: innerItemIndex
+                    value: checklistItemIndex
                 }
             ]
         });
@@ -402,7 +402,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     // Create Right side of checklist item
-    const createInnerChecklistRight = function createRightChecklistItemElements(parent, todoIndex, innerItem, innerItemIndex) {
+    const createInnerChecklistRight = function createRightChecklistItemElements(parent, todoIndex, checklistItem, checklistItemIndex) {
         const innerItemRightDiv = dom.createElement({
             parent,
             tag: 'div',
@@ -420,7 +420,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                 },
                 {
                     name: 'item',
-                    value: innerItemIndex
+                    value: checklistItemIndex
                 }
             ]
         });
@@ -428,8 +428,8 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
     }
 
-    const createChecklistItem = function createChecklistItemElements(parent, todo, todoIndex, innerItem) {
-        const innerItemIndex = todo.checklist.indexOf(innerItem);
+    const createChecklistItem = function createChecklistItemElements(parent, todo, todoIndex, checklistItem) {
+        const checklistItemIndex = todo.checklist.indexOf(checklistItem);
             const innerItemDiv = dom.createElement({
                 parent,
                 tag: 'div',
@@ -441,19 +441,19 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
                     },
                     {
                         name: 'item',
-                        value: innerItemIndex
+                        value: checklistItemIndex
                     }
                 ]
             });
             dom.addClass(innerItemDiv, 'inner-checklist-elements');
-            createInnerChecklistLeft(innerItemDiv, todoIndex, innerItem, innerItemIndex);
-            createInnerChecklistRight(innerItemDiv, todoIndex, innerItem, innerItemIndex);
+            createInnerChecklistLeft(innerItemDiv, todoIndex, checklistItem, checklistItemIndex);
+            createInnerChecklistRight(innerItemDiv, todoIndex, checklistItem, checklistItemIndex);
     }
 
     const createInnerChecklistItems = function createInnerCheckListItemElements(parent, todo, todoIndex) {
         // Create inner check list items
-        todo.checklist.forEach(innerItem => {
-            createChecklistItem(parent, todo, todoIndex, innerItem);
+        todo.checklist.forEach(checklistItem => {
+            createChecklistItem(parent, todo, todoIndex, checklistItem);
         });
     }
 
