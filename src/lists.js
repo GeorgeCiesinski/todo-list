@@ -110,6 +110,40 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.keyUpEvent(description, events.changeDescription);
     }
 
+    const createAddDelete = function createAddAndDeleteElements(current) {
+        const addDeleteDiv = dom.createElement(
+            {
+                parent: listElement,
+                tag: 'div',
+                className: 'add-delete-divs'
+            }
+        );
+        const addTodoButton = dom.createElement({
+            parent: addDeleteDiv,
+            tag: 'button',
+            className: 'add-todo-buttons',
+            innerHTML: '<span class="material-symbols-rounded">add</span><label>Add Todo</label>',
+            attributes: [
+                {   
+                    name: 'index',
+                    value: current.index
+                }
+            ]
+        });
+        const deleteTodoButton = dom.createElement({
+            parent: addDeleteDiv,
+            tag: 'button',
+            className: 'delete-todo-buttons',
+            innerHTML: '<label>Delete List</label><span class="material-symbols-rounded">delete_forever</span>',
+            attributes: [
+                {   
+                    name: 'index',
+                    value: current.index
+                }
+            ]
+        });
+    }
+
     // Builds and rebuilds listElement from list by index
     const buildList = function buildListByIndex() {
         dom.clearList();
@@ -117,6 +151,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         createTitle(current);
         createDescription(current);
         todos.build();
+        createAddDelete(current);
         events.createEventListeners();
     }
 

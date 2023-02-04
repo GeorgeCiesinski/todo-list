@@ -181,8 +181,28 @@ body {
 }
 
 // Lists
-.list-elements, .todo-items {
+.list-elements, .todo-items, .add-delete-divs {
     margin: 10px;
+}
+
+.add-delete-divs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-delete-divs>button {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.add-todo-buttons {
+
+}
+
+.delete-todo-buttons {
+
 }
 
 .visible-todo-elements, .collapsible-todo-elements>div {
@@ -320,7 +340,7 @@ body {
     display: inline-flex;
     align-items: center;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .delete-inner-item-buttons>span, .add-inner-item-buttons>span {
     font-size: 125%;  // Google icon size

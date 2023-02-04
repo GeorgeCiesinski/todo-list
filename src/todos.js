@@ -484,7 +484,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: addItemDiv,
             tag: 'button',
             className: 'add-inner-item-buttons',
-            innerHTML: '<span class="material-symbols-rounded">add</span> Add Step',
+            innerHTML: '<span class="material-symbols-rounded">add</span><label>Add Step</label>',
             attributes: [
                 {   
                     name: 'index',
