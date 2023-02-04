@@ -198,7 +198,8 @@ body {
 }
 
 .add-todo-buttons {
-
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
 }
 
 .delete-todo-buttons {

@@ -122,7 +122,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             parent: addDeleteDiv,
             tag: 'button',
             className: 'add-todo-buttons',
-            innerHTML: '<span class="material-symbols-rounded">add</span><label>Add Todo</label>',
+            innerHTML: '<span class="material-symbols-rounded">add</span><label>New Todo</label>',
             attributes: [
                 {   
                     name: 'index',
