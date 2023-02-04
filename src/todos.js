@@ -287,7 +287,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: rightDiv,
             tag: 'button',
             className: 'collapse-buttons',
-            innerHTML: '<i class="fa-solid fa-chevron-down"></i>'  // Font awesome plus icon
+            innerHTML: '<span class="material-symbols-rounded">expand_more</span>'
         });
         dom.addClass(collapseButton, 'collapsed');
     }
@@ -417,7 +417,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: innerItemRightDiv,
             tag: 'button',
             className: 'delete-inner-item-buttons',
-            innerHTML: '<i class="fa-regular fa-circle-xmark"></i>',
+            innerHTML: '<span class="material-symbols-rounded">backspace</span>',
             attributes: [
                 {   
                     name: 'index',
@@ -484,7 +484,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: addItemDiv,
             tag: 'button',
             className: 'add-inner-item-buttons',
-            innerHTML: '<i class="fa-solid fa-plus"></i> Add Step',
+            innerHTML: '<span class="material-symbols-rounded">add</span> Add Step',
             attributes: [
                 {   
                     name: 'index',
@@ -590,7 +590,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent,
             tag: 'button',
             className: 'delete-item-buttons',
-            innerHTML: '<i class="fa-solid fa-trash"></i>',
+            innerHTML: '<span class="material-symbols-rounded">delete</span>',
             attributes: [
                 {
                     name: 'index',

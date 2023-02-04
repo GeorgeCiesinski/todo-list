@@ -241,11 +241,11 @@ const modifyDom = function modifyDomElements() {
         if (currentTarget.classList.contains('collapsed')) {
             currentTarget.classList.remove('collapsed');
             currentTarget.classList.add('visible');
-            currentTarget.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';  // Change to minus icon
+            currentTarget.innerHTML = '<span class="material-symbols-rounded">expand_less</span>';  // Change to minus icon
         } else if (currentTarget.classList.contains('visible')) {
             currentTarget.classList.remove('visible');
             currentTarget.classList.add('collapsed');
-            currentTarget.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';  // Change to plus icon
+            currentTarget.innerHTML = '<span class="material-symbols-rounded">expand_more</span>';  // Change to plus icon
         }
         // Get 'collapsible-todo-elements' which is a sibling of parent 'visible-todo-elements'
         const contentElement = currentTarget.parentNode.parentNode.nextElementSibling;
