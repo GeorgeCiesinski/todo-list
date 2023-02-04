@@ -467,7 +467,11 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         const todoIndex = addButton.getAttribute('index');
         const innerCheckListElement = addButton.parentNode.previousSibling;
         const { checklistItem, checklistItemIndex } = events.addChecklistItem(event);
+        // Create Element
         createChecklistItem(innerCheckListElement, todoIndex, checklistItem, checklistItemIndex);
+        // Focus
+        const newNameElement = document.querySelector(`.inner-item-names[index='${todoIndex}'][item='${checklistItemIndex}']`);
+        newNameElement.focus();
     }
 
     const createAddChecklistItemButton = function createAddChecklistItemButtonElement(parent, todoIndex) {
