@@ -71,50 +71,6 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
         colorInput.addEventListener('input', util.updateColorScheme);
     }
 
-    // Creates dark mode div
-    const createDarkMode = function createDarkModeElement(parent) {
-        const darkModeDiv = dom.createElement({
-            parent,
-            tag: "div",
-            idName: 'dark-mode-div'
-        });
-        // Label
-        dom.createElement({
-            parent: darkModeDiv,
-            tag: 'label',
-            className: 'labels',
-            innerHTML: 'Dark Mode: ',
-            attributes: [
-                {
-                    name: 'for',
-                    value: 'dark-mode-input'
-                }
-            ],
-        });
-        // Input
-        const darkModeInput = dom.createElement({
-            parent: darkModeDiv,
-            tag: 'input',
-            className: 'inputs',
-            idName: 'dark-mode-input',
-            attributes: [
-                {
-                    name: 'type',
-                    value: 'checkbox'
-                },
-                {
-                    name: 'name',
-                    value: 'dark-mode-input',
-                },
-                {
-                    name: 'value',
-                    value: 'on'
-                }
-            ],
-        });
-        darkModeInput.addEventListener('input', util.updateDarkMode);
-    }
-
     // Contains load and save buttons
     const createSettingsDiv = function createButtonsDivElement() {
         const settingsDiv = dom.createElement({
@@ -124,7 +80,6 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             className: 'settings-divs'
         });
         createColors(settingsDiv);
-        createDarkMode(settingsDiv);
     }
 
     const createLoadButton = function createLoadButtonElement(parent) {
@@ -204,7 +159,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
     const build = function buildSettingsPage() {
         // Page Header
         createTitle();
-        // Color Theme and Dark Mode
+        // Color Theme
         createSettingsDiv();
         createButtonsDiv();
         // Data

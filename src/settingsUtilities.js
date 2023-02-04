@@ -27,11 +27,6 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom, list) {
         updateSASS();
     }
 
-    // Update dark mode in local storage
-    const updateDarkMode = function updateDarkModeLocalStorage(event) {
-        colorSettings.darkMode = event.target.checked;
-    }
-
     // Loads saved changes
     const loadSettings = function loadSettingsFromLocalStorage() {
         colorSettings = JSON.parse(localStorage.getItem('colorSettings'));
@@ -57,7 +52,6 @@ const settingsUtilities = function settingsUtilitiesFunctions(dom, list) {
     return {
         getPrimaryColor,
         updateColorScheme,
-        updateDarkMode,
         loadSettings,
         saveSettings,
         deleteData

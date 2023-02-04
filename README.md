@@ -75,13 +75,9 @@ The checklist object is optional data a user can add to a todo item. For example
 
 Settings page with options to pick colors such as font, background, secondary colors, etc. 
 
-### Dark Mode
-
-Dark Mode Toggle in settings. 
-
 ## Code Style
 
-[Airbnb Javascript Style](https://airbnb.io/javascript/).
+[Airbnb Javascript Style](https://airbnb.io/javascript/)
 
 ## Credits
 
