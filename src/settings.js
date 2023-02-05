@@ -1,4 +1,4 @@
-import settingsUtilities from "./settingsUtilities"
+import settingsUtilities from "./settingsUtilities";
 
 /*
  * Builds settings page

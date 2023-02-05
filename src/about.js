@@ -1,4 +1,4 @@
-import aboutData from "./assets/data/about.json"
+import aboutData from "./assets/data/about.json";
 
 /*
  * Builds about page

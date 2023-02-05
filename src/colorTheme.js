@@ -1,5 +1,5 @@
 import { createPaletteFromColor } from "palettey";
-import contrast from "./lib/color"
+import contrast from "./lib/color";
 
 // Temporary fix for createPaletteFromColor
 const fixPalette = function fixPaletteStep500(palette) {

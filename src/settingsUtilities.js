@@ -1,4 +1,4 @@
-import createColorSettings from "./colorTheme"
+import createColorSettings from "./colorTheme";
 
 /*
  * Utility functions for Settings Page

@@ -1,4 +1,4 @@
-import './main.scss'
+import './main.scss';
 import baseLayout from './baseLayout';
 import modifyDom from "./modifyDom";
 

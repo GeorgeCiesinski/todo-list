@@ -1,4 +1,4 @@
-import todosEvents from "./todosEvents"
+import todosEvents from "./todosEvents";
 
 const todosBuilder = function todosBuilderFunctions(dom, util) {
 

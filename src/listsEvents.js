@@ -29,4 +29,4 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
     }
 }
 
-export default listsEvents
+export default listsEvents;

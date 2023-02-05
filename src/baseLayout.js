@@ -1,8 +1,8 @@
-import navLinks from "./navLinks"
-import copyright from "./copyright"
-import lists from "./lists"
-import settings from "./settings"
-import about from "./about"
+import navLinks from "./navLinks";
+import copyright from "./copyright";
+import lists from "./lists";
+import settings from "./settings";
+import about from "./about";
 
 /*
  * Builds the base layout: 

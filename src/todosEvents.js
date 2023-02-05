@@ -1,4 +1,4 @@
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 
 const todosEvents = function todosEventFunctions(dom, util) {
 

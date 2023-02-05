@@ -1,7 +1,7 @@
-import links from "./listsLinks"
-import todosBuilder from "./todos"
-import listsEvents from "./listsEvents"
-import listsUtilities from "./listsUtilities"
+import links from "./listsLinks";
+import todosBuilder from "./todos";
+import listsEvents from "./listsEvents";
+import listsUtilities from "./listsUtilities";
 
 const listsBuilder = function listsBuilderFunctions(dom) {
 
@@ -166,4 +166,4 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     }
 }
 
-export default listsBuilder
+export default listsBuilder;
