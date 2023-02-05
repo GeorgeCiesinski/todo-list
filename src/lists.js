@@ -1,37 +1,7 @@
 import links from "./listsLinks"
 import todosBuilder from "./todos"
+import listsEvents from "./listsEvents"
 import listsUtilities from "./listsUtilities"
-
-const listsEvents = function listEventFunctions(dom, util, listsLinks) {
-
-    // Change Title Event - Changes the list.title variable
-    const changeTitle = function changeListTitle(event) {
-        const element = event.currentTarget;
-        const current = util.getCurrent();  // Current List
-        current.list.title = element.value;
-        util.updateChange();
-        listsLinks.build();  // Build Nav Links for Lists
-    }
-
-    // Change Title Event - Changes the list.title variable and updates the last change time
-    const changeDescription = function changeListDescription(event) {
-        const element = event.currentTarget;
-        const current = util.getCurrent();  // Current List
-        current.list.description = element.value;
-        util.updateChange();
-    }
-
-    // Adds event listeners to page
-    const createEventListeners = function addEventListenersToElements() {
-        dom.createCollapse();
-    }
-
-    return {
-        changeTitle,
-        changeDescription,
-        createEventListeners
-    }
-}
 
 const listsBuilder = function listsBuilderFunctions(dom) {
 
@@ -130,6 +100,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
+        dom.clickEvent(addTodoButton, todos.addNewTodoItem);
         const deleteTodoButton = dom.createElement({
             parent: addDeleteDiv,
             tag: 'button',

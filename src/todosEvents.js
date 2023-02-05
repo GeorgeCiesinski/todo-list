@@ -1,3 +1,5 @@
+import format from 'date-fns/format'
+
 const todosEvents = function todosEventFunctions(dom, util) {
 
     // Returns common variables used by event functions
@@ -70,6 +72,26 @@ const todosEvents = function todosEventFunctions(dom, util) {
         util.updateChange();
     }
 
+    const addTodo = function createNewTodoItem(event) {
+        const { todos } = returnEventVariables(event);
+        const todoItem = {
+            "name": null,
+            "added": format(new Date(), "yyyy-MM-dd"),
+            "description": null,
+            "checklist": [],
+            "due": null,
+            "priority": 2,
+            "checked": false
+        }
+        const todoIndex = todos.push(todoItem) - 1;
+        util.updateChange();
+
+        return {
+            todoItem,
+            todoIndex
+        }
+    }
+
     /*
      * Updates Indices of items in arrays
      * 
@@ -114,7 +136,8 @@ const todosEvents = function todosEventFunctions(dom, util) {
             'checked': false
         }
         const checklistItemIndex = checklist.push(checklistItem) - 1;
-        // Returns an object with the checklistItem and index
+        util.updateChange();
+
         return {
             checklistItem,
             checklistItemIndex
@@ -149,6 +172,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
         });
     }
 
+    // Deletes item from checklist
     const deleteChecklistItem = function deleteChecklistItem(event) {
         const { elementIndex, elementItem, checklist, checklistLength } = returnEventVariables(event);
         // Delete item from checklist array
@@ -173,6 +197,7 @@ const todosEvents = function todosEventFunctions(dom, util) {
         changeDue,
         changeTodoDescription,
         changeCreated,
+        addTodo,
         deleteTodo,
         addChecklistItem,
         changeInnerChecked,

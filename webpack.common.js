@@ -8,6 +8,8 @@ module.exports = {
     nav: "./src/navLinks.js",
     copyright: "./src/copyright.js",
     lists: "./src/lists.js",
+    listsEvents: "./src/listsEvents.js",
+    listsLinks: "./src/listsLinks.js",
     listsUtilities: "./src/listsUtilities.js",
     todos: "./src/todos.js",
     todosEvents: "./src/todosEvents.js",

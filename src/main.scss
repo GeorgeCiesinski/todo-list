@@ -203,7 +203,8 @@ body {
 }
 
 .delete-todo-buttons {
-
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
 }
 
 .visible-todo-elements, .collapsible-todo-elements>div {

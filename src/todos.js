@@ -40,7 +40,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             attributes: [
                 {
                     name: 'value',
-                    value: todo.name
+                    value: todo.name || ''  // Adds todo name or empty if null
                 },
                 {   
                     name: 'index',
@@ -461,6 +461,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         createCollapsibleDiv(itemDiv, todo, todoIndex);
     }
 
+    const addNewTodoItem = function addNewTodoItemElement(event) {
+        const { todoItem, todoIndex } = events.addTodo(event);
+        const parent = document.getElementById('todos');
+        createTodoItem(parent, todoItem, todoIndex);
+    }
+
     // Creates todo div
     const build = function createTodoElement() {
         const current = util.getCurrent();
@@ -478,6 +484,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
     }
 
     return {
+        addNewTodoItem,
         build
     }
 }
