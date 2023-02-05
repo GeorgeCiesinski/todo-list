@@ -101,10 +101,10 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             ]
         });
         dom.clickEvent(addTodoButton, todos.addNewTodoItem);
-        const deleteTodoButton = dom.createElement({
+        const deleteListButton = dom.createElement({
             parent: addDeleteDiv,
             tag: 'button',
-            className: 'delete-todo-buttons',
+            className: 'delete-list-buttons',
             innerHTML: '<label>Delete List</label><span class="material-symbols-rounded">delete_forever</span>',
             attributes: [
                 {   

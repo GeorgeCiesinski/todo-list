@@ -105,7 +105,13 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
             parent: rightDiv,
             tag: 'button',
             className: 'collapse-buttons',
-            innerHTML: '<span class="material-symbols-rounded">expand_more</span>'
+            innerHTML: '<span class="material-symbols-rounded">expand_more</span>',
+            attributes: [
+                {
+                    name: 'event',
+                    value: false
+                }
+            ]
         });
         dom.addClass(collapseButton, 'collapsed');
     }
@@ -465,6 +471,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util) {
         const { todoItem, todoIndex } = events.addTodo(event);
         const parent = document.getElementById('todos');
         createTodoItem(parent, todoItem, todoIndex);
+        dom.createCollapse();
+        const newNameElement = document.querySelector(`.item-names[index='${todoIndex}']`);
+        newNameElement.focus();
     }
 
     // Creates todo div

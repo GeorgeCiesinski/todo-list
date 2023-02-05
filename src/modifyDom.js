@@ -259,8 +259,12 @@ const modifyDom = function modifyDomElements() {
 
     // Adds event listener to each todo item - collapses content
     const createCollapse = function createCollapseEventListener() {
-        const collapseButtons = document.querySelectorAll('.collapse-buttons');
-        collapseButtons.forEach(button => clickEvent(button, collapseContent));
+        // Get collapseButtons with event=false attribute
+        const collapseButtons = document.querySelectorAll('.collapse-buttons[event="false"]');
+        collapseButtons.forEach(button => {
+            button.setAttribute('event', true);
+            clickEvent(button, collapseContent);
+        });
     }
 
     return {
