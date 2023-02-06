@@ -109,7 +109,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
-        dom.clickEvent(deleteListButton, events.deleteList);
+        dom.clickEvent(deleteListButton, events.showModal);
     }
 
     const createAddDelete = function createAddAndDeleteElements(current) {
@@ -148,6 +148,63 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     listsLinks = links(dom, util, switchList);
     events = listsEvents(dom, util, listsLinks);
 
+    // Create warning modal
+    const createDeleteConfirmationModal = function createDeleteConfirmationModalElement(parent) {
+        // Main modal div
+        const modalDiv = dom.createElement({
+            parent, 
+            tag: 'div', 
+            idName: 'warning-modal',
+        });
+        // Modal content - contains a top, middle and bottom div
+        const modalContent = dom.createElement({
+            parent: modalDiv, 
+            tag: 'div', 
+            idName: 'modal-content',
+        });
+        // Top div
+        const modalTopDiv = dom.createElement({
+            parent: modalContent, 
+            tag: 'div', 
+            idName: 'modal-top',
+            className: 'modal-layer',
+        });
+        const closeButton = dom.createElement({
+            parent: modalTopDiv,
+            tag: 'span',
+            idName: 'modal-close',
+            innerHTML: '<span class="material-symbols-rounded">close</span>'
+        });
+        dom.clickEvent(closeButton, events.hideModal);
+        // Middle div
+        const modalMiddleDiv = dom.createElement({
+            parent: modalContent, 
+            tag: 'div', 
+            idName: 'modal-middle',
+            className: 'modal-layer',
+        });
+        dom.createElement({
+            parent: modalMiddleDiv,
+            tag: 'p',
+            idName: 'modal-text',
+            innerHTML: 'Are you sure you want to permanently delete this list?'
+        });
+        // Bottom div
+        const modalBottomDiv = dom.createElement({
+            parent: modalContent, 
+            tag: 'div', 
+            idName: 'modal-bottom',
+            className: 'modal-layer',
+        });
+        const confirmDeleteButton = dom.createElement({
+            parent: modalBottomDiv,
+            tag: 'button',
+            idName: 'confirm-delete-button',
+            innerHTML: '<span class="material-symbols-rounded">delete_forever</span><label>Delete Forever</label>',
+        });
+        dom.clickEvent(confirmDeleteButton, events.deleteList);
+    }
+
     // Shows lists page
     const showPage = function switchPage(event) {
         // If called by event, change clicked link to show as active link
@@ -166,6 +223,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     const deleteDataRefresh = function refreshElementsAfterDataDelete() {
         util.deleteRefresh();
     }
+
+    // Initialize Modal
+    createDeleteConfirmationModal(listsPage);
 
     return {
         buildList,

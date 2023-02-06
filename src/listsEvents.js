@@ -23,6 +23,20 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
     }
 
     /*
+     * Modal
+     */
+
+    const showModal = function confirmDeleteModalElements() {
+        const modal = document.getElementById('warning-modal');
+        modal.style.display = 'block';
+    }
+
+    const hideModal = function hideModalElements() {
+        const modal = document.getElementById('warning-modal');
+        modal.style.display = 'none';
+    }
+
+    /*
      * Deletes the list object from the array and clears the listElement
      */
     const deleteList = function deleteListObjectAndElement() {
@@ -30,13 +44,16 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
         dom.clearList();
         util.updateChange();
         listsLinks.build();  // Build Nav Links for Lists
+        hideModal();
     }
 
     return {
         changeTitle,
         changeDescription,
         createEventListeners,
-        deleteList
+        deleteList,
+        showModal,
+        hideModal
     }
 }
 
