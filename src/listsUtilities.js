@@ -71,6 +71,16 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Load first list when app loads
     switchCurrent(0);
 
+    // Deletes the current list from the lists array
+    const deleteCurrent = function deleteCurrentList() {
+        lists.splice(currentListIndex, 1);
+    }
+
+    
+    /* 
+     * Refreshes lists data with default data and switches current list to first list
+     * This is required after local storage data is deleted so that the lists array does not include old deleted data
+     */
     const deleteRefresh = function refreshListAfterDataDelete() {
         assignListsObject();
         switchCurrent(0);
@@ -124,6 +134,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
         loadLists,
         listsLength,
         switchCurrent,
+        deleteCurrent,
         deleteRefresh,
         getCurrent,
         updateChange

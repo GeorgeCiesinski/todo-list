@@ -22,10 +22,21 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
         dom.createCollapse();
     }
 
+    /*
+     * Deletes the list object from the array and clears the listElement
+     */
+    const deleteList = function deleteListObjectAndElement() {
+        util.deleteCurrent();
+        dom.clearList();
+        util.updateChange();
+        listsLinks.build();  // Build Nav Links for Lists
+    }
+
     return {
         changeTitle,
         changeDescription,
-        createEventListeners
+        createEventListeners,
+        deleteList
     }
 }
 

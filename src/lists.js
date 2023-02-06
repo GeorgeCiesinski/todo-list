@@ -80,16 +80,9 @@ const listsBuilder = function listsBuilderFunctions(dom) {
         dom.keyUpEvent(description, events.changeDescription);
     }
 
-    const createAddDelete = function createAddAndDeleteElements(current) {
-        const addDeleteDiv = dom.createElement(
-            {
-                parent: listElement,
-                tag: 'div',
-                className: 'add-delete-divs'
-            }
-        );
+    const createAddTodo = function createAddTodoButton(parent, current) {
         const addTodoButton = dom.createElement({
-            parent: addDeleteDiv,
+            parent,
             tag: 'button',
             className: 'add-todo-buttons',
             innerHTML: '<span class="material-symbols-rounded">add</span><label>New Todo</label>',
@@ -101,8 +94,11 @@ const listsBuilder = function listsBuilderFunctions(dom) {
             ]
         });
         dom.clickEvent(addTodoButton, todos.addNewTodoItem);
+    }
+
+    const createDeleteList = function createDeleteListButton(parent, current) {
         const deleteListButton = dom.createElement({
-            parent: addDeleteDiv,
+            parent,
             tag: 'button',
             className: 'delete-list-buttons',
             innerHTML: '<label>Delete List</label><span class="material-symbols-rounded">delete_forever</span>',
@@ -113,6 +109,19 @@ const listsBuilder = function listsBuilderFunctions(dom) {
                 }
             ]
         });
+        dom.clickEvent(deleteListButton, events.deleteList);
+    }
+
+    const createAddDelete = function createAddAndDeleteElements(current) {
+        const addDeleteDiv = dom.createElement(
+            {
+                parent: listElement,
+                tag: 'div',
+                className: 'add-delete-divs'
+            }
+        );
+        createAddTodo(addDeleteDiv, current);
+        createDeleteList(addDeleteDiv, current);
     }
 
     // Builds and rebuilds listElement from list by index
