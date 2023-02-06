@@ -26,16 +26,6 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
      * Modal
      */
 
-    const showModal = function confirmDeleteModalElements() {
-        const modal = document.getElementById('warning-modal');
-        modal.style.display = 'block';
-    }
-
-    const hideModal = function hideModalElements() {
-        const modal = document.getElementById('warning-modal');
-        modal.style.display = 'none';
-    }
-
     /*
      * Deletes the list object from the array and clears the listElement
      */
@@ -44,7 +34,6 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
         dom.clearList();
         util.updateChange();
         listsLinks.build();  // Build Nav Links for Lists
-        hideModal();
     }
 
     return {
@@ -52,8 +41,6 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
         changeDescription,
         createEventListeners,
         deleteList,
-        showModal,
-        hideModal
     }
 }
 

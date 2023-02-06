@@ -182,7 +182,7 @@ body {
 
 // Modal
 
-#warning-modal {
+.warning-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -196,7 +196,7 @@ body {
     background-color: rgba(0,0,0,0.5);
 }
 
-#modal-content {
+.modal-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -208,28 +208,28 @@ body {
     width: 50%;
 }
 
-#modal-top {
+.modal-top {
     display: flex;
     justify-content: end;
 }
 
-#modal-close {
+.modal-close {
     color: var(--color-primary-700);
     font-size: 28px;
     font-weight: bold;
 }
-#modal-close:hover, #modal-close:focus {
+.modal-close:hover, .modal-close:focus {
     color: var(--color-primary-900);
     text-decoration: none;
     cursor: pointer;
 }
 
-#modal-middle, #modal-bottom {
+.modal-middle, .modal-bottom {
     display: flex;
     justify-content: center;
 }
 
-#confirm-delete-button {
+.modal-button {
     display: flex;
     align-items: center;
     justify-content: center;
