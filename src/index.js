@@ -14,7 +14,10 @@ import about from "./about";
  * - Nav
  * - Footer
  */
-const baseLayout = function createBaseLayoutElements(dom) {
+const baseLayout = function createBaseLayoutElements() {
+
+    // Dom
+    const dom = modifyDom();  // Document Object Model Module used to construct pages
 
     // Pages
     const list = lists(dom);
@@ -98,6 +101,5 @@ const baseLayout = function createBaseLayoutElements(dom) {
     }
 };
 
-const dom = modifyDom();  // Document Object Model Module used to construct pages
-const layout = baseLayout(dom);  // Create base layout for site
-layout.build();
+const layout = baseLayout();  
+layout.build();  // Create base layout for site
