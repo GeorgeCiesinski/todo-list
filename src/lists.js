@@ -222,6 +222,7 @@ const listsBuilder = function listsBuilderFunctions(dom) {
     // Refreshes lists data with default lists when localStorage data is deleted from the settings
     const deleteDataRefresh = function refreshElementsAfterDataDelete() {
         util.deleteRefresh();
+        listsLinks.build();
     }
 
     // Initialize Modal
