@@ -54,6 +54,13 @@ const todosEvents = function todosEventFunctions(dom, util) {
     // Change due date event - change due date of todo item
     const changeDue = function changeDueDateOfTodoItem(event) {
         const { todoItem, element } = returnEventVariables(event);
+
+        // Check if due date is before created date
+        if (new Date(element.value) < new Date(todoItem.added)) {
+            element.value = todoItem.due;
+            return
+        }
+
         todoItem.due = element.value;
         util.updateChange();
     }
