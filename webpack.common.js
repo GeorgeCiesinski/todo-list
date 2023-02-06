@@ -4,7 +4,6 @@ module.exports = {
   entry: {
     main: "./src/index.js",
     modifyDom: "./src/modifyDom.js",
-    baseLayout: "./src/baseLayout.js",
     nav: "./src/navLinks.js",
     copyright: "./src/copyright.js",
     lists: "./src/lists.js",
