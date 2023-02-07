@@ -3,6 +3,27 @@
  */
 const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBuilder) {
 
+    // Creates add lists link
+    const addLists = function createAddListsElements(parent) {
+        const addListLink = dom.createElement({
+            parent,
+            tag: 'a',
+            idName: 'add-list',
+            className: 'add-list-link',
+            innerHTML: '<span class="material-symbols-rounded">add</span><label>New List</label>'
+        });
+    }
+
+    // Creates an unordered list and sets it as the Nav element in dom
+    const listsList = function createListsUnorderedList(parent) {
+        const listUL = dom.createElement({
+            parent,
+            tag: 'ul',
+            idName: 'list-items'
+        });
+        dom.setNavElement(listUL);
+    }
+
     // Create lists link
     const listsItem = function createListsNav(sidebar) {
         const listItem = dom.createElement({
@@ -18,14 +39,12 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
             className: 'nav-links',
             innerHTML: 'Lists'
         });
-        const listUL = dom.createElement({
-            parent: listItem,
-            tag: 'ul',
-            idName: 'list-items'
-        });
         dom.addClass(listLink, 'active-nav-links');  // Set Lists as the active page
         dom.clickEvent(listLink, lists.showPage);
-        dom.setNavElement(listUL);
+        // Add List Link
+        addLists(listItem);
+        // Links to existing lists
+        listsList(listItem);
     }
 
     // Create settings link

@@ -137,15 +137,15 @@ body {
     flex-direction: column;
 }
 
-.nav-items, .list-nav-items {
+.nav-items {
     margin: 20px;
 }
 
-.nav-links, .list-link-items {
+.nav-links, .list-link-items, #add-list {
     display: inline-block;
     transition: 0.3s;
 }
-.nav-links:hover, .list-link-items:hover {
+.nav-links:hover, .list-link-items:hover, #add-list:hover {
     cursor: pointer;
     transform: scale(1.1);
 } 
@@ -155,7 +155,25 @@ body {
 }
 
 #lists {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 20px;
     flex: 1;
+}
+
+#add-list {
+    margin-left: 15px;
+}
+#add-list>span {
+    font-size: 100%;
+    float: left;
+}
+
+#list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 15px;
 }
 
 .active-nav-links::before {
