@@ -1,4 +1,4 @@
-const listsEvents = function listEventFunctions(dom, util, listsLinks) {
+const listsEvents = function listEventFunctions(dom, util, listsLinks, buildAddList) {
 
     // Change Title Event - Changes the list.title variable
     const changeTitle = function changeListTitle(event) {
@@ -31,8 +31,10 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks) {
      */
     const deleteList = function deleteListObjectAndElement() {
         util.deleteCurrent();
-        dom.clearList();
         util.updateChange();
+
+        buildAddList();
+        
         listsLinks.build();  // Build Nav Links for Lists
     }
 

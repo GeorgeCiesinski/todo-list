@@ -19,21 +19,17 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
     let events = null;
     
     // Root page element for lists 
-    const listsPage = dom.createElement(
-        {
-            tag: 'div',
-            idName: 'lists-page'
-        }
-    );
+    const listsPage = dom.createElement({
+        tag: 'div',
+        idName: 'lists-page'
+    });
 
     // List element containing list data elements
-    const listElement = dom.createElement(
-        {
-            parent: listsPage,
-            tag: 'div',
-            idName: 'list-div'
-        }
-    );
+    const listElement = dom.createElement({
+        parent: listsPage,
+        tag: 'div',
+        idName: 'list-div'
+    });
 
     // Set list in dom
     dom.setListElement(listElement);
@@ -140,6 +136,21 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         events.createEventListeners();
     }
 
+    const buildAddList = function buildAddListElements() {
+        dom.clearList();
+        const addListDiv = dom.createElement({
+            parent: listElement,
+            tag: 'div',
+            className: 'add-list-div'
+        });
+        const addListButton = dom.createElement({
+            parent: addListDiv, 
+            tag: 'button',
+            className: 'add-list-button',
+            innerHTML: '<span class="material-symbols-rounded">add</span><label>New List</label>'
+        })
+    }
+
     // Handle list nav event and show requested list
     const switchList = function switchListEvent(event) {
         const element = event.target;
@@ -151,9 +162,9 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
 
     // Define listsLinks instance declared previously
     listsLinks = links(dom, util, switchList);
-    events = listsEvents(dom, util, listsLinks);
+    events = listsEvents(dom, util, listsLinks, buildAddList);
 
-    // Add action to warningModal
+    // Add action to warningModal - Required events
     warningModal.addAction(events.deleteList);
 
     // Shows lists page
@@ -164,8 +175,14 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         }
         // Switch content element to display listsPage
         dom.switchContent(listsPage);
-        // Build current list
-        buildList();  
+        // If current list is undefined, buildAddList
+        const current = util.getCurrent();
+        if (current.list === undefined) {
+            buildAddList();
+        } else {
+            // Build current list
+            buildList(); 
+        }
         // Build Nav Links for Lists
         listsLinks.build(); 
     }

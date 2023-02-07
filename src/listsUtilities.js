@@ -74,6 +74,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Deletes the current list from the lists array
     const deleteCurrent = function deleteCurrentList() {
         lists.splice(currentListIndex, 1);
+        currentListIndex = null;  // Unsets current list until a new current list is selected
     }
 
     
