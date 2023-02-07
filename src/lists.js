@@ -1,19 +1,15 @@
 import links from "./listsLinks";
-import modalBuilder from "./modal";
 import todosBuilder from "./todos";
 import listsEvents from "./listsEvents";
 import listsUtilities from "./listsUtilities";
 
-const listsBuilder = function listsBuilderFunctions(dom) {
+const listsBuilder = function listsBuilderFunctions(dom, modal) {
 
     // Lists Utilities - manage lists objects
     const util = listsUtilities();
 
-    // Modals
-    const modal = modalBuilder(dom);
-
     // Todos Builder - builds individual todo items
-    const todos = todosBuilder(dom, util);
+    const todos = todosBuilder(dom, util, modal);
 
     /*
      * listsLinks and events instances defined later

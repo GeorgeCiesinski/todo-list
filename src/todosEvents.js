@@ -1,6 +1,22 @@
 import format from 'date-fns/format';
 
-const todosEvents = function todosEventFunctions(dom, util) {
+const todosEvents = function todosEventFunctions(dom, util, modal) {
+
+    // Create warning modals
+    const dueModal = modal.actionModal({
+        messageHTML: 'Due date must be after the created date.',
+        buttonHTML: '<label>OK</label>',
+    });
+
+    const addedFutureModal = modal.actionModal({
+        messageHTML: 'Created date must not be in the future.',
+        buttonHTML: '<label>OK</label>',
+    });
+
+    const addedAfterDueModal = modal.actionModal({
+        messageHTML: 'Created date be before due date.',
+        buttonHTML: '<label>OK</label>',
+    });
 
     // Returns common variables used by event functions
     const returnEventVariables = function returnEventVariableObject(event) {
@@ -55,13 +71,17 @@ const todosEvents = function todosEventFunctions(dom, util) {
     const changeDue = function changeDueDateOfTodoItem(event) {
         const { todoItem, element } = returnEventVariables(event);
 
-        // Check if due date is before created date
-        if (new Date(element.value) < new Date(todoItem.added)) {
-            element.value = todoItem.due;
+        const elementDate = new Date(`${element.value}T00:00:00`);
+        const todoItemAddedDate = new Date(`${todoItem.added}T00:00:00`);
+
+        // Exit if due date is before added date
+        if (elementDate < todoItemAddedDate) {
+            element.value = todoItem.due;  // Change input back to original date
+            dueModal.showModal();
             return
         }
 
-        todoItem.due = element.value;
+        todoItem.due = element.value;  // Update due date
         util.updateChange();
     }
 
@@ -75,6 +95,25 @@ const todosEvents = function todosEventFunctions(dom, util) {
     // Change created date event - change created date of todo item
     const changeCreated = function changeCreatedDateOfTodoItem(event) {
         const { todoItem, element } = returnEventVariables(event);
+
+        // Normalize dates to local time
+        const elementDate = new Date(`${element.value}T00:00:00`);
+        const todoItemDueDate = new Date(`${todoItem.due}T00:00:00`);
+
+        // Exit if added date is in the future
+        if (elementDate > new Date()) {
+            element.value = todoItem.added;  // Change input back to original date
+            addedFutureModal.showModal();
+            return;
+        }
+
+        // Exit if added date is after due date
+        if (elementDate > todoItemDueDate && todoItem.due != null) {
+            element.value = todoItem.added;  // Change input back to original date
+            addedAfterDueModal.showModal();
+            return;
+        }
+
         todoItem.added = element.value;
         util.updateChange();
     }

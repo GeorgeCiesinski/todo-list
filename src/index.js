@@ -1,5 +1,6 @@
 import './main.scss';
 import modifyDom from "./modifyDom";
+import modalBuilder from "./modal";
 import navLinks from "./navLinks";
 import copyright from "./copyright";
 import lists from "./lists";
@@ -16,11 +17,12 @@ import about from "./about";
  */
 const baseLayout = function createBaseLayoutElements() {
 
-    // Dom
+    // Common Page Utilities
     const dom = modifyDom();  // Document Object Model Module used to construct pages
+    const modal = modalBuilder(dom);
 
     // Pages
-    const list = lists(dom);
+    const list = lists(dom, modal);
     const settingsBuilder = settings(dom, list);
     const aboutBuilder = about(dom);
 

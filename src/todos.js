@@ -1,8 +1,8 @@
 import todosEvents from "./todosEvents";
 
-const todosBuilder = function todosBuilderFunctions(dom, util) {
+const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
 
-    const events = todosEvents(dom, util);
+    const events = todosEvents(dom, util, modal);
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, todo, todoIndex) {
