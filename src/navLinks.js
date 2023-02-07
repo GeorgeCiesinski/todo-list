@@ -8,7 +8,6 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         const addListLink = dom.createElement({
             parent,
             tag: 'a',
-            idName: 'add-list',
             className: 'add-list-link',
             innerHTML: '<span class="material-symbols-rounded">add</span><label>New List</label>'
         });
