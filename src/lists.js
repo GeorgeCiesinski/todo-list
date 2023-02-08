@@ -55,6 +55,10 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
                     value: 'List title'
                 },
                 {
+                    name: 'maxlength',
+                    value: '25'
+                },
+                {
                     name: 'data-form-type',
                     value: 'other'
                 }

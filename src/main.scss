@@ -125,7 +125,7 @@ body {
 
 // Sidebar
 #sidebar {
-    width: 20vw;
+    max-width: 150px;
     color: var(--font-color);
     background-color: var(--color-primary-400);
 }
