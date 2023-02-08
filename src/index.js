@@ -30,7 +30,7 @@ const baseLayout = function createBaseLayoutElements() {
     const nav = navLinks(dom, list, settingsBuilder, aboutBuilder);
 
     const createHeader = function createHeaderElement() {
-        const logoText = 'What TODO';
+        const logoText = 'What To-do';
         const header = dom.createElement({
             parent: document.body, 
             tag: 'header', 

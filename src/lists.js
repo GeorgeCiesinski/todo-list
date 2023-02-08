@@ -49,6 +49,14 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
                 {
                     name: 'index',
                     value: current.index
+                },
+                {
+                    name: 'placeholder',
+                    value: 'List title'
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -70,6 +78,10 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
                 {
                     name: 'index',
                     value: current.index
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -148,7 +160,8 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
             tag: 'button',
             className: 'add-list-button',
             innerHTML: '<span class="material-symbols-rounded">add</span><label>New List</label>'
-        })
+        });
+        dom.clickEvent(addListButton, events.createNewList);
     }
 
     // Handle list nav event and show requested list
@@ -162,7 +175,8 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
 
     // Define listsLinks instance declared previously
     listsLinks = links(dom, util, switchList);
-    events = listsEvents(dom, util, listsLinks, buildAddList);
+    events = listsEvents(dom, util, listsLinks, buildList, buildAddList);
+    const { createNewList } = events;
 
     // Add action to warningModal - Required events
     warningModal.addAction(events.deleteList);
@@ -197,7 +211,8 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         buildList,
         switchList,
         showPage,
-        deleteDataRefresh
+        deleteDataRefresh,
+        createNewList
     }
 }
 

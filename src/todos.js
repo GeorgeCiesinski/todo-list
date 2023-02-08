@@ -24,6 +24,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {   
                     name: 'index',
                     value: todoIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -45,6 +49,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {   
                     name: 'index',
                     value: todoIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -85,6 +93,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {   
                     name: 'index',
                     value: todoIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -158,6 +170,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {   
                     name: 'index',
                     value: todoIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -198,6 +214,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {
                     name: 'item',
                     value: checklistItemIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -223,6 +243,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {
                     name: 'item',
                     value: checklistItemIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });
@@ -402,6 +426,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 {
                     name: 'index',
                     value: todoIndex
+                },
+                {
+                    name: 'data-form-type',
+                    value: 'other'
                 }
             ]
         });

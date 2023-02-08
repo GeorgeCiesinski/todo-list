@@ -39,7 +39,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
     }
 
     const createDefault = function createDefaultList() {
-        // console.log('Generating default list');
         const defaultList = listsData.lists;
         saveLists(defaultList);
         return defaultList;
@@ -77,6 +76,12 @@ const listsUtilities = function listsUtilitiesFunctions() {
         currentListIndex = null;  // Unsets current list until a new current list is selected
     }
 
+    const createNewList = function createNewListData() {
+        const { newList } = listsData;
+        lists.push(newList);
+        const newListIndex = lists.indexOf(newList);
+        switchCurrent(newListIndex);
+    }
     
     /* 
      * Refreshes lists data with default data and switches current list to first list
@@ -130,6 +135,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     setInterval(checkChanges, timeDelay);
 
     return {
+        createNewList,
         listNavData,
         saveLists,
         loadLists,

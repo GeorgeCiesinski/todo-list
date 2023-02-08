@@ -1,4 +1,4 @@
-const listsEvents = function listEventFunctions(dom, util, listsLinks, buildAddList) {
+const listsEvents = function listEventFunctions(dom, util, listsLinks, buildList, buildAddList) {
 
     // Change Title Event - Changes the list.title variable
     const changeTitle = function changeListTitle(event) {
@@ -23,19 +23,20 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks, buildAddL
     }
 
     /*
-     * Modal
-     */
-
-    /*
      * Deletes the list object from the array and clears the listElement
      */
     const deleteList = function deleteListObjectAndElement() {
         util.deleteCurrent();
         util.updateChange();
-
         buildAddList();
-        
         listsLinks.build();  // Build Nav Links for Lists
+    }
+
+    const createNewList = function createNewListObjectAndElement() {
+        util.createNewList();
+        buildList();
+        const listTitle = document.querySelector('#list-title');
+        listTitle.focus();
     }
 
     return {
@@ -43,6 +44,7 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks, buildAddL
         changeDescription,
         createEventListeners,
         deleteList,
+        createNewList
     }
 }
 

@@ -132,5 +132,10 @@
                 }
             ]
         }
-    ]
+    ],
+    "newList": {
+        "title": "",
+        "description": "New list description...",
+        "todos": []
+    }
 }
