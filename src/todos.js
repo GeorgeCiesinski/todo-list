@@ -61,16 +61,21 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
 
     // Create priority div
     const createPriority = function createPriorityElements(parent, todo, todoIndex) {
+        const priorityDiv = dom.createElement({
+            parent, 
+            tag: 'div',
+            className: 'priority-divs',
+        })
         // Label
         dom.createElement({
-            parent,
+            parent: priorityDiv,
             tag: 'label',
             className: 'tracking-label',
             innerHTML: 'Priority: '
         });
         // Priority
         const priorityInput = dom.createElement({
-            parent,
+            parent: priorityDiv,
             tag: 'input',
             className: 'priority-input',
             attributes: [

@@ -320,17 +320,25 @@ body {
 .visible-todo-elements, .left-visible-elements, .right-visible-elements {
     display: flex;
     align-items: center;
-    gap: 10px;
 } 
 
 .visible-todo-elements {
     flex-wrap: wrap;
-    justify-content: space-between;   
+    justify-content: space-between;
+    gap: 40px;
 }
 
 .left-visible-elements, .right-visible-elements {
-    box-sizing: border-box;
+    gap: 10px;
+}
+
+.left-visible-elements {
     max-width: 100%;
+}
+
+.right-visible-elements {
+    flex: 1;
+    justify-content: space-between;
 }
 
 .created-divs, .delete-item-divs {
@@ -473,6 +481,7 @@ body {
     align-items: center;
     height: 100px;
     background-color: var(--color-primary-200);
+    border-radius: 10px;
 }
 
 // Settings
