@@ -437,9 +437,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
     }
 
     // Create button to delete todo item
-    const createDelete = function createDeleteElement(parent, todo, todoIndex) {
-        const deleteButton = dom.createElement({
+    const createDelete = function createDeleteElement(parent, todoIndex) {
+        const deleteDiv = dom.createElement({
             parent,
+            tag: 'div',
+            className: 'delete-item-divs',
+        });
+        const deleteButton = dom.createElement({
+            parent: deleteDiv,
             tag: 'button',
             className: 'delete-item-buttons',
             innerHTML: '<span class="material-symbols-rounded">delete</span>',

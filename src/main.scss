@@ -194,10 +194,6 @@ body {
     margin: 20px;
 }
 
-#content>div>h2, #content>div>h3 {
-    margin: 15px 0px;
-}
-
 // Modal
 
 .warning-modal {
@@ -266,7 +262,9 @@ body {
 
 .add-delete-divs {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
 .add-todo-buttons, .delete-list-buttons, .add-list-button {
@@ -297,10 +295,11 @@ body {
 #list-div {
     display: flex;
     flex-direction: column;
-    width: 40vw;
-    min-width: 390px;
-    margin: 20px 30vw 20px 10vw;
+    width: 50vw;
+    // min-width: 390px;
+    margin: 20px auto 20px auto;
     background-color: var(--color-primary-300);
+    box-shadow: 5px 5px 10px var(--color-primary-800);
 }
 
 #list-title {
@@ -321,14 +320,26 @@ body {
 .visible-todo-elements, .left-visible-elements, .right-visible-elements {
     display: flex;
     align-items: center;
+    gap: 10px;
 } 
 
-.left-visible-elements, .right-visible-elements {
-    gap: 10px;
+.visible-todo-elements {
+    flex-wrap: wrap;
+    justify-content: space-between;   
 }
 
-.visible-todo-elements {
-    justify-content: space-between
+.left-visible-elements, .right-visible-elements {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.created-divs, .delete-item-divs {
+    flex: 1;
+}
+
+.delete-item-divs {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .collapse-buttons, .delete-item-buttons {
@@ -383,12 +394,21 @@ body {
 }
 
 .item-names {
+    box-sizing: border-box;
+    max-width: 100%;
     font-size: 110%;
+    overflow: hidden;
 }
 
 .item-tracking-div, .deletion-div {
     display: flex;
     justify-content: space-between
+}
+
+.deletion-div {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .checklist-item-divs {
