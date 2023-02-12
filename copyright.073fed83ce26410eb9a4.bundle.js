@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktodo_list=self.webpackChunktodo_list||[]).push([[42],{567:(i,t,e)=>{e.d(t,{Z:()=>s});const s=function(){return`Copyright &copy ${(new Date).getFullYear()} George Ciesinski <a href="https://github.com/GeorgeCiesinski"><i class="fa-brands github-link fa-github github-link"></i></a>`}}},i=>{i(i.s=567)}]);
