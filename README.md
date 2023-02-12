@@ -1,6 +1,6 @@
 # todo-list
 
-A simple todo web app.
+A todo web app with local storage.
 
 ## Features
 
@@ -69,11 +69,29 @@ The checklist object is optional data a user can add to a todo item. For example
 }
 ```
 
-## Planned Features
+## Challenges
 
-### Custom Color Scheme
+I encountered a number of challenges while working on this app. These challenges were significant and turned a project I hoped to finish in 2 weeks into an almost 8 week long project. I will try to outline some of these below. 
 
-Settings page with options to pick colors such as font, background, secondary colors, etc. 
+### Custom Framework
+
+Before starting this project, I was not experienced with any javascript front-end frameworks such as React. Consequently, I found myself rebuilding the wheel and creating my own framework. While I learned a lot, including what to avoid next project, I regret the time spent building something that I could have completely avoided had I just started with an existing framework.
+
+### Depracated Libraries
+
+While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library, and finding more issues with it. As the author of the library was not reachable, I opted to create a fix within my own app that negates the bug in the library. The lesson learned here is to be careful when using old deprecated libraries. 
+
+### Color Luminance Math
+
+The most rewarding challenge I experienced with this app was due to a feature I wanted to add. My aim was to let the user pick a primary color and generate a color theme for the site. To meet web accessibility standards, I needed to generate a font color that contrasted against the primary color. This became a challenge when I had to create functions that converted hex to RGB, split it up into components, calculated the relative luminance, and recombined it into the resulting luminance. This took me almost a week to solve, but the result is a functional luminance calculation that can determine whether white or black font contrasts more strongly against the primary color. These functions can be found in `lib/color.js`.
+
+### Circular Imports
+
+I encountered a frustrating bug that took me days to resolve. I imported a module and instantiated the exported function. The issue came when I needed a function from the parent module that imported the function. In this instance, I decided to use a callback function to resolve the issue. During my research, I came across a pattern where a single module is used for all imports, and other modules import this main module, but I have to research this further.
+
+### Unclear Design Pattern
+
+I originally intended to use revealing module pattern for this project before finding out it isn't necessary in the days of ES6 modules. Consequently, I used a module pattern that in retrospect wasn't the most suitable for this project, and lead to many frustrating issues. I decided to do more reading on design patterns so that I can choose more suitable patterns for future projects.
 
 ## Code Style
 
