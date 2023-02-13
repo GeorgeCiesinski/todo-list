@@ -191,17 +191,13 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         if (event) {
             dom.switchNavLinks(event.target);
         }
-        // Switch content element to display listsPage
         dom.switchContent(listsPage);
-        // If current list is undefined, buildAddList
         const current = util.getCurrent();
         if (current.list === undefined) {
             buildAddList();
         } else {
-            // Build current list
             buildList(); 
         }
-        // Build Nav Links for Lists
         listsLinks.build(); 
     }
     

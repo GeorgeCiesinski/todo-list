@@ -29,9 +29,15 @@ const todosEvents = function todosEventFunctions(dom, util, modal) {
         const { todos } = current.list;  // Current todos array
         const todosLength = todos.length;  // Length of todos array
         const todoItem = current.list.todos[elementIndex];  // Current Todo Item
-        const { checklist } = todoItem;
-        const checklistLength = todoItem.checklist.length;  // Length of Checklist
-        const checklistItem = todoItem.checklist[elementItem];  // Current Checklist Item
+        let checklist = null;
+        let checklistLength = null;
+        let checklistItem = null;
+        if (todoItem) {
+            checklist = todoItem.checklist;
+            checklistLength = checklist.length;
+            checklistItem = checklist[elementItem];
+        }
+        
         return {
             element,
             elementIndex,
