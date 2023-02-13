@@ -99,6 +99,18 @@ body {
 }
 
 /*
+    Firefox
+*/
+
+input[type='number'] {
+    appearance: textfield;
+}
+input[type='number']:hover,
+input[type='number']:focus {
+    appearance: auto;
+}
+
+/*
     Specific Styling
 */
 
