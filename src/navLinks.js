@@ -11,7 +11,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
             className: 'add-list-link',
             innerHTML: '<span class="material-symbols-rounded">add</span><label>New List</label>'
         });
-        dom.clickEvent(addListLink, lists.createNewList);
+        dom.clickEvent(addListLink, lists.switchAndCreate);
     }
 
     // Creates an unordered list and sets it as the Nav element in dom

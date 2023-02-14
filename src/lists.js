@@ -200,6 +200,12 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         }
         listsLinks.build(); 
     }
+
+    // Switches to list page and createsNewList
+    const switchAndCreate = function switchPagesAndCreateList() {
+        showPage();
+        createNewList();
+    }
     
     // Refreshes lists data with default lists when localStorage data is deleted from the settings
     const deleteDataRefresh = function refreshElementsAfterDataDelete() {
@@ -211,6 +217,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         buildList,
         switchList,
         showPage,
+        switchAndCreate,
         deleteDataRefresh,
         createNewList
     }

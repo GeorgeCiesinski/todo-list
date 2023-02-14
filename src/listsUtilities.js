@@ -47,6 +47,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Array of Lists - Load lists or create new lists if don't exist
     const assignListsObject = function loadListsOrCreateDefaultLists() {
         lists = loadLists() || createDefault();
+        console.log(lists);
     }
 
     // Load or create lists
