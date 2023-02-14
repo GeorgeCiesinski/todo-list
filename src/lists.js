@@ -84,6 +84,10 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
                     value: current.index
                 },
                 {
+                    name: 'placeholder',
+                    value: 'List description...'
+                },
+                {
                     name: 'data-form-type',
                     value: 'other'
                 }
