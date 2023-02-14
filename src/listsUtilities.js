@@ -133,7 +133,7 @@ const listsUtilities = function listsUtilitiesFunctions() {
         lastChange = new Date();
     }
 
-    const timeDelay = 3000;  // Delay between change checks
+    const timeDelay = 500;  // Delay between change checks
 
     // Compares lastSave to lastChange to see if new changes occurred
     const checkChanges = function checkIfListsChanged() {
