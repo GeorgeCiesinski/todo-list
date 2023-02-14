@@ -478,7 +478,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             className: 'deletion-div',
         });
         createCreated(deletionDiv, todo, todoIndex);
-        createDelete(deletionDiv, todo, todoIndex);
+        createDelete(deletionDiv, todoIndex);
     }
 
 
