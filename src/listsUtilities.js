@@ -47,11 +47,12 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Array of Lists - Load lists or create new lists if don't exist
     const assignListsObject = function loadListsOrCreateDefaultLists() {
         lists = loadLists() || createDefault();
-        console.log(lists);
     }
 
     // Load or create lists
     assignListsObject();
+
+    console.log(lists);  // TEMPORARY
 
     /*
      * Current List
@@ -82,6 +83,18 @@ const listsUtilities = function listsUtilitiesFunctions() {
         lists.push(newList);
         const newListIndex = lists.indexOf(newList);
         switchCurrent(newListIndex);
+    }
+
+    // Gets the title element and switches focus to it
+    const titleFocus = function focusOnTitleElement() {
+        const listTitle = document.querySelector('#list-title');
+        listTitle.focus();
+    }
+
+    // Returns true if title element is empty - prevents untitled lists from being created
+    const titleEmpty = function checkIfTitleIsEmpty() {
+        const listTitle = document.querySelector('#list-title');
+        return listTitle.value === '' || listTitle.value === null;
     }
     
     /* 
@@ -137,6 +150,8 @@ const listsUtilities = function listsUtilitiesFunctions() {
 
     return {
         createNewList,
+        titleFocus,
+        titleEmpty,
         listNavData,
         saveLists,
         loadLists,

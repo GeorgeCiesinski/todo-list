@@ -35,8 +35,7 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks, buildList
     const createNewList = function createNewListObjectAndElement() {
         util.createNewList();
         buildList();
-        const listTitle = document.querySelector('#list-title');
-        listTitle.focus();
+        util.titleFocus();
     }
 
     return {

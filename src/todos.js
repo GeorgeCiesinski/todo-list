@@ -3,6 +3,13 @@ import todosEvents from "./todosEvents";
 const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
 
     const events = todosEvents(dom, util, modal);
+
+    // Create warning modals
+    const emptyTitleModal = modal.actionModal({
+        messageHTML: 'Please name the list before adding any data to it.',
+        buttonHTML: '<label>OK</label>',
+        action: util.titleFocus
+    });
     
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(parent, todo, todoIndex) {
@@ -505,7 +512,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
         createCollapsibleDiv(itemDiv, todo, todoIndex);
     }
 
+    // Adds a new TODO item to parent list
     const addNewTodoItem = function addNewTodoItemElement(event) {
+        if (util.titleEmpty()) {
+            emptyTitleModal.showModal();
+            return;
+        } 
         const { todoItem, todoIndex } = events.addTodo(event);
         const parent = document.getElementById('todos');
         createTodoItem(parent, todoItem, todoIndex);
