@@ -75,15 +75,15 @@ I encountered a number of challenges while working on this app. These challenges
 
 ### Custom Framework
 
-Before starting this project, I was not experienced with any javascript front-end frameworks such as React. Consequently, I found myself rebuilding the wheel and creating my own framework. While I learned a lot, including what to avoid next project, I regret the time spent building something that I could have completely avoided had I just started with an existing framework.
+Before starting this project, I was not experienced with any javascript front-end frameworks such as React. Consequently, I found myself rebuilding the wheel and creating my own framework. While I learned a lot, including what to avoid next project, my biggest takeaway was to use an existing framework to improve my efficiency rather than creating a custom one from the ground up.
 
 ### Depracated Libraries
 
-While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library, and finding more issues with it. As the author of the library was not reachable, I opted to create a fix within my own app that negates the bug in the library. The lesson learned here is to be careful when using old deprecated libraries. 
+While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library, and finding more issues with it. As the author of the library was not reachable and could not accept my pull-request, I opted to create a fix within my own app that negates the bug in the library. The lesson learned here is to be careful when using old deprecated libraries. 
 
 ### Color Luminance Math
 
-The most rewarding challenge I experienced with this app was due to a feature I wanted to add. My aim was to let the user pick a primary color and generate a color theme for the site. To meet web accessibility standards, I needed to generate a font color that contrasted against the primary color. This became a challenge when I had to create functions that converted hex to RGB, split it up into components, calculated the relative luminance, and recombined it into the resulting luminance. This took me almost a week to solve, but the result is a functional luminance calculation that can determine whether white or black font contrasts more strongly against the primary color. These functions can be found in `lib/color.js`.
+The most rewarding challenge I experienced with this app was due to a feature I wanted to add. My aim was to let the user pick a primary color and generate a color theme for the site. To meet web accessibility standards, I needed to generate a font color that contrasted against the primary color. This became a challenge when I had to create functions that converted hex to RGB, split it up into components, calculated the relative luminance, and recombined it so that the contrast against white and black font could be compared and the higher contrasting font color can be selected. This took me almost a week to solve, but the result is a functional luminance calculation that can determine whether white or black font contrasts more strongly against the primary color. These functions can be found in `lib/color.js`.
 
 ### Circular Imports
 
@@ -91,7 +91,7 @@ I encountered a frustrating bug that took me days to resolve. I imported a modul
 
 ### Unclear Design Pattern
 
-I originally intended to use revealing module pattern for this project before finding out it isn't necessary in the days of ES6 modules. Consequently, I used a module pattern that in retrospect wasn't the most suitable for this project, and lead to many frustrating issues. I decided to do more reading on design patterns so that I can choose more suitable patterns for future projects.
+I originally intended to use revealing module pattern for this project before finding out it isn't necessary in the days of ES6 modules. Consequently, I was stuck with a module pattern that in retrospect wasn't the most suitable for this project, and lead to many frustrating issues. I am currently researching design patterns further so that I can pick a more suitable one in the future. 
 
 ## Code Style
 
