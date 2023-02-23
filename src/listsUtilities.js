@@ -52,8 +52,6 @@ const listsUtilities = function listsUtilitiesFunctions() {
     // Load or create lists
     assignListsObject();
 
-    console.log(lists);  // TEMPORARY
-
     /*
      * Current List
      */

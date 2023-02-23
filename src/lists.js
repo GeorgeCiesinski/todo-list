@@ -149,6 +149,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
     const buildList = function buildListByIndex() {
         dom.clearList();
         const current = util.getCurrent();
+        console.log(current);  // Temporary
         createTitle(current);
         createDescription(current);
         todos.build();
@@ -207,7 +208,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
 
     // Switches to list page and createsNewList
     const switchAndCreate = function switchPagesAndCreateList() {
-        showPage();
+        dom.switchContent(listsPage);
         createNewList();
     }
     
