@@ -36,6 +36,7 @@ const listsEvents = function listEventFunctions(dom, util, listsLinks, buildList
         util.createNewList();
         buildList();
         util.titleFocus();
+        listsLinks.build();
     }
 
     return {

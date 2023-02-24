@@ -77,9 +77,8 @@ const listsUtilities = function listsUtilitiesFunctions() {
     }
 
     const createNewList = function createNewListData() {
-        const { newList } = listsData;
-        lists.push(newList);
-        const newListIndex = lists.indexOf(newList);
+        const { newList } = JSON.parse(JSON.stringify(listsData));
+        const newListIndex = lists.push(newList) - 1;
         switchCurrent(newListIndex);
     }
 

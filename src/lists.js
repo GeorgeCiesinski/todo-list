@@ -149,7 +149,6 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
     const buildList = function buildListByIndex() {
         dom.clearList();
         const current = util.getCurrent();
-        console.log(current);  // Temporary
         createTitle(current);
         createDescription(current);
         todos.build();

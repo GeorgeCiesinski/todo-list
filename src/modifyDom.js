@@ -165,7 +165,7 @@ const modifyDom = function modifyDomElements() {
     }
     
     // Clears list for rebuild
-    const clearNav = function clearListElement() {
+    const clearNav = function clearNavElement() {
         clearElement(nav);
     }
 
