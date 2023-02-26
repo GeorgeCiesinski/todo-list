@@ -117,7 +117,7 @@ input[type='number']:focus {
 // Header & Footer
 #site-header, #site-footer {
     color: var(--font-color);
-    background-color: var(--color-primary-600);
+    background-color: var(--color-primary-500);
 }
 
 #site-header {
@@ -138,8 +138,9 @@ input[type='number']:focus {
 // Sidebar
 #sidebar {
     max-width: 150px;
+    border-right: 1px solid var(--color-primary-500);
     color: var(--font-color);
-    background-color: var(--color-primary-400);
+    background-color: var(--color-primary-300);
 }
 
 // Nav
@@ -164,6 +165,9 @@ input[type='number']:focus {
 
 .nav-links {
     font-size: 125%;
+    border: 1px solid var(--color-primary-500);
+    border-radius: 10px;
+    padding: 5px;
 }
 
 #lists {
@@ -188,8 +192,8 @@ input[type='number']:focus {
     margin-left: 15px;
 }
 
-.active-nav-links::before {
-    content: '> ';
+.active-nav-links {
+    background-color: var(--color-primary-400);
 }
 
 .active-list-link-items {
@@ -309,6 +313,7 @@ input[type='number']:focus {
     flex-direction: column;
     width: 50vw;
     margin: 20px auto 20px auto;
+    border: 1px solid var(--color-primary-500); 
     background-color: var(--color-primary-300);
     box-shadow: 5px 5px 10px var(--color-primary-800);
 }
