@@ -137,7 +137,7 @@ input[type='number']:focus {
 
 // Sidebar
 #sidebar {
-    max-width: 150px;
+    // max-width: 150px;
     border-right: 1px solid var(--color-primary-500);
     color: var(--font-color);
     background-color: var(--color-primary-300);
@@ -170,9 +170,12 @@ input[type='number']:focus {
     padding: 5px;
 }
 
-#lists {
+#lists, #settings, #about {
     display: inline-flex;
     flex-direction: column;
+}
+
+#lists {
     gap: 20px;
     flex: 1;
 }
