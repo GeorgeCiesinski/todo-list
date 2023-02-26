@@ -118,14 +118,10 @@ input[type='number']:focus {
 #site-header, #site-footer {
     color: var(--font-color);
     background-color: var(--color-primary-500);
-}
-
-#site-header {
     padding: 20px;
 }
 
 #site-footer {
-    padding: 20px;
     text-align: center;
 }
 
@@ -137,7 +133,6 @@ input[type='number']:focus {
 
 // Sidebar
 #sidebar {
-    // max-width: 150px;
     border-right: 1px solid var(--color-primary-500);
     color: var(--font-color);
     background-color: var(--color-primary-300);
@@ -314,7 +309,7 @@ input[type='number']:focus {
 #list-div {
     display: flex;
     flex-direction: column;
-    width: 50vw;
+    max-width: 450px;
     margin: 20px auto 20px auto;
     border: 1px solid var(--color-primary-500); 
     background-color: var(--color-primary-300);
