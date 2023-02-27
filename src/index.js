@@ -1,4 +1,4 @@
-import './main.scss';
+import './scss/main.scss';
 import modifyDom from "./modifyDom";
 import modalBuilder from "./modal";
 import navLinks from "./navLinks";

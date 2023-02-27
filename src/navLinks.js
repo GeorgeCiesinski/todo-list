@@ -41,10 +41,15 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         });
         dom.addClass(listLink, 'active-nav-links');  // Set Lists as the active page
         dom.clickEvent(listLink, lists.showPage);
+        const collapseDiv = dom.createElement({
+            parent: listItem, 
+            tag: 'div', 
+            className: 'collapse'
+        });
         // Add List Link
-        addLists(listItem);
+        addLists(collapseDiv);
         // Links to existing lists
-        listsList(listItem);
+        listsList(collapseDiv);
     }
 
     // Create settings link
