@@ -1,4 +1,6 @@
+@use './abstracts/' as *;
 @use './base';
+@use './pages';
 @use './vendors';
 
 /*
@@ -8,22 +10,22 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-html {
-    // Default Colors
-    --color-primary-50: #F2F5FD;
-    --color-primary-100: #E4EAFB;
-    --color-primary-200: #C5D2F7;
-    --color-primary-300: #9CB3F2;
-    --color-primary-400: #6F90EC;
-    --color-primary-500: #1D4ED8;
-    --color-primary-600: #1B48C6;
-    --color-primary-700: #163BA2;
-    --color-primary-800: #123187;
-    --color-primary-900: #0D225E;
-    --font-color: white;
-    // Fonts
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+// html {
+//     // Default Colors
+//     --color-primary-50: #F2F5FD;
+//     --color-primary-100: #E4EAFB;
+//     --color-primary-200: #C5D2F7;
+//     --color-primary-300: #9CB3F2;
+//     --color-primary-400: #6F90EC;
+//     --color-primary-500: #1D4ED8;
+//     --color-primary-600: #1B48C6;
+//     --color-primary-700: #163BA2;
+//     --color-primary-800: #123187;
+//     --color-primary-900: #0D225E;
+//     --font-color: white;
+//     // Fonts
+//     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+// }
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
