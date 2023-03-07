@@ -39,16 +39,21 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
             className: 'nav-links',
             innerHTML: 'Lists'
         });
-        dom.addClass(listLink, 'active-nav-links');  // Set Lists as the active page
+        dom.addClass(listLink, 'active-nav-links');
         dom.clickEvent(listLink, lists.showPage);
+        const collapseButton = dom.createElement({
+            parent: listItem,
+            tag: 'button',
+            className: 'link-collapse',
+            innerHTML: 'Select List <span class="material-symbols-rounded">expand_more</span>'
+        });
+        dom.clickEvent(collapseButton, dom.createCollapseNav);
         const collapseDiv = dom.createElement({
             parent: listItem, 
             tag: 'div', 
             className: 'collapse'
         });
-        // Add List Link
         addLists(collapseDiv);
-        // Links to existing lists
         listsList(collapseDiv);
     }
 
