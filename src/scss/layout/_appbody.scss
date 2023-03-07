@@ -1,0 +1,12 @@
+#app-body {
+    flex: 1;
+    display: flex;
+}
+
+@media(max-width: 768px) {
+
+    #app-body {
+        flex-direction: column;
+    }
+    
+}

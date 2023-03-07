@@ -1,0 +1,227 @@
+// Lists
+.list-elements, .todo-items, .add-delete-divs {
+    margin: 10px;
+}
+
+.add-delete-divs {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.add-todo-buttons, .delete-list-buttons, .add-list-button {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
+}
+
+.visible-todo-elements, .collapsible-todo-elements>div {
+    margin: 10px;
+}
+
+.list-elements {
+    border: none;
+    background-color: var(--color-primary-300);
+}
+.list-elements:focus {
+    background-color: white;
+}
+
+#list-div, .todo-items, .collapse-buttons, .delete-item-buttons {
+    border-radius: 10px;
+}
+
+#list-div {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    margin: 20px auto 20px auto;
+    border: 1px solid var(--color-primary-500); 
+    background-color: var(--color-primary-300);
+    box-shadow: 5px 5px 10px var(--color-primary-800);
+}
+
+#list-title {
+    font-size: 25px;
+}
+
+#todos {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-items {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-primary-400);
+}
+
+.visible-todo-elements, .left-visible-elements, .right-visible-elements {
+    display: flex;
+    align-items: center;
+} 
+
+.visible-todo-elements {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.left-visible-elements, .right-visible-elements {
+    gap: 10px;
+}
+
+.left-visible-elements {
+    max-width: 100%;
+}
+
+.right-visible-elements {
+    flex: 1;
+    justify-content: space-between;
+}
+
+.created-divs, .delete-item-divs {
+    flex: 1;
+}
+
+.delete-item-divs {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.collapse-buttons, .delete-item-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 28px;
+    width: 28px;
+    border: none;
+}
+
+.collapse-buttons {
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
+}
+
+.delete-item-buttons {
+    color: var(--color-primary-500);
+    background-color: var(--color-primary-100);
+    transition: 1s;
+}
+.delete-item-buttons:hover {
+    color: var(--color-primary-900);
+    background-color: var(--color-primary-200);
+}
+
+.collapsible-todo-elements {
+    display: none;
+    overflow: hidden;
+}
+
+.item-checkboxes {
+    height: 20px;
+    width: 20px;
+}
+
+.date-labels {
+    display: inline-block;
+    min-width: 65px;
+}
+
+.item-names, .inner-item-names, .date-input, .priority-input {
+    border: none;
+    background-color: var(--color-primary-400);
+}
+.item-names:focus, .inner-item-names:focus, .date-input:focus, .priority-input:focus {
+    background-color: white;
+}
+
+.priority-input {
+    width: 25px;
+}
+
+.item-names {
+    box-sizing: border-box;
+    max-width: 100%;
+    font-size: 110%;
+    overflow: hidden;
+}
+
+.item-tracking-div, .deletion-div {
+    display: flex;
+    justify-content: space-between
+}
+
+.deletion-div {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checklist-item-divs {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checklist-item-left-divs, .checklist-item-right-divs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inner-labels {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.delete-inner-item-buttons, .add-inner-item-buttons {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+}
+.delete-inner-item-buttons>span, .add-inner-item-buttons>span {
+    font-size: 125%;  // Google icon size
+}
+
+.delete-inner-item-buttons {
+    margin: 2px;
+    padding: 1px;
+    background-color: var(--color-primary-400);
+    color: var(--color-primary-900);
+}
+
+.add-inner-item-buttons {
+    margin: 4px;
+    color: var(--font-color);
+    background-color: var(--color-primary-500);
+}
+
+.description-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.item-description {
+    flex: 1;
+    background-color: var(--color-primary-200);
+    border: none;
+    border-radius: 5px;
+    resize: none;
+}
+
+.add-list-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    border-radius: 10px;
+}
