@@ -3,8 +3,17 @@
  */
 const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBuilder) {
 
-    // Creates add lists link
-    const addLists = function createAddListsElements(parent) {
+    const createSelectButton = function createSelectButtonElement(parent) {
+        const collapseButton = dom.createElement({
+            parent,
+            tag: 'button',
+            className: 'link-collapse',
+            innerHTML: 'Select <span class="material-symbols-rounded">expand_more</span>'
+        });
+        dom.clickEvent(collapseButton, dom.createCollapseNav);
+    }
+
+    const createAddLists = function createAddListsElements(parent) {
         const addListLink = dom.createElement({
             parent,
             tag: 'a',
@@ -15,7 +24,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
     }
 
     // Creates an unordered list and sets it as the Nav element in dom
-    const listsList = function createListsUnorderedList(parent) {
+    const createListsList = function createListsUnorderedList(parent) {
         const listUL = dom.createElement({
             parent,
             tag: 'ul',
@@ -24,8 +33,17 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         dom.setNavElement(listUL);
     }
 
-    // Create lists link
-    const listsItem = function createListsNav(sidebar) {
+    const createCollapseDiv = function createCollapseDivElement(parent) {
+        const collapseDiv = dom.createElement({
+            parent, 
+            tag: 'div', 
+            className: 'collapse'
+        });
+        createAddLists(collapseDiv);
+        createListsList(collapseDiv);
+    }
+
+    const createListsItem = function createListsNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: 'li', 
@@ -41,24 +59,11 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         });
         dom.addClass(listLink, 'active-nav-links');
         dom.clickEvent(listLink, lists.showPage);
-        const collapseButton = dom.createElement({
-            parent: listItem,
-            tag: 'button',
-            className: 'link-collapse',
-            innerHTML: 'Select <span class="material-symbols-rounded">expand_more</span>'
-        });
-        dom.clickEvent(collapseButton, dom.createCollapseNav);
-        const collapseDiv = dom.createElement({
-            parent: listItem, 
-            tag: 'div', 
-            className: 'collapse'
-        });
-        addLists(collapseDiv);
-        listsList(collapseDiv);
+        createSelectButton(listItem);
+        createCollapseDiv(listItem);
     }
 
-    // Create settings link
-    const settingsItem = function createSettingsNav(sidebar) {
+    const createSettingsItem = function createSettingsNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: 'li', 
@@ -75,8 +80,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         dom.clickEvent(settingsLink, settingsBuilder.showPage);
     }
 
-    // Create about link
-    const aboutItem = function createAboutNav(sidebar) {
+    const createAboutItem = function createAboutNav(sidebar) {
         const listItem = dom.createElement({
             parent: sidebar, 
             tag: 'li', 
@@ -93,12 +97,11 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         dom.clickEvent(aboutLink, aboutBuilder.showPage);
     }
 
-    // Build page
     const build = function buildSidebarNavLinks(sidebar) {
         const navList = dom.createElement({parent: sidebar, tag: 'ul', idName: 'nav-list'});
-        listsItem(navList);
-        settingsItem(navList);
-        aboutItem(navList);
+        createListsItem(navList);
+        createSettingsItem(navList);
+        createAboutItem(navList);
     }
 
     return {
