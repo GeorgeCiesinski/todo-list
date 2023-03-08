@@ -45,7 +45,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
             parent: listItem,
             tag: 'button',
             className: 'link-collapse',
-            innerHTML: 'Select List <span class="material-symbols-rounded">expand_more</span>'
+            innerHTML: 'Select <span class="material-symbols-rounded">expand_more</span>'
         });
         dom.clickEvent(collapseButton, dom.createCollapseNav);
         const collapseDiv = dom.createElement({

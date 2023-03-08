@@ -5,7 +5,7 @@
 }
 
 .nav-items {
-    margin: 20px;
+    // margin: 20px;
 }
 
 .nav-links, .list-link-items, .add-list-link {
@@ -14,13 +14,10 @@
 }
 .nav-links:hover, .list-link-items:hover, .add-list-link:hover {
     cursor: pointer;
-    transform: scale(1.1);
 } 
 
 .nav-links {
     font-size: 125%;
-    border: 1px solid var(--color-primary-500);
-    border-radius: 10px;
     padding: 5px;
 }
 
@@ -29,9 +26,25 @@
     flex-direction: column;
 }
 
+#lists>a, #settings>a, #about>a {
+    padding: 15px;
+}
+
 #lists {
-    gap: 20px;
-    flex: 1;
+    box-sizing: border-box;
+}
+
+.link-collapse {
+    display: flex;
+    padding: 15px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-300);
+    border: none;
+}
+.link-collapse.active {
+    background-color: var(--color-primary-400);
 }
 
 .collapse {
