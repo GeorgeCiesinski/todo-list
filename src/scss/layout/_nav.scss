@@ -30,7 +30,12 @@
     padding: 15px;
 }
 
-.link-collapse {
+.list-menu {
+    display: none;
+    flex-direction: column;
+}
+
+.list-collapse {
     display: flex;
     padding: 15px;
     align-items: center;
@@ -38,7 +43,7 @@
     border: none;
     background-color: var(--color-primary-300);
 }
-.link-collapse.active {
+.list-collapse.active {
     background-color: var(--color-primary-500);
 }
 
@@ -74,6 +79,10 @@
 
 .active-nav-links {
     background-color: var(--color-primary-500);
+}
+
+.active-nav-links + div {
+    display: flex;
 }
 
 .active-list-link-items {

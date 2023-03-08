@@ -7,7 +7,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         const collapseButton = dom.createElement({
             parent,
             tag: 'button',
-            className: 'link-collapse',
+            className: 'list-collapse',
             innerHTML: 'Select <span class="material-symbols-rounded">expand_more</span>'
         });
         dom.clickEvent(collapseButton, dom.createCollapseNav);
@@ -57,10 +57,15 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
             className: 'nav-links',
             innerHTML: 'Lists'
         });
+        const listMenu = dom.createElement({
+            parent: listItem, 
+            tag: 'div', 
+            className: 'list-menu'
+        })
         dom.addClass(listLink, 'active-nav-links');
         dom.clickEvent(listLink, lists.showPage);
-        createSelectButton(listItem);
-        createCollapseDiv(listItem);
+        createSelectButton(listMenu);
+        createCollapseDiv(listMenu);
     }
 
     const createSettingsItem = function createSettingsNav(sidebar) {
