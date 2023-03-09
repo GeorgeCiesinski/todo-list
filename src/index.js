@@ -64,6 +64,14 @@ const baseLayout = function createBaseLayoutElements() {
         dom.setContent(content);
     }
 
+    const createRight = function createRightSideElement(parent) {
+        dom.createElement({
+            parent, 
+            tag: 'div', 
+            idName: 'right'
+        });
+    }
+
     // Create App Body and append sidebar and content
     const createAppBody = function createAppBodyElement() {
         const appBody = dom.createElement({
@@ -73,6 +81,7 @@ const baseLayout = function createBaseLayoutElements() {
         });
         createSidebar(appBody);
         createContent(appBody);
+        createRight(appBody);
     }
 
     const createFooter = function createFooterElement() {
