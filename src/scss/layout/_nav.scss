@@ -22,7 +22,6 @@
 // List menu hidden by default
 .list-menu {
     display: none;
-    flex-direction: column;
 }
 
 .list-collapse {
@@ -46,7 +45,6 @@
 
 .nav-links:hover, .add-list-link:hover, .list-collapse:hover, 
 .add-list-link:hover, .list-link-items:hover {
-    outline: 1px solid red;
     cursor: pointer;
 } 
 
@@ -75,13 +73,20 @@
     padding: 10px;
 }
 
-.active-nav-links {
+.nav-links {
+    background-color: var(--color-primary-300);
+    border: 1px solid var(--color-primary-300);
+}
+
+.nav-links.active-nav-links {
     background-color: var(--color-primary-400);
+    border: 1px solid var(--color-primary-400);
 }
 
 // Show list-menu if Lists is the active nav link
-.active-nav-links + div {
+.nav-links.active-nav-links + div {
     display: flex;
+    flex-direction: column;
 }
 
 .active-list-link-items {
