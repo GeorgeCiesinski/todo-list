@@ -119,7 +119,7 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         for (let i = 0; i < 3; i += 1) {
             createBar(hamburgerDiv);
         }
-        dom.clickEvent(hamburgerDiv, dom.createCollapseNavList)
+        dom.clickEvent(hamburgerDiv, dom.createCollapseNav);
     }
 
     const build = function buildSidebarNavLinks(sidebar) {
