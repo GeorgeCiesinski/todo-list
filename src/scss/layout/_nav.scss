@@ -1,20 +1,8 @@
 #nav-list {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    width: 150px;
 }
-
-.nav-items {
-    // margin: 20px;
-}
-
-.nav-links, .list-link-items, .add-list-link {
-    display: inline-block;
-    transition: 0.3s;
-}
-.nav-links:hover, .list-link-items:hover, .add-list-link:hover {
-    cursor: pointer;
-} 
 
 .nav-links {
     font-size: 125%;
@@ -22,14 +10,16 @@
 }
 
 #lists, #settings, #about {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 #lists>a, #settings>a, #about>a {
     padding: 15px;
 }
 
+// List menu hidden by default
 .list-menu {
     display: none;
     flex-direction: column;
@@ -41,6 +31,7 @@
     align-items: center;
     justify-content: center;
     border: none;
+    color: var(--font-color);
     background-color: var(--color-primary-300);
 }
 .list-collapse.active {
@@ -48,17 +39,24 @@
 }
 
 .collapse {
-    padding-left: 10px;
+    padding-left: 10%;
     background-color: var(--color-primary-400);
     display: none;
 }
 
+.nav-links:hover, .add-list-link:hover, .list-collapse:hover, 
+.add-list-link:hover, .list-link-items:hover {
+    outline: 1px solid red;
+    cursor: pointer;
+} 
+
 .add-list-link {
     display: flex;
+    justify-content: center;
     background-color: var(--color-primary-400);
-    margin-left: 10px;
     padding: 10px;
 }
+
 .add-list-link>span {
     font-size: 100%;
     float: left;
@@ -67,13 +65,13 @@
 #list-items {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
     border-bottom: 1px solid var(--color-primary-400);
     background-color: var(--color-primary-300);
 }
 
 .list-link-items {
     display: flex;
+    justify-content: center;
     padding: 10px;
 }
 
@@ -81,10 +79,23 @@
     background-color: var(--color-primary-400);
 }
 
+// Show list-menu if Lists is the active nav link
 .active-nav-links + div {
     display: flex;
 }
 
 .active-list-link-items {
     background-color: var(--color-primary-500);
+}
+
+@media(max-width: 768px) {
+
+    #nav-list {
+        width: 100%;
+    }
+
+    .collapse {
+        padding-left: 0;
+    }
+    
 }
