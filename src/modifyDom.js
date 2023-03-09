@@ -273,6 +273,7 @@ const modifyDom = function modifyDomElements() {
         dropdownContent.classList.toggle('visible');
     }
 
+    // Close collapsible menu elements upon selection
     const closeMenus = function closeMenusAfterSelection() {
         const hamburger = document.querySelector('.hamburger');
         const navList = document.querySelector('#nav-list');
