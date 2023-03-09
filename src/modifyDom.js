@@ -277,6 +277,16 @@ const modifyDom = function modifyDomElements() {
         }
     }
 
+    const createCollapseNavList = function createCollapseNavListEventListener() {
+        this.classList.toggle('active');
+        const navList = this.nextElementSibling;
+        if (navList.style.display === 'block') {
+            navList.style.display = 'none';
+        } else {
+            navList.style.display = 'block';
+        }
+    }
+
     return {
         createElement,
         removeElement,
@@ -297,7 +307,8 @@ const modifyDom = function modifyDomElements() {
         keyUpEvent,
         changeEvent,
         createCollapse,
-        createCollapseNav
+        createCollapseNav,
+        createCollapseNavList
     }
 };
 

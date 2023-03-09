@@ -102,11 +102,33 @@ const navLinks = function createNavElements(dom, lists, settingsBuilder, aboutBu
         dom.clickEvent(aboutLink, aboutBuilder.showPage);
     }
 
+    const createBar = function createBarElement(parent) {
+        dom.createElement({
+            parent,
+            tag: 'span',
+            className: 'bar',
+        });
+    }
+
+    const createHamburger = function createHamburgerElement(parent) {
+        const hamburgerDiv = dom.createElement({
+            parent,
+            tag: 'div',
+            className: 'hamburger',
+        });
+        for (let i = 0; i < 3; i += 1) {
+            createBar(hamburgerDiv);
+        }
+        dom.clickEvent(hamburgerDiv, dom.createCollapseNavList)
+    }
+
     const build = function buildSidebarNavLinks(sidebar) {
+        createHamburger(sidebar);
         const navList = dom.createElement({parent: sidebar, tag: 'ul', idName: 'nav-list'});
         createListsItem(navList);
         createSettingsItem(navList);
         createAboutItem(navList);
+        
     }
 
     return {
