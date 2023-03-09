@@ -270,11 +270,7 @@ const modifyDom = function modifyDomElements() {
     const createCollapseNav = function createCollapseNavEventListener() {
         this.classList.toggle('active');
         const dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === 'block') {
-            dropdownContent.style.display = 'none';
-        } else {
-            dropdownContent.style.display = 'block';
-        }
+        dropdownContent.classList.toggle('visible');
     }
 
     return {

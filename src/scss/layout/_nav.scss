@@ -42,6 +42,9 @@
     background-color: var(--color-primary-400);
     display: none;
 }
+.collapse.visible {
+    display: block;
+}
 
 .nav-links:hover, .add-list-link:hover, .list-collapse:hover, 
 .add-list-link:hover, .list-link-items:hover {
@@ -115,6 +118,10 @@
     #nav-list {
         display: none;
         width: 100%;
+    }
+
+    #nav-list.visible {
+        display: flex;
     }
 
     .collapse {
