@@ -173,6 +173,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             dom.switchNavLinks(event.target);
         }
         dom.switchContent(settingsPage);
+        dom.closeMenus();
     }
 
     build();  // Builds page

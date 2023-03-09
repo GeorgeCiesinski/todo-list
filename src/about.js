@@ -80,6 +80,7 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
             dom.switchNavLinks(event.target);
         }
         dom.switchContent(aboutPage);
+        dom.closeMenus();
     }
 
     build();

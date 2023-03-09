@@ -179,6 +179,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
         util.switchCurrent(index);
         buildList();
         dom.switchListLinks(element);
+        dom.closeMenus();
     }
 
     // Define listsLinks instance declared previously
@@ -203,6 +204,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
             buildList(); 
         }
         listsLinks.build(); 
+        dom.closeMenus();
     }
 
     // Switches to list page and createsNewList

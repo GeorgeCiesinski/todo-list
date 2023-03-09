@@ -273,6 +273,15 @@ const modifyDom = function modifyDomElements() {
         dropdownContent.classList.toggle('visible');
     }
 
+    const closeMenus = function closeMenusAfterSelection() {
+        const hamburger = document.querySelector('.hamburger');
+        const navList = document.querySelector('#nav-list');
+        const select = document.querySelector('.collapse');
+        hamburger.classList.remove('active');
+        navList.classList.remove('visible');
+        select.classList.remove('visible');
+    }
+
     return {
         createElement,
         removeElement,
@@ -294,6 +303,7 @@ const modifyDom = function modifyDomElements() {
         changeEvent,
         createCollapse,
         createCollapseNav,
+        closeMenus
     }
 };
 
