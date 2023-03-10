@@ -75,27 +75,7 @@ The checklist object is optional data a user can add to a todo item. For example
 
 ## Challenges
 
-I encountered a number of challenges while working on this app. These challenges were significant and turned a project I hoped to finish in 2 weeks into one that took more than 8 weeks. I will try to outline the most significant challenges below.
-
-### Custom Framework
-
-Before starting this project, I had little experience with javascript front-end frameworks such as React. The study plan I am following (The Odin Project) also had this as an upcoming chapter I would be covering next, so I decided to use what I already knew to build this project. Consequently, I found myself rebuilding the wheel and creating my own framework. While I learned a lot, my biggest take away is that it is simply not worth it to build a custom framework unless you have a very good reason, and a lot of man hours available.
-
-### Depracated Libraries
-
-While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library. As the author of the library was not reachable and could not accept my pull-request, I opted to create a fix within my own app that reverses the bug in the library. The lesson learned here is to be careful when using old deprecated libraries.
-
-### Color Luminance Math
-
-The most rewarding challenge I experienced with this app was due to a feature I wanted to add. My aim was to let the user pick a primary color and generate a color theme for the site. To meet web accessibility standards, I needed to generate a font color that contrasted against the primary color. This became a challenge when I had to create functions that converted hex to RGB, split it up into components, calculated the relative luminance, and recombined it so that the contrast against white and black font could be compared and the higher contrasting font color can be selected. This took me almost a week to solve, but the result is a functional luminance calculation that can determine whether white or black font contrasts more strongly against the primary color. This code can be found in `src/colorTheme.js` and `src/lib/color.js`.
-
-### Circular Imports
-
-I encountered a frustrating bug that took me days to resolve. I imported a module and instantiated the exported function. The issue came when I needed to use a function from the original module within the instantiated function. In this instance, I decided to use a callback function to resolve the issue, but this issue occurred several more times, and in retrospect, I do not think this was the best solution.
-
-### Unclear Design Pattern
-
-I originally intended to use revealing module pattern for this project before finding out it isn't necessary in the days of ES6 modules. Consequently, I was stuck with a module pattern that in retrospect wasn't the most suitable for this project, and lead to many frustrating issues.
+As this app was created to hone my skills in dom manipulation and web development, I encountered a number of challenges which I documented on [this page](https://github.com/GeorgeCiesinski/todo-list/wiki/Challenges) of the project wiki. Feel free to check it out if this interests you!
 
 ## Code Style
 
