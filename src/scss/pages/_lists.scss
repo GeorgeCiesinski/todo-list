@@ -1,7 +1,9 @@
 @use '../layout/content' as *;
 
 // Lists
-.list-elements, .todo-items, .add-delete-divs {
+.list-elements,
+.todo-items,
+.add-delete-divs {
     margin: 10px;
 }
 
@@ -12,7 +14,9 @@
     flex-wrap: wrap;
 }
 
-.add-todo-buttons, .delete-list-buttons, .add-list-button {
+.add-todo-buttons,
+.delete-list-buttons,
+.add-list-button {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -28,16 +32,22 @@
     transition: all 0.3s;
 }
 
-.add-inner-item-buttons:hover, .add-todo-buttons:hover, .delete-list-buttons:hover, .add-list-button:hover, .collapse-buttons:hover {
+.add-inner-item-buttons:hover,
+.add-todo-buttons:hover,
+.delete-list-buttons:hover,
+.add-list-button:hover,
+.collapse-buttons:hover {
     box-shadow: 0px 0px 5px var(--font-color);
     text-shadow: 2px 2px 1px var(--color-primary-800);
 }
 
-.add-todo-buttons > label, .delete-list-buttons > label {
+.add-todo-buttons > label,
+.delete-list-buttons > label {
     font-size: 125%;
 }
 
-.visible-todo-elements, .collapsible-todo-elements>div {
+.visible-todo-elements,
+.collapsible-todo-elements > div {
     margin: 10px;
 }
 
@@ -49,7 +59,10 @@
     background-color: white;
 }
 
-#list-div, .todo-items, .collapse-buttons, .delete-item-buttons {
+#list-div,
+.todo-items,
+.collapse-buttons,
+.delete-item-buttons {
     border-radius: 10px;
 }
 
@@ -60,7 +73,7 @@
     min-width: 330px;
     max-width: $max-width;
     margin: 50px;
-    border: 1px solid var(--color-primary-500); 
+    border: 1px solid var(--color-primary-500);
     background-color: var(--color-primary-300);
     box-shadow: 5px 5px 10px var(--color-primary-800);
 }
@@ -80,10 +93,12 @@
     background-color: var(--color-primary-400);
 }
 
-.visible-todo-elements, .left-visible-elements, .right-visible-elements {
+.visible-todo-elements,
+.left-visible-elements,
+.right-visible-elements {
     display: flex;
     align-items: center;
-} 
+}
 
 .visible-todo-elements {
     flex-wrap: wrap;
@@ -94,7 +109,8 @@
     max-width: calc($max-width - 40px);
 }
 
-.left-visible-elements, .right-visible-elements {
+.left-visible-elements,
+.right-visible-elements {
     gap: 10px;
 }
 
@@ -107,7 +123,8 @@
     justify-content: space-between;
 }
 
-.created-divs, .delete-item-divs {
+.created-divs,
+.delete-item-divs {
     flex: 1;
 }
 
@@ -116,7 +133,8 @@
     justify-content: flex-end;
 }
 
-.collapse-buttons, .delete-item-buttons {
+.collapse-buttons,
+.delete-item-buttons {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -155,11 +173,17 @@
     min-width: 65px;
 }
 
-.item-names, .inner-item-names, .date-input, .priority-input {
+.item-names,
+.inner-item-names,
+.date-input,
+.priority-input {
     border: none;
     background-color: var(--color-primary-400);
 }
-.item-names:focus, .inner-item-names:focus, .date-input:focus, .priority-input:focus {
+.item-names:focus,
+.inner-item-names:focus,
+.date-input:focus,
+.priority-input:focus {
     background-color: white;
 }
 
@@ -174,9 +198,10 @@
     overflow: hidden;
 }
 
-.item-tracking-div, .deletion-div {
+.item-tracking-div,
+.deletion-div {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .deletion-div {
@@ -192,7 +217,8 @@
     gap: 5px;
 }
 
-.checklist-item-left-divs, .checklist-item-right-divs {
+.checklist-item-left-divs,
+.checklist-item-right-divs {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -203,14 +229,16 @@
     margin-bottom: 10px;
 }
 
-.delete-inner-item-buttons, .add-inner-item-buttons {
+.delete-inner-item-buttons,
+.add-inner-item-buttons {
     display: inline-flex;
     align-items: center;
     border: none;
     border-radius: 5px;
 }
-.delete-inner-item-buttons>span, .add-inner-item-buttons>span {
-    font-size: 125%;  // Google icon size
+.delete-inner-item-buttons > span,
+.add-inner-item-buttons > span {
+    font-size: 125%; // Google icon size
 }
 
 .delete-inner-item-buttons {

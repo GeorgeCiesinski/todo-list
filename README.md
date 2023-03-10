@@ -10,7 +10,7 @@ Lists and Settings are stored using local storage. As long as you access the app
 
 ### Customize Color Theme
 
-The `Primary Color` setting in the Settings menu allows you to specify a color theme. Thanks to the Palettey library, a Tailwinds style 10 color palette is generated for the website to use. 
+The `Primary Color` setting in the Settings menu allows you to specify a color theme. Thanks to the Palettey library, a Tailwinds style 10 color palette is generated for the website to use.
 
 ### Alternating Font Color
 
@@ -31,7 +31,7 @@ The Lists object contains all of the lists. The app starts with a default list t
             "title": "Default",
             "description": "Basic list for any kind of todo's"
             "todos": [
-                todo-object, 
+                todo-object,
                 todo-object-2,
                 ...
             ]
@@ -83,7 +83,7 @@ Before starting this project, I had little experience with javascript front-end 
 
 ### Depracated Libraries
 
-While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library. As the author of the library was not reachable and could not accept my pull-request, I opted to create a fix within my own app that reverses the bug in the library. The lesson learned here is to be careful when using old deprecated libraries. 
+While working on this project, I searched for libraries that would help me build planned features. I found an outdated library that did exactly what I wanted, but the library itself had bugs within it. I got sidetracked and ended up pushing an update for this deprecated library. As the author of the library was not reachable and could not accept my pull-request, I opted to create a fix within my own app that reverses the bug in the library. The lesson learned here is to be careful when using old deprecated libraries.
 
 ### Color Luminance Math
 

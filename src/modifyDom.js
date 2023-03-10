@@ -2,14 +2,13 @@
  * Contains all functions that modify DOM
  */
 const modifyDom = function modifyDomElements() {
-    
-    let nav = null;  // Nav element
-    let content = null;  // Content element
-    let list = null;  // List element
+    let nav = null // Nav element
+    let content = null // Content element
+    let list = null // List element
 
     /* Set attribute for a given element
-     * 
-     * - Params - 
+     *
+     * - Params -
      * element: A DOM element
      * attribute: An array containing objects with attribute name and value
      *      {
@@ -18,17 +17,16 @@ const modifyDom = function modifyDomElements() {
      *      }
      */
     const addAttributes = function addAttributesToElement(element, attribute) {
-        const {name, value} = attribute;
+        const { name, value } = attribute
         try {
-            element.setAttribute(name, value);
-        }
-        catch(err) {
-            console.error('Failed to add attribute to element.', err);
+            element.setAttribute(name, value)
+        } catch (err) {
+            console.error('Failed to add attribute to element.', err)
         }
     }
 
     /*
-     * Creates a new element, adds attributes, and appends to parent if provided. 
+     * Creates a new element, adds attributes, and appends to parent if provided.
      *
      * - Params -
      * parent: Parent element. Appends new element to parent if provided.
@@ -37,66 +35,61 @@ const modifyDom = function modifyDomElements() {
      * className: Adds class if provided.
      * innerHTML: Adds innerHTML if provided.
      * href: Adds href if the tag is an anchor. If no href provided, 'href="#"` will be added instead.
-     * 
+     *
      * - Returns -
      * {
      *      success: true/false,
      *      element: (element) if success === true
      * }
      */
-    const createElement = function createNewDomElement({
-        parent, 
-        tag,
-        idName, 
-        className,
-        innerHTML,
-        href,
-        attributes
-    }={
-        attributes: {} 
-    }) {
-
-        const result = {};
+    const createElement = function createNewDomElement(
+        { parent, tag, idName, className, innerHTML, href, attributes } = {
+            attributes: {},
+        }
+    ) {
+        const result = {}
 
         // If parent and tag are provided, create element
         if (tag) {
-            const element = document.createElement(tag);
+            const element = document.createElement(tag)
             // Append to parent if provided
             if (parent) {
-                parent.appendChild(element);
+                parent.appendChild(element)
             }
             // Add optional values
             if (idName) {
-                element.id = idName;
+                element.id = idName
             }
             if (className) {
-                element.classList.add(className);
+                element.classList.add(className)
             }
             if (innerHTML) {
-                element.innerHTML = innerHTML;
+                element.innerHTML = innerHTML
             }
             if (href) {
-                element.href = href;
+                element.href = href
             }
             if (attributes) {
-                attributes.forEach(attribute => addAttributes(element, attribute));
+                attributes.forEach((attribute) =>
+                    addAttributes(element, attribute)
+                )
             }
-            result.success = true;
-            result.element = element;
+            result.success = true
+            result.element = element
         } else {
-            console.error('Unable to create element without a tag.');
-            result.success = false;
+            console.error('Unable to create element without a tag.')
+            result.success = false
         }
 
         if (result.success) {
-            return result.element;
+            return result.element
         }
 
-        return null;  // Return null if failed
+        return null // Return null if failed
     }
 
     const removeElement = function removeDomElement(element) {
-        element.remove();
+        element.remove()
     }
 
     /*
@@ -105,19 +98,22 @@ const modifyDom = function modifyDomElements() {
 
     // Add class to an element
     const addClass = function addClassToElement(element, className) {
-        element.classList.add(className);
+        element.classList.add(className)
     }
 
     // Remove class from an element
     const removeClass = function addClassToElement(element, className) {
-        element.classList.remove(className);
+        element.classList.remove(className)
     }
 
     // Remove active class from previous elements and add to new element
-    const switchActiveClass = function switchActiveClassForElement(element, className) {
-        const activeItems = document.querySelectorAll(`.${className}`);
-        activeItems.forEach(item => removeClass(item, className));
-        addClass(element, className);
+    const switchActiveClass = function switchActiveClassForElement(
+        element,
+        className
+    ) {
+        const activeItems = document.querySelectorAll(`.${className}`)
+        activeItems.forEach((item) => removeClass(item, className))
+        addClass(element, className)
     }
 
     /*
@@ -126,31 +122,31 @@ const modifyDom = function modifyDomElements() {
 
     // Sets nav element when it is first created
     const setNavElement = function setNavElementDomNode(element) {
-        nav = element;
+        nav = element
     }
 
     const getNavElement = function getNavElementDomNode() {
         if (nav) {
-            return nav;
+            return nav
         }
-        return null;
+        return null
     }
 
     // Sets content element when it is first created
     const setContent = function setContentDomNode(element) {
-        content = element;
+        content = element
     }
 
     // Sets list element when it is first created
     const setListElement = function setListElementDomNode(element) {
-        list = element;
+        list = element
     }
 
     const getListElement = function getListElementDomNode() {
         if (list) {
-            return list;
+            return list
         }
-        return null;
+        return null
     }
 
     /*
@@ -160,36 +156,36 @@ const modifyDom = function modifyDomElements() {
     // Remove children from parent element
     const clearElement = function clearElementsFromParent(element) {
         while (element.firstChild) {
-            element.removeChild(element.lastChild);
+            element.removeChild(element.lastChild)
         }
     }
-    
+
     // Clears list for rebuild
     const clearNav = function clearNavElement() {
-        clearElement(nav);
+        clearElement(nav)
     }
 
     // Clears list for rebuild
     const clearList = function clearListElement() {
-        clearElement(list);
+        clearElement(list)
     }
 
     // Switch which element is the active Nav link
     const switchNavLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = 'active-nav-links';
-        switchActiveClass(element, activeClass);
+        const activeClass = 'active-nav-links'
+        switchActiveClass(element, activeClass)
     }
 
     // Switch which element is the active List link
     const switchListLinks = function switchNavLinksActiveClass(element) {
-        const activeClass = 'active-list-link-items';
-        switchActiveClass(element, activeClass);
+        const activeClass = 'active-list-link-items'
+        switchActiveClass(element, activeClass)
     }
 
     // Appends element to content div
     const switchContent = function switchContentWithNewElement(element) {
-        clearElement(content);  
-        content.appendChild(element);
+        clearElement(content)
+        content.appendChild(element)
     }
 
     /*
@@ -199,19 +195,17 @@ const modifyDom = function modifyDomElements() {
     // Adds color variables to CSS
     const setPalette = function setPaletteCSS(palette) {
         Object.entries(palette).forEach((entry) => {
-            const [step, color] = entry;
+            const [step, color] = entry
             document.documentElement.style.setProperty(
-                `--color-primary-${step}`, 
+                `--color-primary-${step}`,
                 color
-            );
-        });
+            )
+        })
     }
 
     // Adds font variable to CSS
     const setFont = function setFontColorCSS(fontColor) {
-        document.documentElement.style.setProperty(
-            '--font-color', fontColor
-        )
+        document.documentElement.style.setProperty('--font-color', fontColor)
     }
 
     /*
@@ -220,15 +214,15 @@ const modifyDom = function modifyDomElements() {
 
     // Adds a click event listener to an element
     const clickEvent = function createClickEventListener(element, action) {
-        element.addEventListener('click', action);
+        element.addEventListener('click', action)
     }
 
     const keyUpEvent = function createKeyUpEvent(element, action) {
-        element.addEventListener('keyup', action);
+        element.addEventListener('keyup', action)
     }
 
     const changeEvent = function createChangeEventListener(element, action) {
-        element.addEventListener('change', action);
+        element.addEventListener('change', action)
     }
 
     /*
@@ -237,50 +231,55 @@ const modifyDom = function modifyDomElements() {
 
     // Collapse todo item content
     const collapseContent = function collapseContentElement(event) {
-        const { currentTarget } = event;
+        const { currentTarget } = event
         if (currentTarget.classList.contains('collapsed')) {
-            currentTarget.classList.remove('collapsed');
-            currentTarget.classList.add('visible');
-            currentTarget.innerHTML = '<span class="material-symbols-rounded">expand_less</span>';  // Change to minus icon
+            currentTarget.classList.remove('collapsed')
+            currentTarget.classList.add('visible')
+            currentTarget.innerHTML =
+                '<span class="material-symbols-rounded">expand_less</span>' // Change to minus icon
         } else if (currentTarget.classList.contains('visible')) {
-            currentTarget.classList.remove('visible');
-            currentTarget.classList.add('collapsed');
-            currentTarget.innerHTML = '<span class="material-symbols-rounded">expand_more</span>';  // Change to plus icon
+            currentTarget.classList.remove('visible')
+            currentTarget.classList.add('collapsed')
+            currentTarget.innerHTML =
+                '<span class="material-symbols-rounded">expand_more</span>' // Change to plus icon
         }
         // Get 'collapsible-todo-elements' which is a sibling of parent 'visible-todo-elements'
-        const contentElement = currentTarget.parentNode.parentNode.nextElementSibling;
+        const contentElement =
+            currentTarget.parentNode.parentNode.nextElementSibling
         // Toggle collapse
-        if (contentElement.style.display === "block") {
-            contentElement.style.display = "none";
+        if (contentElement.style.display === 'block') {
+            contentElement.style.display = 'none'
         } else {
-            contentElement.style.display = "block";
+            contentElement.style.display = 'block'
         }
     }
 
     // Adds event listener to each todo item - collapses content
     const createCollapse = function createCollapseEventListener() {
         // Get collapseButtons with event=false attribute
-        const collapseButtons = document.querySelectorAll('.collapse-buttons[event="false"]');
-        collapseButtons.forEach(button => {
-            button.setAttribute('event', true);
-            clickEvent(button, collapseContent);
-        });
+        const collapseButtons = document.querySelectorAll(
+            '.collapse-buttons[event="false"]'
+        )
+        collapseButtons.forEach((button) => {
+            button.setAttribute('event', true)
+            clickEvent(button, collapseContent)
+        })
     }
 
     const createCollapseNav = function createCollapseNavEventListener() {
-        this.classList.toggle('active');
-        const dropdownContent = this.nextElementSibling;
-        dropdownContent.classList.toggle('visible');
+        this.classList.toggle('active')
+        const dropdownContent = this.nextElementSibling
+        dropdownContent.classList.toggle('visible')
     }
 
     // Close collapsible menu elements upon selection
     const closeMenus = function closeMenusAfterSelection() {
-        const hamburger = document.querySelector('.hamburger');
-        const navList = document.querySelector('#nav-list');
-        const select = document.querySelector('.collapse');
-        hamburger.classList.remove('active');
-        navList.classList.remove('visible');
-        select.classList.remove('visible');
+        const hamburger = document.querySelector('.hamburger')
+        const navList = document.querySelector('#nav-list')
+        const select = document.querySelector('.collapse')
+        hamburger.classList.remove('active')
+        navList.classList.remove('visible')
+        select.classList.remove('visible')
     }
 
     return {
@@ -304,8 +303,8 @@ const modifyDom = function modifyDomElements() {
         changeEvent,
         createCollapse,
         createCollapseNav,
-        closeMenus
+        closeMenus,
     }
-};
+}
 
-export default modifyDom;
+export default modifyDom

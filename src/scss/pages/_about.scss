@@ -8,14 +8,14 @@
     margin: 0px 10vw;
 }
 
-#about-page > h2, #about-page > h3 {
+#about-page > h2,
+#about-page > h3 {
     margin-top: 30px;
 }
 
-@media(max-width: 768px) {
-
-    #about-page > h2, #about-page > h3 {
+@media (max-width: 768px) {
+    #about-page > h2,
+    #about-page > h3 {
         text-align: center;
     }
-
 }

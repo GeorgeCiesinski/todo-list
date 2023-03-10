@@ -1,18 +1,15 @@
-import settingsUtilities from "./settingsUtilities";
+import settingsUtilities from './settingsUtilities'
 
 /*
  * Builds settings page
  */
 const settingsBuilder = function settingsBuilderFunctions(dom, list) {
-    
-    const util = settingsUtilities(dom, list);
+    const util = settingsUtilities(dom, list)
 
-    const settingsPage = dom.createElement(
-        {
-            tag: 'div',
-            idName: 'settings-page'
-        }
-    );  // Base settings dom element  
+    const settingsPage = dom.createElement({
+        tag: 'div',
+        idName: 'settings-page',
+    }) // Base settings dom element
 
     /*
      * Page Construction
@@ -23,17 +20,17 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
         dom.createElement({
             parent: settingsPage,
             tag: 'h2',
-            innerHTML: "Settings"
-        });
+            innerHTML: 'Settings',
+        })
     }
 
     // Creates color div
     const createColors = function createColorsElement(parent) {
         const colorDiv = dom.createElement({
-            parent, 
-            tag: 'div', 
-            idName: 'color-div'
-        });
+            parent,
+            tag: 'div',
+            idName: 'color-div',
+        })
         // Label
         dom.createElement({
             parent: colorDiv,
@@ -43,10 +40,10 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             attributes: [
                 {
                     name: 'for',
-                    value: 'color-input'
-                }
+                    value: 'color-input',
+                },
             ],
-        });
+        })
         // Input
         const colorInput = dom.createElement({
             parent: colorDiv,
@@ -56,38 +53,38 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             attributes: [
                 {
                     name: 'type',
-                    value: 'color'
+                    value: 'color',
                 },
                 {
                     name: 'name',
-                    value: 'color-input'
+                    value: 'color-input',
                 },
                 {
                     name: 'value',
-                    value: util.getPrimaryColor()
-                }
+                    value: util.getPrimaryColor(),
+                },
             ],
-        });
-        colorInput.addEventListener('input', util.updateColorScheme);
+        })
+        colorInput.addEventListener('input', util.updateColorScheme)
     }
 
     // Contains load and save buttons
     const createSettingsDiv = function createButtonsDivElement() {
         const settingsDiv = dom.createElement({
             parent: settingsPage,
-            tag: "div",
-            idName: 'color-settings-div', 
-            className: 'settings-divs'
-        });
-        createColors(settingsDiv);
+            tag: 'div',
+            idName: 'color-settings-div',
+            className: 'settings-divs',
+        })
+        createColors(settingsDiv)
     }
 
     const createLoadButton = function createLoadButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
             parent,
-            tag: "div",
-            idName: 'load-button-div'
-        });
+            tag: 'div',
+            idName: 'load-button-div',
+        })
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv,
@@ -95,16 +92,16 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             idName: 'load-button',
             className: 'settings-buttons',
             innerHTML: 'Load Previous',
-        });
-        saveButton.addEventListener('click', util.loadSettings);
+        })
+        saveButton.addEventListener('click', util.loadSettings)
     }
 
     const createSaveButton = function createSaveButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
             parent,
-            tag: "div",
-            idName: 'save-button-div'
-        });
+            tag: 'div',
+            idName: 'save-button-div',
+        })
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv,
@@ -112,20 +109,20 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             idName: 'save-button',
             className: 'settings-buttons',
             innerHTML: 'Save Settings',
-        });
-        saveButton.addEventListener('click', util.saveSettings);
+        })
+        saveButton.addEventListener('click', util.saveSettings)
     }
 
     // Contains load and save buttons
     const createButtonsDiv = function createButtonsDivElement() {
         const buttonsDiv = dom.createElement({
             parent: settingsPage,
-            tag: "div",
-            idName: 'buttons-div', 
-            className: 'settings-divs'
-        });
-        createLoadButton(buttonsDiv);
-        createSaveButton(buttonsDiv);
+            tag: 'div',
+            idName: 'buttons-div',
+            className: 'settings-divs',
+        })
+        createLoadButton(buttonsDiv)
+        createSaveButton(buttonsDiv)
     }
 
     // Data
@@ -133,54 +130,54 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
         dom.createElement({
             parent: settingsPage,
             tag: 'h3',
-            innerHTML: "Data"
-        });
+            innerHTML: 'Data',
+        })
     }
 
     // Create Delete Data Div
     const createDeleteData = function createDeleteData() {
         const deleteDataDiv = dom.createElement({
             parent: settingsPage,
-            tag: "div",
-            idName: 'delete-data-div', 
-            className: 'settings-divs'
-        });
+            tag: 'div',
+            idName: 'delete-data-div',
+            className: 'settings-divs',
+        })
         // Button
         const deleteDataButton = dom.createElement({
             parent: deleteDataDiv,
             tag: 'button',
             className: 'settings-buttons',
             innerHTML: 'Delete Local Data',
-        });
-        deleteDataButton.addEventListener('click', util.deleteData);
+        })
+        deleteDataButton.addEventListener('click', util.deleteData)
     }
 
     // Builds page page
     const build = function buildSettingsPage() {
         // Page Header
-        createTitle();
+        createTitle()
         // Color Theme
-        createSettingsDiv();
-        createButtonsDiv();
+        createSettingsDiv()
+        createButtonsDiv()
         // Data
-        createDataHeader();
-        createDeleteData();
+        createDataHeader()
+        createDeleteData()
     }
 
     // Shows built page
     const showPage = function switchPage(event) {
         if (event) {
-            dom.switchNavLinks(event.target);
+            dom.switchNavLinks(event.target)
         }
-        dom.switchContent(settingsPage);
-        dom.closeMenus();
+        dom.switchContent(settingsPage)
+        dom.closeMenus()
     }
 
-    build();  // Builds page
+    build() // Builds page
 
     return {
-        showPage
+        showPage,
     }
 }
 
-export default settingsBuilder;
+export default settingsBuilder

@@ -2,14 +2,15 @@
     display: inline-flex;
     flex-direction: column;
 }
-#color-settings-div>div {
+#color-settings-div > div {
     display: flex;
     // justify-content: space-between;
     align-items: center;
     gap: 72px;
 }
 
-#color-settings-div>div, #buttons-div {
+#color-settings-div > div,
+#buttons-div {
     height: 30px;
 }
 
@@ -33,14 +34,14 @@
     width: 130px;
 }
 
-#settings-page > h2, #settings-page > h3 {
+#settings-page > h2,
+#settings-page > h3 {
     margin-top: 40px;
 }
 
-@media(max-width: 768px) {
-
-    #settings-page > h2, #settings-page > h3 {
+@media (max-width: 768px) {
+    #settings-page > h2,
+    #settings-page > h3 {
         text-align: center;
     }
-
 }
