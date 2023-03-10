@@ -1,4 +1,9 @@
+// Max width for content elements
+$max-width: 600px;
+
 #content {
+    display: flex;
+    justify-content: center;
     flex: 1;
     background-color: var(--color-primary-200);
 }

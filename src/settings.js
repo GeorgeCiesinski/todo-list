@@ -94,7 +94,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             tag: 'button',
             idName: 'load-button',
             className: 'settings-buttons',
-            innerHTML: 'Load Settings',
+            innerHTML: 'Load Previous',
         });
         saveButton.addEventListener('click', util.loadSettings);
     }

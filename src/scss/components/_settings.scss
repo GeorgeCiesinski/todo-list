@@ -4,9 +4,9 @@
 }
 #color-settings-div>div {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 72px;
 }
 
 #color-settings-div>div, #buttons-div {
@@ -21,7 +21,7 @@
 #buttons-div {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 40px;
 }
 
 .settings-buttons {
@@ -31,4 +31,16 @@
     border-radius: 5px;
     height: 25px;
     width: 130px;
+}
+
+#settings-page > h2, #settings-page > h3 {
+    margin-top: 40px;
+}
+
+@media(max-width: 768px) {
+
+    #settings-page > h2, #settings-page > h3 {
+        text-align: center;
+    }
+
 }

@@ -1,3 +1,5 @@
+@use '../layout/content' as *;
+
 // Lists
 .list-elements, .todo-items, .add-delete-divs {
     margin: 10px;
@@ -5,7 +7,7 @@
 
 .add-delete-divs {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 5px;
     flex-wrap: wrap;
 }
@@ -13,10 +15,26 @@
 .add-todo-buttons, .delete-list-buttons, .add-list-button {
     display: inline-flex;
     align-items: center;
+    gap: 5px;
     border: none;
     border-radius: 10px;
     color: var(--font-color);
     background-color: var(--color-primary-500);
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.collapse-buttons {
+    transition: all 0.3s;
+}
+
+.add-inner-item-buttons:hover, .add-todo-buttons:hover, .delete-list-buttons:hover, .add-list-button:hover, .collapse-buttons:hover {
+    box-shadow: 0px 0px 5px var(--font-color);
+    text-shadow: 2px 2px 1px var(--color-primary-800);
+}
+
+.add-todo-buttons > label, .delete-list-buttons > label {
+    font-size: 125%;
 }
 
 .visible-todo-elements, .collapsible-todo-elements>div {
@@ -38,8 +56,8 @@
 #list-div {
     display: flex;
     flex-direction: column;
-    max-width: 450px;
-    margin: 20px auto 20px auto;
+    max-width: $max-width;
+    margin: 50px;
     border: 1px solid var(--color-primary-500); 
     background-color: var(--color-primary-300);
     box-shadow: 5px 5px 10px var(--color-primary-800);
@@ -68,7 +86,10 @@
 .visible-todo-elements {
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;
+    width: 50vw;
+    min-width: 235px;
+    max-width: calc($max-width - 40px);
 }
 
 .left-visible-elements, .right-visible-elements {
@@ -97,7 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 28px;
+    height: 30px;
     width: 28px;
     border: none;
 }
@@ -110,11 +131,11 @@
 .delete-item-buttons {
     color: var(--color-primary-500);
     background-color: var(--color-primary-100);
-    transition: 1s;
+    transition: 0.3s;
 }
 .delete-item-buttons:hover {
-    color: var(--color-primary-900);
-    background-color: var(--color-primary-200);
+    box-shadow: 0px 0px 5px var(--color-primary-700);
+    text-shadow: 1px 1px 1px var(--color-primary-700);
 }
 
 .collapsible-todo-elements {
