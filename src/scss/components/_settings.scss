@@ -40,6 +40,10 @@
     text-shadow: 2px 2px 1px var(--color-primary-800);
 }
 
+.settings-buttons:active {
+    transform: translateY(4px);
+}
+
 #settings-page > h2,
 #settings-page > h3 {
     margin-top: 40px;
