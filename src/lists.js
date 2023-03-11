@@ -211,6 +211,7 @@ const listsBuilder = function listsBuilderFunctions(dom, modal) {
     // Switches to list page and createsNewList
     const switchAndCreate = function switchPagesAndCreateList() {
         dom.switchContent(listsPage)
+        dom.closeMenus()
         createNewList()
     }
 
