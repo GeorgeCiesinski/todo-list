@@ -12,7 +12,7 @@ const listsLinks = function listsLinksBuilderFunctions(dom, util, switchList) {
             parent: dom.getNavElement(),
             tag: 'li',
             className: 'list-nav-items',
-        })
+        });
         const listLink = dom.createElement({
             parent: listLI,
             tag: 'a',
@@ -24,25 +24,25 @@ const listsLinks = function listsLinksBuilderFunctions(dom, util, switchList) {
                     value: itemIndex,
                 },
             ],
-        })
+        });
         if (itemIndex === currentListIndex) {
-            dom.addClass(listLink, 'active-list-link-items')
+            dom.addClass(listLink, 'active-list-link-items');
         }
-        dom.clickEvent(listLink, switchList)
-    }
+        dom.clickEvent(listLink, switchList);
+    };
 
     const build = function generateListLinksElements() {
-        dom.clearNav() // Clear existing navLinks
-        const listNavData = util.listNavData()
-        const current = util.getCurrent()
+        dom.clearNav(); // Clear existing navLinks
+        const listNavData = util.listNavData();
+        const current = util.getCurrent();
         listNavData.forEach((item) => {
-            createListItem(item, listNavData.indexOf(item), current.index)
-        })
-    }
+            createListItem(item, listNavData.indexOf(item), current.index);
+        });
+    };
 
     return {
         build,
-    }
-}
+    };
+};
 
-export default listsLinks
+export default listsLinks;

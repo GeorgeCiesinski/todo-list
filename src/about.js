@@ -1,4 +1,4 @@
-import aboutData from './assets/data/about.json'
+import aboutData from './assets/data/about.json';
 
 /*
  * Builds about page
@@ -7,7 +7,7 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
     const aboutPage = dom.createElement({
         tag: 'div',
         idName: 'about-page',
-    }) // Base about dom element
+    }); // Base about dom element
 
     /*
      * Headers
@@ -19,21 +19,21 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
             parent: aboutPage,
             tag: 'h2',
             innerHTML: 'About',
-        })
-    }
+        });
+    };
 
     // App Info
     const createInfo = function createInfoDiv() {
         const infoDiv = dom.createElement({
             parent: aboutPage,
             tag: 'div',
-        })
+        });
         dom.createElement({
             parent: infoDiv,
             tag: 'p',
             innerHTML: aboutData.info,
-        })
-    }
+        });
+    };
 
     /* Credits
      * Creates a credits section by looping through credits.json
@@ -44,47 +44,47 @@ const aboutBuilder = function aboutBuilderFunctions(dom) {
             parent: aboutPage,
             tag: 'h3',
             innerHTML: 'Credits',
-        })
+        });
         const creditsDiv = dom.createElement({
             parent: aboutPage,
             tag: 'div',
-        })
+        });
         // Unordered List
         const list = dom.createElement({
             parent: creditsDiv,
             tag: 'ul',
-        })
+        });
         // Loop through credits.json and add contents as list items
         aboutData.credits.forEach((credit) => {
             dom.createElement({
                 parent: list,
                 tag: 'li',
                 innerHTML: credit.innerHTML,
-            })
-        })
-    }
+            });
+        });
+    };
 
     // Builds page page
     const build = function buildAboutPage() {
-        createTitle()
-        createInfo()
-        createCredits()
-    }
+        createTitle();
+        createInfo();
+        createCredits();
+    };
 
     // Shows built page
     const showPage = function switchPage(event) {
         if (event) {
-            dom.switchNavLinks(event.target)
+            dom.switchNavLinks(event.target);
         }
-        dom.switchContent(aboutPage)
-        dom.closeMenus()
-    }
+        dom.switchContent(aboutPage);
+        dom.closeMenus();
+    };
 
-    build()
+    build();
 
     return {
         showPage,
-    }
-}
+    };
+};
 
-export default aboutBuilder
+export default aboutBuilder;

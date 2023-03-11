@@ -1,15 +1,15 @@
-import settingsUtilities from './settingsUtilities'
+import settingsUtilities from './settingsUtilities';
 
 /*
  * Builds settings page
  */
 const settingsBuilder = function settingsBuilderFunctions(dom, list) {
-    const util = settingsUtilities(dom, list)
+    const util = settingsUtilities(dom, list);
 
     const settingsPage = dom.createElement({
         tag: 'div',
         idName: 'settings-page',
-    }) // Base settings dom element
+    }); // Base settings dom element
 
     /*
      * Page Construction
@@ -21,8 +21,8 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             parent: settingsPage,
             tag: 'h2',
             innerHTML: 'Settings',
-        })
-    }
+        });
+    };
 
     // Creates color div
     const createColors = function createColorsElement(parent) {
@@ -30,7 +30,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             parent,
             tag: 'div',
             idName: 'color-div',
-        })
+        });
         // Label
         dom.createElement({
             parent: colorDiv,
@@ -43,7 +43,7 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
                     value: 'color-input',
                 },
             ],
-        })
+        });
         // Input
         const colorInput = dom.createElement({
             parent: colorDiv,
@@ -64,9 +64,9 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
                     value: util.getPrimaryColor(),
                 },
             ],
-        })
-        colorInput.addEventListener('input', util.updateColorScheme)
-    }
+        });
+        colorInput.addEventListener('input', util.updateColorScheme);
+    };
 
     // Contains load and save buttons
     const createSettingsDiv = function createButtonsDivElement() {
@@ -75,16 +75,16 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             tag: 'div',
             idName: 'color-settings-div',
             className: 'settings-divs',
-        })
-        createColors(settingsDiv)
-    }
+        });
+        createColors(settingsDiv);
+    };
 
     const createLoadButton = function createLoadButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
             parent,
             tag: 'div',
             idName: 'load-button-div',
-        })
+        });
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv,
@@ -92,16 +92,16 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             idName: 'load-button',
             className: 'settings-buttons',
             innerHTML: 'Load Previous',
-        })
-        saveButton.addEventListener('click', util.loadSettings)
-    }
+        });
+        saveButton.addEventListener('click', util.loadSettings);
+    };
 
     const createSaveButton = function createSaveButtonElement(parent) {
         const saveButtonDiv = dom.createElement({
             parent,
             tag: 'div',
             idName: 'save-button-div',
-        })
+        });
         // Button
         const saveButton = dom.createElement({
             parent: saveButtonDiv,
@@ -109,9 +109,9 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             idName: 'save-button',
             className: 'settings-buttons',
             innerHTML: 'Save Settings',
-        })
-        saveButton.addEventListener('click', util.saveSettings)
-    }
+        });
+        saveButton.addEventListener('click', util.saveSettings);
+    };
 
     // Contains load and save buttons
     const createButtonsDiv = function createButtonsDivElement() {
@@ -120,10 +120,10 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             tag: 'div',
             idName: 'buttons-div',
             className: 'settings-divs',
-        })
-        createLoadButton(buttonsDiv)
-        createSaveButton(buttonsDiv)
-    }
+        });
+        createLoadButton(buttonsDiv);
+        createSaveButton(buttonsDiv);
+    };
 
     // Data
     const createDataHeader = function createHeader() {
@@ -131,8 +131,8 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             parent: settingsPage,
             tag: 'h3',
             innerHTML: 'Data',
-        })
-    }
+        });
+    };
 
     // Create Delete Data Div
     const createDeleteData = function createDeleteData() {
@@ -141,43 +141,43 @@ const settingsBuilder = function settingsBuilderFunctions(dom, list) {
             tag: 'div',
             idName: 'delete-data-div',
             className: 'settings-divs',
-        })
+        });
         // Button
         const deleteDataButton = dom.createElement({
             parent: deleteDataDiv,
             tag: 'button',
             className: 'settings-buttons',
             innerHTML: 'Delete Local Data',
-        })
-        deleteDataButton.addEventListener('click', util.deleteData)
-    }
+        });
+        deleteDataButton.addEventListener('click', util.deleteData);
+    };
 
     // Builds page page
     const build = function buildSettingsPage() {
         // Page Header
-        createTitle()
+        createTitle();
         // Color Theme
-        createSettingsDiv()
-        createButtonsDiv()
+        createSettingsDiv();
+        createButtonsDiv();
         // Data
-        createDataHeader()
-        createDeleteData()
-    }
+        createDataHeader();
+        createDeleteData();
+    };
 
     // Shows built page
     const showPage = function switchPage(event) {
         if (event) {
-            dom.switchNavLinks(event.target)
+            dom.switchNavLinks(event.target);
         }
-        dom.switchContent(settingsPage)
-        dom.closeMenus()
-    }
+        dom.switchContent(settingsPage);
+        dom.closeMenus();
+    };
 
-    build() // Builds page
+    build(); // Builds page
 
     return {
         showPage,
-    }
-}
+    };
+};
 
-export default settingsBuilder
+export default settingsBuilder;

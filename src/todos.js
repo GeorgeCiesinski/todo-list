@@ -1,14 +1,14 @@
-import todosEvents from './todosEvents'
+import todosEvents from './todosEvents';
 
 const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
-    const events = todosEvents(dom, util, modal)
+    const events = todosEvents(dom, util, modal);
 
     // Create warning modals
     const emptyTitleModal = modal.actionModal({
         messageHTML: 'Please name the list before adding any data to it.',
         buttonHTML: '<label>OK</label>',
         action: util.titleFocus,
-    })
+    });
 
     // Creates left side of visible div
     const createLeftVisibleDiv = function createLeftVisibleDivElements(
@@ -20,7 +20,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'left-visible-elements',
-        })
+        });
         // Checkbox
         const checkBox = dom.createElement({
             parent: leftDiv,
@@ -40,12 +40,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
+        });
         if (todo.checked) {
-            checkBox.checked = true
+            checkBox.checked = true;
         }
         // checkBox event
-        dom.changeEvent(checkBox, events.changeChecked)
+        dom.changeEvent(checkBox, events.changeChecked);
         // Item Name
         const todoName = dom.createElement({
             parent: leftDiv,
@@ -65,9 +65,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.keyUpEvent(todoName, events.changeTodoName)
-    }
+        });
+        dom.keyUpEvent(todoName, events.changeTodoName);
+    };
 
     // Create priority div
     const createPriority = function createPriorityElements(
@@ -79,14 +79,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'priority-divs',
-        })
+        });
         // Label
         dom.createElement({
             parent: priorityDiv,
             tag: 'label',
             className: 'tracking-label',
             innerHTML: 'Priority: ',
-        })
+        });
         // Priority
         const priorityInput = dom.createElement({
             parent: priorityDiv,
@@ -118,9 +118,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.changeEvent(priorityInput, events.changePriority)
-    }
+        });
+        dom.changeEvent(priorityInput, events.changePriority);
+    };
 
     // Creates right side of visible div
     const createRightVisibleDiv = function createRightVisibleDivElements(
@@ -132,9 +132,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'right-visible-elements',
-        })
+        });
         // Priority
-        createPriority(rightDiv, todo, todoIndex)
+        createPriority(rightDiv, todo, todoIndex);
         // Collapse Button
         const collapseButton = dom.createElement({
             parent: rightDiv,
@@ -148,9 +148,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: false,
                 },
             ],
-        })
-        dom.addClass(collapseButton, 'collapsed')
-    }
+        });
+        dom.addClass(collapseButton, 'collapsed');
+    };
 
     // Create non collapsible div - always visible
     const createVisibleDiv = function createVisibleDivElements(
@@ -162,10 +162,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'visible-todo-elements',
-        })
-        createLeftVisibleDiv(itemDiv, todo, todoIndex)
-        createRightVisibleDiv(itemDiv, todo, todoIndex)
-    }
+        });
+        createLeftVisibleDiv(itemDiv, todo, todoIndex);
+        createRightVisibleDiv(itemDiv, todo, todoIndex);
+    };
 
     // Create due date div
     const createDueDate = function createDueDateElements(
@@ -177,14 +177,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'due-div',
-        })
+        });
         // Label
         dom.createElement({
             parent: dueDiv,
             tag: 'label',
             className: 'date-labels',
             innerHTML: 'Due: ',
-        })
+        });
         // Date
         const dueDate = dom.createElement({
             parent: dueDiv,
@@ -208,9 +208,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.changeEvent(dueDate, events.changeDue)
-    }
+        });
+        dom.changeEvent(dueDate, events.changeDue);
+    };
 
     // Create item tracking div
     const createItemTracking = function createItemTrackingElements(
@@ -222,9 +222,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'item-tracking-div',
-        })
-        createDueDate(itemTrackingDiv, todo, todoIndex)
-    }
+        });
+        createDueDate(itemTrackingDiv, todo, todoIndex);
+    };
 
     // Create Left side of checklist item
     const createInnerChecklistLeft = function createLeftChecklistItemElements(
@@ -237,7 +237,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'checklist-item-left-divs',
-        })
+        });
         // Checkbox
         const checkBox = dom.createElement({
             parent: innerItemLeftDiv,
@@ -261,11 +261,11 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.addClass(checkBox, 'inner-checklist-elements')
-        dom.clickEvent(checkBox, events.changeInnerChecked)
+        });
+        dom.addClass(checkBox, 'inner-checklist-elements');
+        dom.clickEvent(checkBox, events.changeInnerChecked);
         if (checklistItem.checked) {
-            checkBox.checked = true
+            checkBox.checked = true;
         }
         // Item Name
         const innerItemLabel = dom.createElement({
@@ -290,10 +290,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.addClass(innerItemLabel, 'inner-checklist-elements')
-        dom.keyUpEvent(innerItemLabel, events.changeInnerName)
-    }
+        });
+        dom.addClass(innerItemLabel, 'inner-checklist-elements');
+        dom.keyUpEvent(innerItemLabel, events.changeInnerName);
+    };
 
     // Create Right side of checklist item
     const createInnerChecklistRight = function createRightChecklistItemElements(
@@ -306,7 +306,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'checklist-item-right-divs',
-        })
+        });
         const innerDeleteButton = dom.createElement({
             parent: innerItemRightDiv,
             tag: 'button',
@@ -323,10 +323,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: checklistItemIndex,
                 },
             ],
-        })
-        dom.addClass(innerDeleteButton, 'inner-checklist-elements')
-        dom.clickEvent(innerDeleteButton, events.deleteChecklistItem)
-    }
+        });
+        dom.addClass(innerDeleteButton, 'inner-checklist-elements');
+        dom.clickEvent(innerDeleteButton, events.deleteChecklistItem);
+    };
 
     const createChecklistItem = function createChecklistItemElements(
         parent,
@@ -348,21 +348,21 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: checklistItemIndex,
                 },
             ],
-        })
-        dom.addClass(innerItemDiv, 'inner-checklist-elements')
+        });
+        dom.addClass(innerItemDiv, 'inner-checklist-elements');
         createInnerChecklistLeft(
             innerItemDiv,
             todoIndex,
             checklistItem,
             checklistItemIndex
-        )
+        );
         createInnerChecklistRight(
             innerItemDiv,
             todoIndex,
             checklistItem,
             checklistItemIndex
-        )
-    }
+        );
+    };
 
     const createInnerChecklistItems = function createInnerCheckListItemElements(
         parent,
@@ -371,35 +371,35 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
     ) {
         // Create inner check list items
         todo.checklist.forEach((checklistItem) => {
-            const checklistItemIndex = todo.checklist.indexOf(checklistItem)
+            const checklistItemIndex = todo.checklist.indexOf(checklistItem);
             createChecklistItem(
                 parent,
                 todoIndex,
                 checklistItem,
                 checklistItemIndex
-            )
-        })
-    }
+            );
+        });
+    };
 
     const addChecklistElement = function addNewChecklistElement(event) {
-        const addButton = event.currentTarget
-        const todoIndex = addButton.getAttribute('index')
-        const innerCheckListElement = addButton.parentNode.previousSibling
+        const addButton = event.currentTarget;
+        const todoIndex = addButton.getAttribute('index');
+        const innerCheckListElement = addButton.parentNode.previousSibling;
         const { checklistItem, checklistItemIndex } =
-            events.addChecklistItem(event)
+            events.addChecklistItem(event);
         // Create Element
         createChecklistItem(
             innerCheckListElement,
             todoIndex,
             checklistItem,
             checklistItemIndex
-        )
+        );
         // Focus
         const newNameElement = document.querySelector(
             `.inner-item-names[index='${todoIndex}'][item='${checklistItemIndex}']`
-        )
-        newNameElement.focus()
-    }
+        );
+        newNameElement.focus();
+    };
 
     const createAddChecklistItemButton =
         function createAddChecklistItemButtonElement(parent, todoIndex) {
@@ -407,7 +407,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                 parent,
                 tag: 'div',
                 className: 'checklist-item-divs',
-            })
+            });
             const innerAddButton = dom.createElement({
                 parent: addItemDiv,
                 tag: 'button',
@@ -420,9 +420,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                         value: todoIndex,
                     },
                 ],
-            })
-            dom.clickEvent(innerAddButton, addChecklistElement)
-        }
+            });
+            dom.clickEvent(innerAddButton, addChecklistElement);
+        };
 
     // Create inner check list div - contains todo item checklist
     const createInnerCheckListDiv = function createInnerCheckListDivElements(
@@ -434,23 +434,23 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'inner-checklist-div',
-        })
+        });
         dom.createElement({
             parent: innerCheckListDiv,
             tag: 'label',
             className: 'inner-labels',
             innerHTML: 'Checklist:',
-        })
+        });
         const innerCheckListItemsDiv = dom.createElement({
             parent: innerCheckListDiv,
             tag: 'div',
             className: 'inner-checklist-items-div',
-        })
+        });
         if (todo.checklist.length > 0) {
-            createInnerChecklistItems(innerCheckListItemsDiv, todo, todoIndex)
+            createInnerChecklistItems(innerCheckListItemsDiv, todo, todoIndex);
         }
-        createAddChecklistItemButton(innerCheckListDiv, todoIndex)
-    }
+        createAddChecklistItemButton(innerCheckListDiv, todoIndex);
+    };
 
     // Create item description div
     const createItemDescription = function createItemDescriptionElements(
@@ -462,13 +462,13 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'description-div',
-        })
+        });
         dom.createElement({
             parent: descriptionDiv,
             tag: 'label',
             className: 'label',
             innerHTML: 'Notes:',
-        })
+        });
         const descriptionInput = dom.createElement({
             parent: descriptionDiv,
             tag: 'textarea',
@@ -479,10 +479,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: todoIndex,
                 },
             ],
-        })
-        descriptionInput.value = todo.description // Text area value must be changed with value parameter
-        dom.keyUpEvent(descriptionInput, events.changeTodoDescription)
-    }
+        });
+        descriptionInput.value = todo.description; // Text area value must be changed with value parameter
+        dom.keyUpEvent(descriptionInput, events.changeTodoDescription);
+    };
 
     // Create created date div
     const createCreated = function createCreatedElements(
@@ -494,14 +494,14 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'created-div',
-        })
+        });
         // Label
         dom.createElement({
             parent: createdDiv,
             tag: 'label',
             className: 'date-labels',
             innerHTML: 'Created: ',
-        })
+        });
         // Date
         const createdDate = dom.createElement({
             parent: createdDiv,
@@ -525,9 +525,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: 'other',
                 },
             ],
-        })
-        dom.changeEvent(createdDate, events.changeCreated)
-    }
+        });
+        dom.changeEvent(createdDate, events.changeCreated);
+    };
 
     // Create button to delete todo item
     const createDelete = function createDeleteElement(parent, todoIndex) {
@@ -535,7 +535,7 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'delete-item-divs',
-        })
+        });
         const deleteButton = dom.createElement({
             parent: deleteDiv,
             tag: 'button',
@@ -547,9 +547,9 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: todoIndex,
                 },
             ],
-        })
-        dom.clickEvent(deleteButton, events.deleteTodo)
-    }
+        });
+        dom.clickEvent(deleteButton, events.deleteTodo);
+    };
 
     // Create item deletion div
     const createItemDeletion = function createItemDeletionElements(
@@ -561,10 +561,10 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'deletion-div',
-        })
-        createCreated(deletionDiv, todo, todoIndex)
-        createDelete(deletionDiv, todoIndex)
-    }
+        });
+        createCreated(deletionDiv, todo, todoIndex);
+        createDelete(deletionDiv, todoIndex);
+    };
 
     // Create collapsible div - collapsed by default
     const createCollapsibleDiv = function createCollapsibleDivElements(
@@ -576,12 +576,12 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
             parent,
             tag: 'div',
             className: 'collapsible-todo-elements',
-        })
-        createItemTracking(collapsibleDiv, todo, todoIndex)
-        createInnerCheckListDiv(collapsibleDiv, todo, todoIndex)
-        createItemDescription(collapsibleDiv, todo, todoIndex)
-        createItemDeletion(collapsibleDiv, todo, todoIndex)
-    }
+        });
+        createItemTracking(collapsibleDiv, todo, todoIndex);
+        createInnerCheckListDiv(collapsibleDiv, todo, todoIndex);
+        createItemDescription(collapsibleDiv, todo, todoIndex);
+        createItemDeletion(collapsibleDiv, todo, todoIndex);
+    };
 
     // Create todo parent div
     const createTodoItem = function createTodoItemElement(
@@ -599,47 +599,47 @@ const todosBuilder = function todosBuilderFunctions(dom, util, modal) {
                     value: todoIndex,
                 },
             ],
-        })
-        createVisibleDiv(itemDiv, todo, todoIndex)
-        createCollapsibleDiv(itemDiv, todo, todoIndex)
-    }
+        });
+        createVisibleDiv(itemDiv, todo, todoIndex);
+        createCollapsibleDiv(itemDiv, todo, todoIndex);
+    };
 
     // Adds a new TODO item to parent list
     const addNewTodoItem = function addNewTodoItemElement(event) {
         if (util.titleEmpty()) {
-            emptyTitleModal.showModal()
-            return
+            emptyTitleModal.showModal();
+            return;
         }
-        const { todoItem, todoIndex } = events.addTodo(event)
-        const parent = document.getElementById('todos')
-        createTodoItem(parent, todoItem, todoIndex)
-        dom.createCollapse()
+        const { todoItem, todoIndex } = events.addTodo(event);
+        const parent = document.getElementById('todos');
+        createTodoItem(parent, todoItem, todoIndex);
+        dom.createCollapse();
         const newNameElement = document.querySelector(
             `.item-names[index='${todoIndex}']`
-        )
-        newNameElement.focus()
-    }
+        );
+        newNameElement.focus();
+    };
 
     // Creates todo div
     const build = function createTodoElement() {
-        const current = util.getCurrent()
+        const current = util.getCurrent();
         const todosDiv = dom.createElement({
             parent: dom.getListElement(),
             tag: 'div',
             idName: 'todos',
-        })
-        const { todos } = current.list
+        });
+        const { todos } = current.list;
         // Create todo items
         todos.forEach((todo) => {
-            const todoIndex = todos.indexOf(todo)
-            createTodoItem(todosDiv, todo, todoIndex)
-        })
-    }
+            const todoIndex = todos.indexOf(todo);
+            createTodoItem(todosDiv, todo, todoIndex);
+        });
+    };
 
     return {
         addNewTodoItem,
         build,
-    }
-}
+    };
+};
 
-export default todosBuilder
+export default todosBuilder;
